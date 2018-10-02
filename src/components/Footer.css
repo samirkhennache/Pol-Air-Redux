@@ -1,0 +1,12 @@
+.list-footer li {
+    list-style-type: none;
+    margin: 5px;
+}
+.list-footer a {
+    text-decoration: none;
+}
+.list-footer {
+    background: rgb(220, 220, 220);
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
