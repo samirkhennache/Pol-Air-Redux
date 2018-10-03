@@ -1,15 +1,55 @@
 import React, { Component } from 'react';
+import ButtonBack from './ButtonBack'
+import ButtonForth from './ButtonForth'
 import './DateIndex.css';
 
-
-// Tape ton code ICI ! :) et bon courage !!!!!
-
+const formatDate = (date) => {
+    let monthNames = [
+      "Janvier", "Février", "Mars",
+      "Avril", "Mai", "Juin", "Juillet",
+      "Août", "Septembre", "Octobre",
+      "Novembre", "Décembre"
+    ];
+    let dayName = [
+        "Lundi", "Mardi", "Mercredi",
+        "Jeudi", "Vendredi", "Samedi", "Dimanche"
+      ];
+    let dayIndex = date.getDay();
+    let day = date.getDate();
+    let monthIndex = date.getMonth();
+  
+    return dayName[dayIndex] + ' ' +  day + ' ' + monthNames[monthIndex] ;
+  }
+  
 class DateIndex extends Component {
-    render() {
-      return (
-        <div />
-      );
-    }
+ 
+  state = { date: formatDate(new Date())};
+
+  count = 0
+
+  decrem = () => {
+    let result = new Date();
+    this.count = this.count - 1
+    result.setDate(result.getDate() + this.count);
+    this.setState({ date: formatDate(result) })
   }
 
+
+  increm = () => {
+    let result = new Date();
+    this.count = this.count + 1
+    result.setDate(result.getDate() + this.count);
+    this.setState({ date: formatDate(result) })
+  }
+  
+    render() { 
+        return (
+          <div className="calendar">
+            <ButtonBack method={this.decrem} />
+              <h1>{this.state.date}</h1> 
+            <ButtonForth method={this.increm} />
+          </div>
+        );
+    }
+}
 export default DateIndex;
