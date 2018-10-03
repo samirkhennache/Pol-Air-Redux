@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ButtonBack from './ButtonBack'
 import ButtonForth from './ButtonForth'
-import './DateIndex.css';
+import './Calendar.css';
 
 const formatDate = (date) => {
     let monthNames = [
