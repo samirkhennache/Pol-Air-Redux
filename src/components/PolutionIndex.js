@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './PolutionIndex.css';
+import PollutionRealTime from './PollutionRealTime'
 
 
 // Tape ton code ICI ! :) et bon courage !!!!!
@@ -7,7 +8,7 @@ import './PolutionIndex.css';
 class PolutionIndex extends Component {
     render() {
       return (
-        <div />
+        <PollutionRealTime />
       );
     }
   }
