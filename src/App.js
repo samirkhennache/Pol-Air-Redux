@@ -12,6 +12,7 @@ import Humidity from './components/Humidity';
 import Description from './components/Description';
 import Icon from './components/Icon';
 import Footer from './components/Footer';
+import DateIndex from './components/DateIndex'
 
 const api_Key_Current= "0f53c26a9c88a54d8706c8b3c9d2b880";
 
@@ -51,6 +52,7 @@ state = {
     return (
       <div>
         <Header />
+        <DateIndex />
         <Titles/>
         <Form getWeather = {this.getWeather}/>
         <City
