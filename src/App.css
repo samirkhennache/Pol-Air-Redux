@@ -1,3 +1,4 @@
+
 .page-parent{
   display: flex;
   flex-direction: column;
@@ -6,6 +7,7 @@
 .page-child{
   /* border: 1px solid black; */
   text-align: center;
+
   width: 70%;
   margin: 10px auto 10px auto;
 }
@@ -25,4 +27,16 @@
   .page-child-bottom{
     width: 100%;
   }
+}
+/* ################# */
+/* css composant météo */
+.bloc-details{
+  display: flex;
+  justify-content: center;
+}
+/* .show-bloc-details{
+ 
+} */
+.detail-col{
+  padding: 15px;
 }

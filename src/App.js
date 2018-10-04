@@ -12,6 +12,7 @@ import Description from './components/Description';
 import Icon from './components/Icon';
 import TempMinMax from './components/TempMinMax';
 import Footer from './components/Footer';
+import PollutionRealTime from './components/PollutionRealTime'
 import DateIndex from './components/DateIndex'
 
 
@@ -27,11 +28,14 @@ state = {
   humidity: undefined,
   description: undefined,
   icon : undefined,
+  degre : null,
   error: undefined
 }
 
   getWeather = async (e) => {
     const city = e.target.elements.city.value;
+    const styles = e.target.elements.styles
+    console.log("skhdfkl"+ styles)
     const units = "&units=metric";
     const lang = "&lang=fr";
     e.preventDefault();
@@ -48,49 +52,45 @@ state = {
       humidity: data.main.humidity,
       description: data.weather[0].description,
       icon : data.weather[0].icon,
+      degre : "C°",
       error: ""
     })
   }
 
   render() {
 
-    return (
-      <div className="page-parent" >
-        <div className="page-child-top">
-          <Header/>
-        </div>
-        <div className="page-child">
-          <DateIndex />
-        </div>
-        <div className="page-child">
-          <Titles/>
-        </div>
-        <div className="page-child" >
-          <Form getWeather = {this.getWeather}/>
-          <City
-            city={this.state.city}
-          />
-          <Temperature
-            temperature={this.state.temperature}
-          />
-          <Humidity
-            humidity={this.state.humidity}
-          />
-          <Description
-            description={this.state.description}
-          />
-          <Icon
-            icon={this.state.icon}
-          />
-          <TempMinMax 
-          temp_min={this.state.temp_min}
-          temp_max={this.state.temp_max}
-          />
-        </div>
-        <div className="page-child-bottom">
-        <Footer />
-        </div>
+    return (      
+<div className="page-parent" >
+  <div className="page-child-top">
+  <Header/>
+  </div>
+  <div className="page-child">
+  <DateIndex />
+  </div>
+  <div className="page-child">
+  <Titles/>
+  </div>
+  <div className="page-child">
+  <Form getWeather = {this.getWeather}/>          
+    <div className="bloc-details page-child">
+      <div className="details1 detail-col">
+      <Icon icon={this.state.icon}/>
+      <City city={this.state.city}/>
+      <Description description={this.state.description}/>
       </div>
+      <div className="details2 detail-col">
+      <Temperature temperature={this.state.temperature} degre={this.state.degre} />
+      <TempMinMax temp_min={this.state.temp_min} temp_max={this.state.temp_max} />
+      <Humidity humidity={this.state.humidity}/>
+      <Description description={this.state.description}/>
+      </div>
+    </div>
+  </div>
+  <PollutionRealTime />
+  <div className="page-child-bottom">
+  <Footer />
+  </div>
+</div>
     );
   }
 }
