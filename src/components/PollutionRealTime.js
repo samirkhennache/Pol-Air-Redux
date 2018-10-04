@@ -1,50 +1,40 @@
 import React,{Component} from 'react';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent'; 
-import {Typography,Grid,Card} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import IndiceDuJours from './IndiceDuJours'
 
-
-
+//j'ai declare url en génirique pour faciliter la recherche des villes par la suite 
+const city =  "Paris"
+let stateCity = "Ile-de-France"
+let country = "FRANCE"
+const key = "AgM8MuxtXNcfwPrHN";
+const url =`http://api.airvisual.com/v2/city?city=${city}&state=${stateCity}&country=${country}&key=${key}`
 
 class PollutionRealTime extends Component {
+    // dataPol permet de recuperer les donnees du fichier json l'indice du jours 
    state ={
-    dataPol: null
+    dataPol:undefined,
    }
-   componentDidMount() {
-    getDataPol() {
-        fetch('http://api.airvisual.com/v2/city?city=Paris&state=Ile-de-France&country=FRANCE&key=AgM8MuxtXNcfwPrHN')
-        .then((jeRecupereLaReponseEtLaMetDansUnJson)=>{jeRecupereLaReponseEtLaMetDansUnJson.json()
-        .then((IciLeJsonParser)=>{console.log(IciLeJsonParser.data.current.pollution.aqius)
-        .catch(error => console.log('echecDuParsage', error))
-        this.setState({dataPol:IciLeJsonParser.data.current.pollution.aqius})
-          })
-        })
+    
+   // getDataPol methode pour appeler l'api
+   getDataPol() {
+    fetch(url).then((resp)=>resp.json()).then((res)=>{this.setState({dataPol:res.data.current.pollution.aqius})});
     }
     
-   }
-    render() { 
+    //componentDidMount :faire l'appel de l'api au moment de la creation du DOM 
+    componentDidMount() {
        
-        return (
-           
-            <Grid container >
-                <Grid item >
-                <Card className="card">
-                    <CardActionArea>
-                        { console.log("indice: "+this.state)}
-                        <CardContent>
-                        <Typography gutterBottom variant="headline" component="h2">
-                          Qualité de l'air
-                        </Typography>
-                        <IndiceDuJours   indice ={this.state.dataPol} />
-                        </CardContent>
-                    </CardActionArea>
-                    </Card>
-                </Grid>
-               
-                
-                
-            </Grid>
+        this.getDataPol()
+    }
+    render() { 
+    //test si jamais les dataPol sont null afficge  progress bar 
+    if(this.state.dataPol === undefined)
+        return (<CircularProgress />)
+        //création d'un Paper  pour afficher les résultats
+        return (  
+                <div>
+                    {/* je passe en props au component child IndiceDuJours les props (indice max de la pollution) */}
+                    <IndiceDuJours indice ={this.state.dataPol} />  
+                </div>  
           );
     }
 }
