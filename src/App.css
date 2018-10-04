@@ -1,3 +1,42 @@
-.App {
+
+.page-parent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.page-child{
+  /* border: 1px solid black; */
   text-align: center;
+
+  width: 70%;
+  margin: 10px auto 10px auto;
+}
+.page-child-top{
+  text-align: center;
+  width: 70%;
+  margin: 0 auto 10px auto;
+}
+.page-child-bottom{
+  text-align: center;
+  width: 70%;
+  margin: 10px auto 0 auto;
+}
+@media all and (max-width: 768px){
+  .page-child,
+  .page-child-top,
+  .page-child-bottom{
+    width: 100%;
+  }
+}
+/* ################# */
+/* css composant météo */
+.bloc-details{
+  display: flex;
+  justify-content: center;
+}
+/* .show-bloc-details{
+ 
+} */
+.detail-col{
+  padding: 15px;
 }

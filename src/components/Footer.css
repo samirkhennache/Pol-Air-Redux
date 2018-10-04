@@ -4,9 +4,16 @@
 }
 .list-footer a {
     text-decoration: none;
+    color: rgb(80, 80, 80);
+    transition: all 0.3s ease;
+}
+.list-footer a:hover {
+    color: black;
+    
 }
 .list-footer {
     background: rgb(220, 220, 220);
     padding: 20px 0 20px 0;
     text-align: center;
+    margin: 0;
 }
