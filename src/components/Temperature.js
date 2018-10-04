@@ -5,7 +5,7 @@ class Temperature extends React.Component{
   render() {
     return (
       <div>
-      {this.props.temperature}
+    Temperature (°C): {this.props.temperature}
       </div>
     )
   }
