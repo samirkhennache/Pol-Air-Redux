@@ -1,0 +1,32 @@
+.indice-du-jour{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20x;
+}
+
+.quality{
+    font-weight: bold;
+}
+.quality-typography{
+    
+    padding: 10px;
+}
+.indice{
+    font-size: 50px;
+}
+.tres-faible{
+    color:#79BC6A
+}
+.faible{
+    color: #BBCF4C
+}
+.moyen{
+   color: #EEC20B
+}
+.eleve{
+   color: #F29305
+}
+.tres-eleve{
+    color:#960018
+}
