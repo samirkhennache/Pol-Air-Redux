@@ -7,14 +7,14 @@ import './Footer.css';
 class Footer extends Component {
     render() {
       return (
-        <grid>
+        <div>
           <ul className="list-footer">
             <li><a href="#">Accueil</a></li>
             <li><a href="#">Prévisions Météo</a></li>
             <li><a href="#">Prévisions Pollution</a></li>
             <li><a href="#">Itinéraire</a></li>
           </ul>
-        </grid>
+        </div>
       );
     }
   }

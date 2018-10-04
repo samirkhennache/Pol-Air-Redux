@@ -50,27 +50,37 @@ state = {
   render() {
 
     return (
-      <div>
-        <Header />
-        <DateIndex />
-        <Titles/>
-        <Form getWeather = {this.getWeather}/>
-        <City
-          city={this.state.city}
-        />
-        <Temperature
-          temperature={this.state.temperature}
-        />
-        <Humidity
-          humidity={this.state.humidity}
-        />
-        <Description
-          description={this.state.description}
-        />
-        <Icon
-          icon={this.state.icon}
-        />
-        <Footer/>
+      <div className="page-parent" >
+        <div className="page-child-top">
+          <Header/>
+        </div>
+        <div className="page-child">
+          <DateIndex />
+        </div>
+        <div className="page-child">
+          <Titles/>
+        </div>
+        <div className="page-child" >
+          <Form getWeather = {this.getWeather}/>
+          <City
+            city={this.state.city}
+          />
+          <Temperature
+            temperature={this.state.temperature}
+          />
+          <Humidity
+            humidity={this.state.humidity}
+          />
+          <Description
+            description={this.state.description}
+          />
+          <Icon
+            icon={this.state.icon}
+          />
+        </div>
+        <div className="page-child-bottom">
+        <Footer />
+        </div>
       </div>
     );
   }
