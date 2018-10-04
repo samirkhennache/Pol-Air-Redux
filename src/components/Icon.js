@@ -3,9 +3,10 @@ import React from "react";
 class Icon extends React.Component{
 
   render() {
+    let icon = `http://openweathermap.org/img/w/${this.props.icon}.png`
     return (
       <div>
-      {this.props.icon}
+        <img className="icon-meteo" src={icon} alt=""></img>
       </div>
     )
   }

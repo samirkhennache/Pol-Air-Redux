@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './components/Icon.css';
 
 
 import Header from './components/Header';
@@ -11,8 +12,10 @@ import Temperature from './components/Temperature';
 import Humidity from './components/Humidity';
 import Description from './components/Description';
 import Icon from './components/Icon';
+import TempMinMax from './components/TempMinMax';
 import Footer from './components/Footer';
 import DateIndex from './components/DateIndex'
+
 
 const api_Key_Current= "0f53c26a9c88a54d8706c8b3c9d2b880";
 
@@ -20,6 +23,8 @@ class App extends Component {
 
 state = {
   temperature: undefined,
+  temp_min: undefined,
+  temp_max: undefined,
   city: undefined,
   humidity: undefined,
   description: undefined,
@@ -42,6 +47,8 @@ state = {
 
     this.setState({
       temperature : Math.floor(data.main.temp),
+      temp_min : data.main.temp_min,
+      temp_max : data.main.temp_max,
       city: data.name,
       humidity: data.main.humidity,
       description: data.weather[0].description,
@@ -74,6 +81,7 @@ state = {
             </div>
             <div className="details2 detail-col">
               <Temperature temperature={this.state.temperature} degre={this.state.degre} />
+              <TempMinMax temp_min={this.state.temp_min} temp_max={this.state.temp_max} />
               <Humidity humidity={this.state.humidity}/>
               <Description description={this.state.description}/>
             </div>
