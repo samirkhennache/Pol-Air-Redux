@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import IndiceDuJours from './IndiceDuJours'
+import './PollutionRealTime.css'
 
 //j'ai declare url en génirique pour faciliter la recherche des villes par la suite 
 const city =  "Paris"
@@ -28,12 +29,16 @@ class PollutionRealTime extends Component {
     render() { 
     //test si jamais les dataPol sont null afficge  progress bar 
     if(this.state.dataPol === undefined)
-        return (<CircularProgress />)
+        return (
+            <div className="CircularProgress">
+                <CircularProgress  />
+            </div>
+        )
         //création d'un Paper  pour afficher les résultats
         return (  
                 <div>
                     {/* je passe en props au component child IndiceDuJours les props (indice max de la pollution) */}
-                    <IndiceDuJours indice ={this.state.dataPol} />  
+                     <IndiceDuJours indice ={this.state.dataPol} /> 
                 </div>  
           );
     }
