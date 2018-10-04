@@ -34,9 +34,6 @@
   display: flex;
   justify-content: center;
 }
-/* .show-bloc-details{
- 
-} */
-.detail-col{
-  padding: 15px;
+.details2 {
+  flex-direction: column;
 }
