@@ -5,7 +5,7 @@ class Humidity extends React.Component{
   render() {
     return (
       <div>
-      Taux d'humidité: {this.props.humidity}
+      Taux d'humidité (%): {this.props.humidity}
       </div>
     )
   }
