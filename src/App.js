@@ -84,7 +84,6 @@ state = {
       <Temperature temperature={this.state.temperature} degre={this.state.degre} />
       <TempMinMax temp_min={this.state.temp_min} temp_max={this.state.temp_max} />
       <Humidity humidity={this.state.humidity}/>
-      <Description description={this.state.description}/>
       </div>
     </div>
   </div>

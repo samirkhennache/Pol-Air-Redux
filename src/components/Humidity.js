@@ -1,11 +1,13 @@
 import React from "react";
+import {Typography} from '@material-ui/core'
 
 class Humidity extends React.Component{
 
   render() {
     return (
       <div>
-      Taux d'humidité (%): {this.props.humidity}
+        <Typography variant="Body" className="quality" >{this.props.humidity}</Typography>
+       
       </div>
     )
   }
