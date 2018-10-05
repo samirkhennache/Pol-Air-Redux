@@ -4,7 +4,8 @@ class Icon extends React.Component{
 
   render() {
     let icon = `http://openweathermap.org/img/w/${this.props.icon}.png`
-    return (
+    
+    return(
       <div>
         <img className="icon-meteo" src={icon} alt=""></img>
       </div>
