@@ -11,8 +11,8 @@ const formatDate = (date) => {
       "Novembre", "Décembre"
     ];
     let dayName = [
-        "Lundi", "Mardi", "Mercredi",
-        "Jeudi", "Vendredi", "Samedi", "Dimanche"
+        "Dimanche","Lundi", "Mardi", "Mercredi",
+        "Jeudi", "Vendredi", "Samedi"
       ];
     let dayIndex = date.getDay();
     let day = date.getDate();
