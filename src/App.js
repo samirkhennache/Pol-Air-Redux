@@ -12,8 +12,10 @@ import Description from './components/Description';
 import Icon from './components/Icon';
 import TempMinMax from './components/TempMinMax';
 import Footer from './components/Footer';
-import PollutionRealTime from './components/PollutionRealTime'
+import PollutionRealTime from './components/PollutionRealTime';
 import DateIndex from './components/DateIndex'
+import ForecastMeteo from './components/ForecastMeteo';
+import BlockForcastMeteo from './components/BlockForcastMeteo';
 
 
 const api_Key_Current= "0f53c26a9c88a54d8706c8b3c9d2b880";
@@ -88,6 +90,8 @@ state = {
   <PollutionRealTime />
   <div className="page-child-bottom">
   <Footer />
+  <ForecastMeteo />
+  <BlockForcastMeteo />
   </div>
 </div>
     );
