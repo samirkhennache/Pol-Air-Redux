@@ -7,7 +7,7 @@ import './PollutionRealTime.css'
 const city =  "Paris"
 let stateCity = "Ile-de-France"
 let country = "FRANCE"
-const key = "AgM8MuxtXNcfwPrHN";
+const key = "ehvBN549ec3xDmbbW";
 const url =`http://api.airvisual.com/v2/city?city=${city}&state=${stateCity}&country=${country}&key=${key}`
 
 class PollutionRealTime extends Component {
