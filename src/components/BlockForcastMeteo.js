@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import DateForcastMeteo from './DateForcastMeteo';
-import IconForecastMeteo from './IconForecastMeteo';
+import BlockForcastMeteoDate from './BlockForcastMeteoDate';
+import BlockForecastMeteoTemp from './BlockForecastMeteoTemp';
+import './BlockForcastMeteo.css'
 
 
 class BlockForcastMeteo extends Component {
     render() { 
         return ( 
-            <div>
-                <DateForcastMeteo />
-                <IconForecastMeteo />
+            <div className="blockMeteo">
+                <BlockForcastMeteoDate date={this.props.dateApp} />
+                <BlockForecastMeteoTemp dateForTemp={this.props.dateApp} />
             </div>
          );
     }
