@@ -34,8 +34,8 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-        <ListItem button>Accueil</ListItem>
-        <ListItem button>Prévisions météo</ListItem>
+        <ListItem component={this.props.OpenAccueil} button>Accueil</ListItem>
+        <ListItem component={this.props.OpenForeCastMeteo} button>Prévisions météo</ListItem>
         <ListItem button>Prévisions pollution</ListItem>
         <ListItem button>Itinéraire</ListItem>
       </div>

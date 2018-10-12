@@ -20,13 +20,15 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
+
+const ButtonAppBar = (props) => {
   const { classes } = props;
   return (
+    
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <OpenMenu/>
+          <OpenMenu OpenAccueil={props.accueil} OpenForeCastMeteo={props.forecastmeteo} />
           <Typography variant="title" color="inherit" className={classes.grow}>
             Pol'Air
           </Typography>
