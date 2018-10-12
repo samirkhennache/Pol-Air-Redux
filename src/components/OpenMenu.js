@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-class TemporaryDrawer extends React.Component {
+class OpenMenu extends React.Component {
   state = {
     top: false,
     left: false,
@@ -70,8 +70,8 @@ class TemporaryDrawer extends React.Component {
   }
 }
 
-TemporaryDrawer.propTypes = {
+OpenMenu.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withStyles(styles)(OpenMenu);
