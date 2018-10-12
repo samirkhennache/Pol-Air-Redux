@@ -21,13 +21,15 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
+
+const ButtonAppBar = (props) => {
   const { classes } = props;
   return (
+    
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <OpenMenu/>
+          <OpenMenu OpenAccueil={props.accueil} OpenForeCastMeteo={props.forecastmeteo} />
           <div className="logo">
             <img src={Logo_PolAir} alt="Pol'Air" className="logo"/>
           </div>

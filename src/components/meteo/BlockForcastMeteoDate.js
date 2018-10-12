@@ -8,15 +8,17 @@ const formatDate = (date) => {
     let dayIndex = date.getDay();
     let day = date.getDate();
   
-    return `${dayName[dayIndex + 1]} ${day + 1}`;
+    return `${dayName[dayIndex ]} ${day}`;
   }
 
 class DateForcastMeteo extends Component {
-    state = { date: formatDate(new Date())};
+
     render() { 
+        let result = new Date();
+        result.setDate(result.getDate() + this.props.date);
         return ( 
             <div>
-                <h1>{this.state.date}</h1> 
+                <h1>{formatDate(result)}</h1> 
             </div>
          );
     }
