@@ -47,10 +47,10 @@ class IndiceDuJours extends Component {
        return(
           
             <Paper className ="indice-du-jour">
-                <Typography  variant="display2"  className="quality-typography">
+                {this.props.indice && <Typography  variant="display2"  className="quality-typography">
                 Qualité de l'air
-                </Typography>
-                <Typography variant="headline" className="quality" >{this.GetQuality()}</Typography>
+                </Typography>}
+                {this.props.indice && <Typography variant="headline" className="quality" >{this.GetQuality()}</Typography>}
                 <span className ={`indice ${this.StyleIndice()}`}>{this.props.indice}</span>  
             </Paper>
         )  
