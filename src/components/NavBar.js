@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import OpenMenu from './OpenMenu'
+import Logo_PolAir from '../img/Logo_PolAir.svg';
+import './NavBar.css';
 
 
 const styles = {
@@ -20,16 +21,18 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
+
+const ButtonAppBar = (props) => {
   const { classes } = props;
   return (
+    
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <OpenMenu/>
-          <Typography variant="title" color="inherit" className={classes.grow}>
-            Pol'Air
-          </Typography>
+          <OpenMenu OpenAccueil={props.accueil} OpenForeCastMeteo={props.forecastmeteo} />
+          <div className="logo">
+            <img src={Logo_PolAir} alt="Pol'Air" className="logo"/>
+          </div>
         </Toolbar>
       </AppBar>
     </div>

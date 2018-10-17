@@ -15,7 +15,7 @@ const styles = {
   }
 };
 
-class TemporaryDrawer extends React.Component {
+class OpenMenu extends React.Component {
   state = {
     top: false,
     left: false,
@@ -34,8 +34,8 @@ class TemporaryDrawer extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-        <ListItem button>Accueil</ListItem>
-        <ListItem button>Prévisions météo</ListItem>
+        <ListItem component={this.props.OpenAccueil} button>Accueil</ListItem>
+        <ListItem component={this.props.OpenForeCastMeteo} button>Prévisions météo</ListItem>
         <ListItem button>Prévisions pollution</ListItem>
         <ListItem button>Itinéraire</ListItem>
       </div>
@@ -70,8 +70,8 @@ class TemporaryDrawer extends React.Component {
   }
 }
 
-TemporaryDrawer.propTypes = {
+OpenMenu.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withStyles(styles)(OpenMenu);

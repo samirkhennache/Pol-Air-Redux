@@ -21,6 +21,7 @@ const formatDate = (date) => {
     return dayName[dayIndex] + ' ' +  day + ' ' + monthNames[monthIndex] ;
   }
   
+  
 class DateIndex extends Component {
  
   state = { date: formatDate(new Date())};

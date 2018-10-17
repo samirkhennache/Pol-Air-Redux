@@ -4,7 +4,6 @@ import IndiceDuJours from './IndiceDuJours'
 import './PollutionRealTime.css'
 
 
-
 class PollutionRealTime extends Component {
 
     render() { 

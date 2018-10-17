@@ -1,37 +1,33 @@
-import React, { Component } from 'react';
-import './App.css';
-import './components/Icon.css';
-import Header from './components/Header';
-import './components/Form.css';
-import Titles from './components/Titles';
-import Form from './components/Form';
-import Footer from './components/Footer';
-import DateIndex from './components/DateIndex'
-
+import React, { Component } from "react";
+import Home from "./Home";
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import ForecastMeteo from './components/meteo/ForecastMeteo'
+import { Link } from 'react-router-dom'
+import NavBar from './components/NavBar'
 
 
 class App extends Component {
 
+  
+
   render() {
+
+    const Accueil = props => <Link to="/" {...props} />
+    const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} />
+
+
     return (
 
-<div className="page-parent" >
-  <div className="page-child-top">
-    <Header/>
-  </div>
-  <div className="page-child">
-    <DateIndex />
-  </div>
-  <div className="page-child">
-    <Titles/>
-  </div>
-  <div className="page-child">
-    <Form />          
-  </div>
-  <div className="page-child-bottom">
-    <Footer />
-  </div>
-</div>
+      <BrowserRouter>
+      <div>
+          <NavBar accueil={Accueil} forecastmeteo={Forecastmeteo}/>
+ 
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/ForecastMeteo" component={ForecastMeteo} />
+          </Switch>
+        </div>
+      </BrowserRouter>
 
     );
   }

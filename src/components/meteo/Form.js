@@ -1,7 +1,7 @@
 import React from "react";
 
 // imports pollution
-import PollutionRealTime from './PollutionRealTime'
+import PollutionRealTime from '../PollutionRealTime'
 
 // imports météo
 import City from './City';
