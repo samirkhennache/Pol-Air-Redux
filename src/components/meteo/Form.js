@@ -74,14 +74,10 @@ class Form extends React.Component{
         const units = "&units=metric";
         const lang = "&lang=fr";
         e.preventDefault();
-
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
-        console.log(data);
         const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
         const data_pol = await api_call_pol.json();
-        console.log(data_pol);
-
         // setState
         this.setState({
             temperature : Math.floor(data.main.temp),

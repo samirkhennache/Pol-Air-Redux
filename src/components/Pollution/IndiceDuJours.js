@@ -72,19 +72,22 @@ class IndiceDuJours extends Component {
             return 10
         else
             return 11
+       
     }
 
     render() { 
         
        return(
-          
-            <Paper className ="indice-du-jour">
-                {this.props.indice && <Typography  variant="display2"  className="quality-typography">
+          <div>
+          {this.props.indice && <Paper className ="indice-du-jour">
+                <Typography  variant="display2"  className="quality-typography">
                 Qualité de l'air
-                </Typography>}
-                {this.props.indice && <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>}
+                </Typography>
+                 <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>
                 <span className ={`indice ${this.StyleIndice()}`}>{this.GetFrenchIndice()}</span>  
             </Paper>
+            }
+        </div>
         )  
     }
 }
