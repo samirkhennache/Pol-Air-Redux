@@ -18,7 +18,7 @@ class PollutionRealTime extends Component {
         return (  
                 <div>
                     {/* je passe en props au component child IndiceDuJours les props (indice max de la pollution) */}
-                     <IndiceDuJours indice ={this.props.dataPol} /> 
+                     <IndiceDuJours indice={this.props.dataPol} />
                 </div>  
           );
     }
