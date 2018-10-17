@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Home from "./Home";
+import Home from "./components/Home";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import ForecastMeteo from './components/meteo/ForecastMeteo'
-import HistoriquePollution from './components/HistoriquePollution'
+import ForecastMeteo from './components/meteo/forcast/ForecastMeteo'
+import HistoriquePollution from './components/Pollution/HistoriquePollution'
 import { Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 
