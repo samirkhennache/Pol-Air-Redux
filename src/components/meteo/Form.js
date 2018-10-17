@@ -1,15 +1,9 @@
 import React from "react";
-
 // imports pollution
-import PollutionRealTime from '../PollutionRealTime'
-
+import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
-import City from './City';
-import Temperature from './Temperature';
-import Humidity from './Humidity';
-import Description from './Description';
-import Icon from './Icon';
-import TempMinMax from './TempMinMax';
+import PrintSearch from './current/PrintSearch'
+import Icon from './current/Icon';
 
 
 // Clés API
@@ -24,8 +18,6 @@ class Form extends React.Component{
     state ={
         value: undefined,
         temperature: undefined,
-        temp_min: undefined,
-        temp_max: undefined,
         city: undefined,
         humidity: undefined,
         description: undefined,
@@ -35,12 +27,9 @@ class Form extends React.Component{
         error: undefined 
     }
     
-
     componentWillMount() {
         this.getLoc()        
     }
-
-
     // Fetch Geoloc via IP
    getLoc = () => {
     
@@ -66,8 +55,6 @@ class Form extends React.Component{
                 .then(response => 
                     this.setState({
                         temperature : Math.floor(response.main.temp),
-                        temp_min : response.main.temp_min,
-                        temp_max : response.main.temp_max,
                         city: response.name,
                         humidity: response.main.humidity,
                         description: response.weather[0].description,
@@ -137,21 +124,18 @@ class Form extends React.Component{
             <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
             <button className="btn-valid">Valider</button>
         </form>
-
-
-       
-        <div className="bloc-details page-child">
-            <div className="details1 detail-col">
-                <Icon icon={this.state.icon}/>
-                <City city={this.state.city}/>
-                <Description description={this.state.description}/>
-            </div>
-            <div className="details2 detail-col">
-                <Temperature temperature={this.state.temperature} degre={this.state.degre} />
-                <TempMinMax temp_min={this.state.temp_min} temp_max={this.state.temp_max} />
-                <Humidity humidity={this.state.humidity}/>
-            </div>
-        </div>
+       <div>
+        <PrintSearch
+         city={this.state.city}
+         temperature={this.state.temperature} 
+         degre={this.state.degre}
+         description={this.state.description}
+         humidity={this.state.humidity}
+         />
+        <Icon 
+        icon={this.state.icon}
+        />
+      </div>
         
 
 
