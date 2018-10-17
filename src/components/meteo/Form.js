@@ -4,6 +4,9 @@ import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+// imports mascottes
+import Mascotte from './Mascotte'
+
 
 
 // Clés API
@@ -140,6 +143,8 @@ class Form extends React.Component{
 
 
         {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
+
+        { this.state.dataPol && this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} /> }
 
     </div>
     )
