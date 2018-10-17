@@ -1,51 +1,163 @@
 import React from "react";
-// import '../App.css'
+
+// imports pollution
+import PollutionRealTime from './PollutionRealTime'
+
+// imports météo
+import City from './City';
+import Temperature from './Temperature';
+import Humidity from './Humidity';
+import Description from './Description';
+import Icon from './Icon';
+import TempMinMax from './TempMinMax';
 
 
+// Clés API
+const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 
 
-// const api_Key_Current= "0f53c26a9c88a54d8706c8b3c9d2b880";
+// CLASS //////////////////////////////////////////////////////////////
 class Form extends React.Component{
+    
+    // state
+    state ={
+        value: undefined,
+        temperature: undefined,
+        temp_min: undefined,
+        temp_max: undefined,
+        city: undefined,
+        humidity: undefined,
+        description: undefined,
+        icon : undefined,
+        degre : null,
+        dataPol:undefined,
+        error: undefined 
+    }
+    
 
-  // state = {
-  //   temperature: undefined,
-  //   city: undefined,
-  //   humidity: undefined,
-  //   description: undefined,
-  //   icon : undefined,
-  //   degre : null,
-  //   error: undefined
-  // }
+    componentWillMount() {
+        this.getLoc()        
+    }
 
-  // getWeather = async (e) => {
-  //   //const city = e.target.elements.city.value;
-  //   const units = "&units=metric";
-  //   const lang = "&lang=fr";
-  //   //e.preventDefault();
 
-  //   const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=paris${units}${lang}&APPID=${api_Key_Current}`);
-  //   const data = await api_call.json();
-  //   console.log(data);
+    // Fetch Geoloc via IP
+   getLoc = () => {
+    
+        navigator.geolocation.getCurrentPosition( (position) => {
+            const latitude =  position.coords.latitude;
+            const longitude =  position.coords.longitude;
+            console.log(longitude);
+            console.log(latitude);
+        
+            if(latitude && longitude){
+                fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
+                .then(res => res.json())
+                .then(response => this.setState({ value: response.address.city }))
+            }
 
-  //   this.setState({
-  //     temperature : Math.floor(data.main.temp),
-  //     city: data.name,
-  //     humidity: data.main.humidity,
-  //     description: data.weather[0].description,
-  //     icon : data.weather[0].icon,
-  //     degre : "C°",
-  //     error: ""
-  //   })
-  // }  
+            if(this.state.value) {
+                let city = this.state.value;
+                const units = "&units=metric";
+                const lang = "&lang=fr";
+        
+                fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                .then(res => res.json())
+                .then(response => 
+                    this.setState({
+                        temperature : Math.floor(response.main.temp),
+                        temp_min : response.main.temp_min,
+                        temp_max : response.main.temp_max,
+                        city: response.name,
+                        humidity: response.main.humidity,
+                        description: response.weather[0].description,
+                        icon : response.weather[0].icon,
+                        degre : "C°",
+                        
+                        error: ""
+                    })    
+                )
+                fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
+                .then(res => res.json())
+                .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+            }
+        })
+    }
+   
 
- 
+
+    // Fetch SearchBar
+    getData = async (e) => {
+        let city = this.state.value;
+        const units = "&units=metric";
+        const lang = "&lang=fr";
+        e.preventDefault();
+
+        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
+        const data = await api_call.json();
+        console.log(data);
+        const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
+        const data_pol = await api_call_pol.json();
+        console.log(data_pol);
+
+        // setState
+        this.setState({
+            temperature : Math.floor(data.main.temp),
+            temp_min : data.main.temp_min,
+            temp_max : data.main.temp_max,
+            city: data.name,
+            humidity: data.main.humidity,
+            description: data.weather[0].description,
+            icon : data.weather[0].icon,
+            degre : "C°",
+            dataPol : data_pol.data.current.pollution.aqius,
+            error: ""
+        })
+    }
+
+
+    handleChange = (event) => {
+        this.setState({value: event.target.value})
+    }
+
+
+
+  // RENDER ////////////////////////////////////////////////////////////
   render() {
+    
+    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.longitude))
+    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.latitude))
+
+
     return (
 
-    <form  onSubmit ={this.props.getWeather}>
-      <input type ="text" name="city" placeholder="Votre ville"/>
-      <button  className="btn-valid">Valider</button>
-    </form>
+    <div>
+
+        <form onSubmit ={this.getData}>
+            <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
+            <button className="btn-valid">Valider</button>
+        </form>
+
+
+       
+        <div className="bloc-details page-child">
+            <div className="details1 detail-col">
+                <Icon icon={this.state.icon}/>
+                <City city={this.state.city}/>
+                <Description description={this.state.description}/>
+            </div>
+            <div className="details2 detail-col">
+                <Temperature temperature={this.state.temperature} degre={this.state.degre} />
+                <TempMinMax temp_min={this.state.temp_min} temp_max={this.state.temp_max} />
+                <Humidity humidity={this.state.humidity}/>
+            </div>
+        </div>
+        
+
+
+        {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
+
+    </div>
     )
   }
 }
