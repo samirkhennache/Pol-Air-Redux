@@ -24,69 +24,60 @@ class Form extends React.Component{
         icon : undefined,
         degre : null,
         dataPol:undefined,
-        error: undefined 
-    }
-    
-    componentWillMount() {
-        this.getLoc()        
+        error: undefined,
+        loaded :false
     }
     // Fetch Geoloc via IP
-   getLoc = () => {
-    
-        navigator.geolocation.getCurrentPosition( (position) => {
+    getLoc = async (e) => {
+        navigator.geolocation.getCurrentPosition(  (position) => {
             const latitude =  position.coords.latitude;
             const longitude =  position.coords.longitude;
-            console.log(longitude);
-            console.log(latitude);
-        
-            if(latitude && longitude){
+            //mettre a jour les states apres la recuperation des lat et long
+            this.setState({loaded :true});
+            ///si loaded = true lance le fetch pour recuperer le nom de la ville 
+            ///pour eviter de lancer le fetch  meteo avant la fin du fetch recuparation ville 
+            ///j'ai créer la fonction GetMetoePollution que j'ai appellé apres la recuperation des infos ville
+            if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.setState({ value: response.address.city }))
-            }
+                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
 
-            if(this.state.value) {
-                let city = this.state.value;
-                const units = "&units=metric";
-                const lang = "&lang=fr";
-        
-                fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
-                .then(res => res.json())
-                .then(response => 
-                    this.setState({
-                        temperature : Math.floor(response.main.temp),
-                        city: response.name,
-                        humidity: response.main.humidity,
-                        description: response.weather[0].description,
-                        icon : response.weather[0].icon,
-                        degre : "C°",
-                        
-                        error: ""
-                    })    
-                )
-                fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
-                .then(res => res.json())
-                .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
             }
         })
-    }
-   
-
-
+    }        
+    //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
+    GetMeteoPollution(city,latitude,longitude){ 
+    const units = "&units=metric";
+    const lang = "&lang=fr";
+    //fetch meteo
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+    .then(res => res.json())
+    .then(response => 
+        this.setState({
+            temperature : Math.floor(response.main.temp),
+            city: response.name,
+            humidity: response.main.humidity,
+            description: response.weather[0].description,
+            icon : response.weather[0].icon,
+            degre : "C°",
+            
+            error: ""
+        }))
+       //fetch pollution
+        fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
+        .then(res => res.json())
+        .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+    } 
     // Fetch SearchBar
     getData = async (e) => {
         let city = this.state.value;
         const units = "&units=metric";
         const lang = "&lang=fr";
         e.preventDefault();
-
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
-        console.log(data);
         const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
         const data_pol = await api_call_pol.json();
-        console.log(data_pol);
-
         // setState
         this.setState({
             temperature : Math.floor(data.main.temp),
@@ -106,22 +97,16 @@ class Form extends React.Component{
     handleChange = (event) => {
         this.setState({value: event.target.value})
     }
-
-
+    componentDidMount(){
+        this.getLoc() 
+    }
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.longitude))
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.latitude))
-
-
     return (
-
     <div>
-
         <form onSubmit ={this.getData}>
-            <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
+            <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
             <button className="btn-valid">Valider</button>
         </form>
        <div>
@@ -136,11 +121,7 @@ class Form extends React.Component{
         icon={this.state.icon}
         />
       </div>
-        
-
-
-        {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
-
+        {this.state.dataPol !==undefined && <PollutionRealTime dataPol={this.state.dataPol} />}
     </div>
     )
   }
