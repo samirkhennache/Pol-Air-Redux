@@ -34,9 +34,9 @@ class OpenMenu extends React.Component {
 
     const sideList = (
       <div className={classes.list}>
-        <ListItem component={this.props.OpenAccueil} button>Accueil</ListItem>
-        <ListItem component={this.props.OpenForeCastMeteo} button>Prévisions météo</ListItem>
-        <ListItem button>Prévisions pollution</ListItem>
+        <ListItem component={this.props.openAccueil} button>Accueil</ListItem>
+        <ListItem component={this.props.openForeCastMeteo} button>Prévisions météo</ListItem>
+        <ListItem component ={this.props.openHistoriquePollution} button>Historique pollution</ListItem>
         <ListItem button>Itinéraire</ListItem>
       </div>
     );

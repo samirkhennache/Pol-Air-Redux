@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import './components/meteo/Icon.css';
-import Titles from './components/Titles';
-import Footer from './components/Footer';
-import PollutionRealTime from './components/PollutionRealTime'
-//import DateIndex from './components/DateIndex'
-//import PrintSearch from './components/PrintSearch'
-import DateIndex from './components/DateIndex'
-import Form from './components/meteo/Form'
-import './App.css';
+
+import Titles from './Titles';
+import Footer from './Footer';
+import PollutionRealTime from './Pollution/PollutionRealTime'
+import DateIndex from './date/DateIndex'
+import Form from './meteo/Form'
+import './Home.css';
 
 class Home extends Component {
     state = {  }
@@ -23,7 +21,6 @@ class Home extends Component {
   </div>
   <div className="page-child">
   <Form />
-  {/* <PrintSearch /> */}
   </div>
   <PollutionRealTime />
   <div className="page-child-bottom">
