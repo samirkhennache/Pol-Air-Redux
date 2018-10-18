@@ -7,7 +7,7 @@ class PagePollution extends Component {
     state = {  }
     render() { 
         return (  
-            <div>
+            <div className="page-parent">
                 <IndiceDuJours indice={this.props.indice}/>
                 <ConseilsPollution indice={this.props.indice}/>
                 <HistoriquePollution/>

@@ -1,9 +1,21 @@
 import React from "react";
 // imports pollution
-import PollutionRealTime from '../Pollution/PollutionRealTime'
+// import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+import PagePollution from "../Pollution/PagePollution";
+import IndiceDuJours from '../Pollution/IndiceDuJours'
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import ForecastMeteo from './forcast/ForecastMeteo'
+import Titles from '../Titles';
+import Footer from '../Footer';
+import DateIndex from '../date/DateIndex'
+import './form.css';
+
+import { Link } from 'react-router-dom'
+import NavBar from '../NavBar'
+// import Home from "../Home";
 
 
 // Clés API
@@ -105,43 +117,63 @@ class Form extends React.Component{
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
+        console.log( " event Handel ",this.state.value);
+        
     }
+    
+    home =() => (
+    <div className="page-parent" >
 
-
+        <div className="page-child">
+          <DateIndex />
+        </div>
+        <div className="page-child">
+            <Titles/>
+        </div>
+        <div className="page-child">
+            <PrintSearch
+            city={this.state.city}
+            temperature={this.state.temperature} 
+            degre={this.state.degre}
+            description={this.state.description}
+            humidity={this.state.humidity}/>
+            <Icon icon={this.state.icon}/>
+        </div>
+        <div className="page-child">
+        <IndiceDuJours indice={this.state.dataPol} />
+        </div>
+        <div className="page-child-bottom">
+        <Footer />
+        </div>   
+    </div>
+        
+    )
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.longitude))
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.latitude))
+    console.log( "render");
+    const pagePollution = props => < PagePollution indice={this.state.dataPol} />
+    const Accueil = props => <Link to="/" {...props} />
+    const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
+    const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
 
 
     return (
+    <BrowserRouter>
+            <div>
+           <NavBar accueil={Accueil} forecastmeteo={Forecastmeteo}  historiquePollution ={pollution}/>
+            <form className="page-child" onSubmit ={this.getData} >
+                <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
+                <button className="btn-valid">Valider</button>
+            </form>
 
-    <div>
-
-        <form onSubmit ={this.getData}>
-            <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
-            <button className="btn-valid">Valider</button>
-        </form>
-       <div>
-        <PrintSearch
-         city={this.state.city}
-         temperature={this.state.temperature} 
-         degre={this.state.degre}
-         description={this.state.description}
-         humidity={this.state.humidity}
-         />
-        <Icon 
-        icon={this.state.icon}
-        />
-      </div>
-        
-
-
-        {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
-
-    </div>
+            <Switch>
+                <Route exact path="/" component={()=>this.home()}/>
+                <Route path="/ForecastMeteo" component={ForecastMeteo} />            
+                <Route path="/HistoriquePollution" component ={pagePollution} />
+            </Switch>
+            </div>
+      </BrowserRouter>          
     )
   }
 }
