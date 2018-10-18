@@ -142,9 +142,9 @@ class Form extends React.Component{
         
 
 
-        {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
+        { this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} /> }
 
-        { this.state.dataPol && this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} /> }
+        { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
 
     </div>
     )
