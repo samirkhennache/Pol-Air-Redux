@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import "./conseilsPollution.css";
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -18,7 +20,7 @@ class ConseilsPagePollution extends Component {
         messageCyclo : [
             `C'est le moment de prendre de la vitesse et de vous dépenser`,
             `Boulot, vélo, dodo. Rien à signaler`,
-            `La danseuse entre les voitures ce n'est pas votre truc, tant mieux ! Évitez les zones à circulation dense `,
+            `Rouler entre les voitures ce n'est pas votre truc, tant mieux ! Aujourd'hui, évitez les zones à circulation dense `,
             `Pistes cyclables conseillées, attention aux émissions de particules fines aux heures de pointe..`,
             `Port du masque conseillé, les personnes sensibles ne doivent pas prendre leur vélo`,
             `Prenez les transports en commun ! Port du masque obligatoire`,
@@ -34,7 +36,8 @@ class ConseilsPagePollution extends Component {
             `Danger de mort, masque adapté obligatoire`
         ],
         adviseDefault: true,
-        advise: ""
+        adviseCyclo: false,
+        adviseHouse: false
 
       }
 
@@ -90,44 +93,58 @@ class ConseilsPagePollution extends Component {
     handleClickPieton = () =>{
         this.setState({
             adviseDefault : this.getConseilsPieton(),
-            advise : false
+            adviseCyclo: false,
+            adviseHouse: false
 
         })
        
     }
     handleClickCyclo = () =>{
         this.setState({
-            advise: this.getAdviseCyclo(),
-            adviseDefault : false
+            adviseCyclo: this.getAdviseCyclo(),
+            adviseDefault: false,
+            adviseHouse: false
         })
        
     }
     handleClickHouse = () =>{
         this.setState({
-            advise: this.getAdviseHouse(),
-            adviseDefault : false
+            adviseHouse: this.getAdviseHouse(),
+            adviseDefault : false,
+            adviseCyclo: false
         })
        
     }
-
+    getCssAdvise = () => {
+        return(this.state.adviseDefault? "border" : "no-border")
+    }
+    getCssAdviseCyclo = () => {
+        return(this.state.adviseCyclo? "border" : "no-border")
+    }
+    getCssAdviseHouse = () => {
+        return(this.state.adviseHouse? "border" : "no-border")
+    }
     render() { 
         
         console.log(this.state.advise + "test")
         const adviseDefault = this.state.adviseDefault ? this.getConseilsPieton() : ""
         return ( 
-            <div>         
-                <button onClick={this.handleClickPieton}>
-                    piéton
-                </button>
-                <button onClick={this.handleClickCyclo}>
-                    cycliste
-                </button>
-                <button onClick={this.handleClickHouse}>
-                    maison
-                </button>
-                <p>{adviseDefault}</p>
-                <p>{this.state.advise}</p>
-            </div>
+            <Grid container spacing={16} alignItems="center" direction="column">
+                <Grid item xs={12} sm={6} md={4} lg={3}>         
+                    <button className={this.getCssAdvise()} onClick={this.handleClickPieton}>
+                        piéton
+                    </button>
+                    <button className={this.getCssAdviseCyclo()} onClick={this.handleClickCyclo}>
+                        cycliste
+                    </button>
+                    <button className={this.getCssAdviseHouse()} onClick={this.handleClickHouse}>
+                        maison
+                    </button>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={3}> 
+                    <p>{adviseDefault}{this.state.adviseCyclo}{this.state.adviseHouse}</p>
+                </Grid>         
+            </Grid>
          );
     }
 }

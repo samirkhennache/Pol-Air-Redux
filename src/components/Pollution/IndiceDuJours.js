@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Typography,Paper} from '@material-ui/core'
 import './IndiceDuJours.css'
+// import PagePollution from './PagePollution';
+// import { Route, BrowserRouter, Switch } from 'react-router-dom';
 
 
 
@@ -72,21 +74,21 @@ class IndiceDuJours extends Component {
             return 10
         else
             return 11
-       
     }
 
     render() { 
+        // const pagePollution = (props) => <PagePollution indice={this.props.indice} />
         
        return(
-          <div>
-          {this.props.indice && <Paper className ="indice-du-jour">
-                <Typography  variant="display2"  className="quality-typography">
+           <div>
+          
+                {this.props.indice && <Paper className ="indice-du-jour">
+                {this.props.indice && <Typography  variant="display2"  className="quality-typography">
                 Qualité de l'air
-                </Typography>
-                 <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>
+                </Typography>}
+                {this.props.indice && <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>}
                 <span className ={`indice ${this.StyleIndice()}`}>{this.GetFrenchIndice()}</span>  
-            </Paper>
-            }
+            </Paper>}
         </div>
         )  
     }
