@@ -81,7 +81,6 @@ class IndiceDuJours extends Component {
         
        return(
            <div>
-          
                 {this.props.indice && <Paper className ="indice-du-jour">
                 {this.props.indice && <Typography  variant="display2"  className="quality-typography">
                 Qualité de l'air
