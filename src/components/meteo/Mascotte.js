@@ -36,8 +36,7 @@ class Mascotte extends React.Component {
     render() { 
         return ( 
             <div >
-                <img src={this.getBear()} alt="Mascotte du jour"/>
-                <p>{this.props.temperature} {this.props.dataPol} {this.props.description}</p>
+                <img src={this.getBear()} alt="Mascotte du jour" style={{ height: "30vh" }}/>
             </div>
         )
     }

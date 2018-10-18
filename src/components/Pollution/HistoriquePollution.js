@@ -8,10 +8,10 @@ import Tab from '@material-ui/core/Tab';
 
 ///declaration de varriables globales
 const url = 'https://services8.arcgis.com/gtmasQsdfwbDAQSQ/arcgis/rest/services/ind_idf_agglo/FeatureServer/0/query?where=1%3D1&outFields=date_echea,valeur,qualificat&returnGeometry=false&outSR=4326&f=json'
-let myDates= [];
+let myDates = [];
 let myLabel = [];
-let myData = [];
-let allData= null
+let myData  = [];
+let allData = null;
 
 class HistoriquePollution extends Component {
     state = {
@@ -80,7 +80,6 @@ class HistoriquePollution extends Component {
         let date =[];
         let data =[];
         let chartData ={}
-        console.log(myLabel);
         for (let i= 0; i<31; i++){
 
             date.push(myLabel[myLabel.length-31+i])
@@ -119,7 +118,7 @@ class HistoriquePollution extends Component {
                     data:data,
                 }]
             }
-        }   
+        }
        return(chartData)
     }
 
@@ -130,6 +129,8 @@ class HistoriquePollution extends Component {
     ///evement qui lorsque on passe d'un onglet à un autre 
     handleChange = (event, value) => {
         this.setState({ value });
+        console.log(value);
+        
       };
     render() {
         return (
@@ -155,7 +156,6 @@ class HistoriquePollution extends Component {
                         text: 'Indice de Pollution',
                         fontSize:30,
                     },
-                     
                        scales:{
                            yAxes:[{
                                ticks :{
