@@ -1,10 +1,25 @@
 import React from "react";
 // imports pollution
-import PollutionRealTime from '../Pollution/PollutionRealTime'
+// import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
 import Background from './current/Background';
+import PagePollution from "../Pollution/PagePollution";
+import IndiceDuJours from '../Pollution/IndiceDuJours'
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import ForecastMeteo from './forcast/ForecastMeteo'
+import Titles from '../Titles';
+import Footer from '../Footer';
+import DateIndex from '../date/DateIndex'
+import './form.css';
+
+import { Link } from 'react-router-dom'
+import NavBar from '../NavBar'
+// import Home from "../Home";
+// imports mascottes
+import Mascotte from './Mascotte'
+
 
 
 // Clés API
@@ -33,67 +48,60 @@ class Form extends React.Component{
     
     componentWillMount() {
         this.getLoc()        
+        //loaded :false
     }
     // Fetch Geoloc via IP
-   getLoc = () => {
-    
-        navigator.geolocation.getCurrentPosition( (position) => {
+    getLoc = async (e) => {
+        navigator.geolocation.getCurrentPosition(  (position) => {
             const latitude =  position.coords.latitude;
             const longitude =  position.coords.longitude;
-            console.log(longitude);
-            console.log(latitude);
-        
-            if(latitude && longitude){
+            //mettre a jour les states apres la recuperation des lat et long
+            this.setState({loaded :true});
+            ///si loaded = true lance le fetch pour recuperer le nom de la ville 
+            ///pour eviter de lancer le fetch  meteo avant la fin du fetch recuparation ville 
+            ///j'ai créer la fonction GetMetoePollution que j'ai appellé apres la recuperation des infos ville
+            if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.setState({ value: response.address.city }))
-            }
+                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
 
-            if(this.state.value) {
-                let city = this.state.value;
-                const units = "&units=metric";
-                const lang = "&lang=fr";
-        
-                fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
-                .then(res => res.json())
-                .then(response => 
-                    this.setState({
-                        temperature : Math.floor(response.main.temp),
-                        city: response.name,
-                        humidity: response.main.humidity,
-                        description: response.weather[0].description,
-                        icon : response.weather[0].icon, //sert à afficher l'icone et le background.
-                        degre : "C°",
-                        imgBackground: response.weather[0].icon, //sert à afficher le background.
-                        error: ""
-                    })   
-                .then(console.log(this.state.imgBackground))
-                )
-                
-                fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
-                .then(res => res.json())
-                .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
             }
         })
-    }
- 
-   
-
-
+    }        
+    //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
+    GetMeteoPollution(city,latitude,longitude){ 
+    const units = "&units=metric";
+    const lang = "&lang=fr";
+    //fetch meteo
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+    .then(res => res.json())
+    .then(response => 
+        this.setState({
+            temperature : Math.floor(response.main.temp),
+            city: response.name,
+            humidity: response.main.humidity,
+            description: response.weather[0].description,
+            icon : response.weather[0].icon, //sert à afficher l'icone et le background.
+            imgBackground: response.weather[0].icon, //sert à afficher le background.
+            degre : "C°",
+            loading: false,
+            error: ""
+        }))
+       //fetch pollution
+        fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
+        .then(res => res.json())
+        .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+    } 
     // Fetch SearchBar
     getData = async (e) => {
         let city = this.state.value;
         const units = "&units=metric";
         const lang = "&lang=fr";
         e.preventDefault();
-
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
-        console.log(data);
         const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
         const data_pol = await api_call_pol.json();
-        console.log(data_pol);
-
         // setState
         this.setState({
             temperature : Math.floor(data.main.temp),
@@ -113,49 +121,75 @@ class Form extends React.Component{
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
+        console.log( " event Handel ",this.state.value);
+        
     }
+    
+    home =() => (
+    <div className="page-parent" >
 
-
+        <div className="page-child">
+          <DateIndex />
+        </div>
+        <div className="page-child">
+            <Titles/>
+        </div>        
+       
+        <div className="page-child">
+        { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
+            <PrintSearch
+            city={this.state.city}
+            temperature={this.state.temperature} 
+            degre={this.state.degre}
+            description={this.state.description}
+            humidity={this.state.humidity}/>
+            <Icon icon={this.state.icon}/>
+        </div>
+        <div>
+            {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
+        </div>
+        <div className="page-child">
+        <IndiceDuJours indice={this.state.dataPol} />
+        </div>
+        <div className="page-child-bottom">
+        <Footer />
+        </div>   
+    </div>
+        
+    )
+    componentDidMount(){
+        this.getLoc() 
+    }
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.longitude))
-    //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.latitude))
+    console.log( "render");
+    const pagePollution = props => < PagePollution indice={this.state.dataPol} />
+    const Accueil = props => <Link to="/" {...props} />
+    const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
+    const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
 
     console.log("****INFO POUR DELPH from composent Form*****")
     console.log(this.state.imgBackground)
 
     return (
+    <BrowserRouter>
+            <div>
+           <NavBar accueil={Accueil} forecastmeteo={Forecastmeteo}  historiquePollution ={pollution}/>
+            <form className="page-child" onSubmit ={this.getData} >
+                <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
+                <button className="btn-valid">Valider</button>
+            </form>
+            
 
-    <div>
-
-        <form onSubmit ={this.getData}>
-            <input type ="text" name="city" placeholder="Votre ville" value={this.state.value} onChange={this.handleChange}/>
-            <button className="btn-valid">Valider</button>
-        </form>
-       <div>
-        <PrintSearch
-         city={this.state.city}
-         temperature={this.state.temperature} 
-         degre={this.state.degre}
-         description={this.state.description}
-         humidity={this.state.humidity}
-         />
-        <Icon 
-        icon={this.state.icon}
-        />
-        <div>
-            {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
-        </div>
-
-      </div>
-        
-
-
-        {this.state.dataPol && <PollutionRealTime dataPol={this.state.dataPol} />}
-
-    </div>
+            <Switch>
+                <Route exact path="/" component={()=>this.home()}/>
+                <Route path="/ForecastMeteo" component={ForecastMeteo} />            
+                <Route path="/HistoriquePollution" component ={pagePollution} />
+            </Switch>
+            </div>
+      </BrowserRouter>
+    
     )
   }
 }
