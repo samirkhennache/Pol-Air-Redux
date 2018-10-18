@@ -4,6 +4,9 @@ import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+// imports mascottes
+import Mascotte from './Mascotte'
+
 
 
 // Clés API
@@ -109,6 +112,7 @@ class Form extends React.Component{
             <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
             <button className="btn-valid">Valider</button>
         </form>
+           { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
        <div>
         <PrintSearch
          city={this.state.city}
@@ -121,6 +125,7 @@ class Form extends React.Component{
         icon={this.state.icon}
         />
       </div>
+
         {this.state.dataPol !==undefined && <PollutionRealTime dataPol={this.state.dataPol} />}
     </div>
     )
