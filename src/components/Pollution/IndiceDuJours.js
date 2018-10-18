@@ -81,13 +81,8 @@ class IndiceDuJours extends Component {
         
        return(
            <div>
-            {/* <BrowserRouter>                    
-                <Switch>
-                    <Route exact path="/HistoriquePollution" component={pagePollution} />
-                </Switch>
-            </BrowserRouter> */}
           
-            {this.props.indice && <Paper className ="indice-du-jour">
+                {this.props.indice && <Paper className ="indice-du-jour">
                 {this.props.indice && <Typography  variant="display2"  className="quality-typography">
                 Qualité de l'air
                 </Typography>}
