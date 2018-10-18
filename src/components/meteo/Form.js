@@ -4,6 +4,7 @@ import React from "react";
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+import Background from './current/Background';
 import PagePollution from "../Pollution/PagePollution";
 import IndiceDuJours from '../Pollution/IndiceDuJours'
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
@@ -23,6 +24,7 @@ import Mascotte from './Mascotte'
 
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+//http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 
 
@@ -40,7 +42,13 @@ class Form extends React.Component{
         degre : null,
         dataPol:undefined,
         error: undefined,
-        loaded :false
+        loading: true, // permet de mettre en attente le chargement du background 
+        imgBackground: undefined
+    }
+    
+    componentWillMount() {
+        this.getLoc()        
+        //loaded :false
     }
     // Fetch Geoloc via IP
     getLoc = async (e) => {
@@ -73,9 +81,10 @@ class Form extends React.Component{
             city: response.name,
             humidity: response.main.humidity,
             description: response.weather[0].description,
-            icon : response.weather[0].icon,
+            icon : response.weather[0].icon, //sert à afficher l'icone et le background.
+            imgBackground: response.weather[0].icon, //sert à afficher le background.
             degre : "C°",
-            
+            loading: false,
             error: ""
         }))
        //fetch pollution
@@ -104,10 +113,11 @@ class Form extends React.Component{
             icon : data.weather[0].icon,
             degre : "C°",
             dataPol : data_pol.data.current.pollution.aqius,
+            imgBackground: data.weather[0].icon,
+            loading : false,
             error: ""
         })
     }
-
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
@@ -135,6 +145,9 @@ class Form extends React.Component{
             humidity={this.state.humidity}/>
             <Icon icon={this.state.icon}/>
         </div>
+        <div>
+            {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
+        </div>
         <div className="page-child">
         <IndiceDuJours indice={this.state.dataPol} />
         </div>
@@ -156,6 +169,8 @@ class Form extends React.Component{
     const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
     const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
 
+    console.log("****INFO POUR DELPH from composent Form*****")
+    console.log(this.state.imgBackground)
 
     return (
     <BrowserRouter>
