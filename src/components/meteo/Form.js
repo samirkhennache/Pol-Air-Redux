@@ -16,6 +16,9 @@ import './form.css';
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 // import Home from "../Home";
+// imports mascottes
+import Mascotte from './Mascotte'
+
 
 
 // Clés API
@@ -120,8 +123,10 @@ class Form extends React.Component{
         </div>
         <div className="page-child">
             <Titles/>
-        </div>
+        </div>        
+       
         <div className="page-child">
+        { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
             <PrintSearch
             city={this.state.city}
             temperature={this.state.temperature} 
@@ -160,6 +165,7 @@ class Form extends React.Component{
                 <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
                 <button className="btn-valid">Valider</button>
             </form>
+            
 
             <Switch>
                 <Route exact path="/" component={()=>this.home()}/>
@@ -168,6 +174,7 @@ class Form extends React.Component{
             </Switch>
             </div>
       </BrowserRouter>
+    
     )
   }
 }
