@@ -4,10 +4,12 @@ import PollutionRealTime from '../Pollution/PollutionRealTime'
 // imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+import Background from './current/Background';
 
 
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+//http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 
 
@@ -24,7 +26,9 @@ class Form extends React.Component{
         icon : undefined,
         degre : null,
         dataPol:undefined,
-        error: undefined 
+        error: undefined,
+        loading: true, // permet de mettre en attente le chargement du background 
+        imgBackground: undefined
     }
     
     componentWillMount() {
@@ -58,18 +62,21 @@ class Form extends React.Component{
                         city: response.name,
                         humidity: response.main.humidity,
                         description: response.weather[0].description,
-                        icon : response.weather[0].icon,
+                        icon : response.weather[0].icon, //sert à afficher l'icone et le background.
                         degre : "C°",
-                        
+                        imgBackground: response.weather[0].icon, //sert à afficher le background.
                         error: ""
-                    })    
+                    })   
+                .then(console.log(this.state.imgBackground))
                 )
+                
                 fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
                 .then(res => res.json())
                 .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
             }
         })
     }
+ 
    
 
 
@@ -98,10 +105,11 @@ class Form extends React.Component{
             icon : data.weather[0].icon,
             degre : "C°",
             dataPol : data_pol.data.current.pollution.aqius,
+            imgBackground: data.weather[0].icon,
+            loading : false,
             error: ""
         })
     }
-
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
@@ -115,6 +123,8 @@ class Form extends React.Component{
     //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.longitude))
     //navigator.geolocation.getCurrentPosition( (position) =>  console.log(position.coords.latitude))
 
+    console.log("****INFO POUR DELPH from composent Form*****")
+    console.log(this.state.imgBackground)
 
     return (
 
@@ -135,6 +145,10 @@ class Form extends React.Component{
         <Icon 
         icon={this.state.icon}
         />
+        <div>
+            {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
+        </div>
+
       </div>
         
 
