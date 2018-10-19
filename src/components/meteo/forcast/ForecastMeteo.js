@@ -3,15 +3,11 @@ import BlockForcastMeteo from './BlockForcastMeteo';
 
 class ForecastMeteo extends Component {
 
-  state = {
-    city : 'paris'
-  }
-
   render() {
-    
+
     return (
       <div>
-        <BlockForcastMeteo city={this.state.city} />
+        <BlockForcastMeteo tempMin={this.props.tempMin} tempMax={this.props.tempMax} city={this.props.city}/>
       </div>
      );
   }
