@@ -1,7 +1,4 @@
 import React from "react";
-// imports pollution
-// import PollutionRealTime from '../Pollution/PollutionRealTime'
-// imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
 import Background from './current/Background';
@@ -13,11 +10,8 @@ import Titles from '../Titles';
 import Footer from '../Footer';
 import DateIndex from '../date/DateIndex'
 import './form.css';
-
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
-// import Home from "../Home";
-// imports mascottes
 import Mascotte from './Mascotte'
 
 
@@ -25,7 +19,8 @@ import Mascotte from './Mascotte'
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
+const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
+// AgM8MuxtXNcfwPrHN -- clef guillaume
 
 
 // CLASS //////////////////////////////////////////////////////////////
@@ -124,34 +119,35 @@ class Form extends React.Component{
     }
     
     home =() => (
-    <div className="page-parent" >
-
-        <div className="page-child">
-          <DateIndex />
+    <div>
+        <div className="bloc-central-form bloc-central" >
+            <div className="page-child">
+            <DateIndex />
+            </div>
+            <div className="page-child">
+                <Titles/>
+            </div>        
+        
+            <div className="page-child">
+            { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
+                <PrintSearch
+                city={this.state.city}
+                temperature={this.state.temperature} 
+                degre={this.state.degre}
+                description={this.state.description}
+                humidity={this.state.humidity}/>
+                <Icon icon={this.state.icon}/>
+            </div>
+            <div>
+                {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
+            </div>
+            <div>
+            <IndiceDuJours indice={this.state.dataPol} />
+            </div>  
         </div>
-        <div className="page-child">
-            <Titles/>
-        </div>        
-       
-        <div className="page-child">
-        { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
-            <PrintSearch
-            city={this.state.city}
-            temperature={this.state.temperature} 
-            degre={this.state.degre}
-            description={this.state.description}
-            humidity={this.state.humidity}/>
-            <Icon icon={this.state.icon}/>
-        </div>
-        <div>
-            {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
-        </div>
-        <div className="page-child">
-        <IndiceDuJours indice={this.state.dataPol} />
-        </div>
-        <div className="page-child-bottom">
-        <Footer />
-        </div>   
+        <div className="page-footer">
+            <Footer />
+        </div> 
     </div>
         
     )
