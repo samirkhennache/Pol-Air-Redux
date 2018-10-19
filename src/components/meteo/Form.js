@@ -92,7 +92,7 @@ class Form extends React.Component{
         let city = this.state.value;
         const units = "&units=metric";
         const lang = "&lang=fr";
-        e.preventDefault();
+        e.preventDefault();// eviter que la page se recharge  a chaque recherche.
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
         const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
@@ -152,12 +152,15 @@ class Form extends React.Component{
         
     )
     componentDidMount(){
+        //lance la methode getloc
         this.getLoc() 
     }
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
     const pagePollution = props => < PagePollution indice={this.state.dataPol} />
+   
+   ///link en variable
     const Accueil = props => <Link to="/" {...props} />
     const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
     const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
