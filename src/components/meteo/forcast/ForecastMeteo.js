@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import BlockForcastMeteo from './BlockForcastMeteo';
 
 class ForecastMeteo extends Component {
-  render() { 
-    return ( 
+
+  render() {
+
+    return (
       <div>
-        <BlockForcastMeteo dateApp={1} />
-        <BlockForcastMeteo dateApp={2} />
-        <BlockForcastMeteo dateApp={3} />
-        <BlockForcastMeteo dateApp={4} />
-        <BlockForcastMeteo dateApp={5} />
+        <BlockForcastMeteo tempMin={this.props.tempMin} tempMax={this.props.tempMax} city={this.props.city}/>
       </div>
      );
   }

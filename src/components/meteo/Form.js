@@ -10,6 +10,7 @@ import Titles from '../Titles';
 import Footer from '../Footer';
 import DateIndex from '../date/DateIndex'
 import './form.css';
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 import Mascotte from './Mascotte'
@@ -22,6 +23,13 @@ const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 
+
+//Api Forecast
+
+const key = "012c3731b7b5a25ce2858d5bdf0c1134"
+const unit = 'metric'
+const lang = 'fr'
+const url = 'http://api.openweathermap.org/data/2.5/forecast?q='
 
 // CLASS //////////////////////////////////////////////////////////////
 class Form extends React.Component{
@@ -37,6 +45,9 @@ class Form extends React.Component{
         degre : null,
         dataPol:undefined,
         error: undefined,
+        loaded :false,
+        tempMax: [],
+        tempMin : [],
         loading: true, // permet de mettre en attente le chargement du background 
         imgBackground: undefined
     }
@@ -59,14 +70,16 @@ class Form extends React.Component{
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
                 .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
-
+                
             }
         })
+        
     }        
     //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
     GetMeteoPollution(city,latitude,longitude){ 
     const units = "&units=metric";
     const lang = "&lang=fr";
+    
     //fetch meteo
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
     .then(res => res.json())
@@ -86,7 +99,11 @@ class Form extends React.Component{
         fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
         .then(res => res.json())
         .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+        this.getForecastMeteo(city)
     } 
+
+
+    
     // Fetch SearchBar
     getData = async (e) => {
         let city = this.state.value;
@@ -112,10 +129,49 @@ class Form extends React.Component{
             loading : false,
             error: ""
         })
+        this.getForecastMeteo(city)
     }
 
+    //Fetch ForecastMeteo
+    getForecastMeteo = (city) => {
+        console.log("into function", city)
+      axios.get(`${url}${city},fr&lang=${lang}&APPID=${key}&units=${unit}`)
+            .then(res => {
+              let temp_min = []
+              let temp_max = []
+              for (let i = 1; i <= 4; i++) {
+                let temperature_min = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
+                temp_min.push(Math.floor(Math.min(...temperature_min.map(x=> x.main.temp_min))))
+      
+                let temperature_max = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
+                temp_max.push(Math.floor(Math.max(...temperature_max.map(x=> x.main.temp_max))))
+              }
+              this.setState({
+                tempMin : temp_min,
+                tempMax: temp_max,
+            })
+            
+            })
+      
+        }
+
+        getDateAddOne(day) {
+            const n = this.getDate(day) + 86400
+            return n
+        }
+        
+        getDate(day) {
+            let d = new Date();
+            let n = d.getTime() % 86400000
+            let test = d.setTime(((d.getTime()-n)/1000)+86400*day)
+            return test
+        }
+        
+
+    //Fin Fetch ForecastMeteo
+
     handleChange = (event) => {
-        this.setState({value: event.target.value})        
+        this.setState({value: event.target.value})
     }
     
     home =() => (
@@ -158,6 +214,8 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+    
+    const pageForecastmeteo = props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city}/>
     const pagePollution = props => < PagePollution indice={this.state.dataPol} />
    
    ///link en variable
@@ -177,7 +235,7 @@ class Form extends React.Component{
 
             <Switch>
                 <Route exact path="/" component={()=>this.home()}/>
-                <Route path="/ForecastMeteo" component={ForecastMeteo} />            
+                <Route path="/ForecastMeteo" component={pageForecastmeteo} />            
                 <Route path="/HistoriquePollution" component ={pagePollution} />
             </Switch>
             </div>

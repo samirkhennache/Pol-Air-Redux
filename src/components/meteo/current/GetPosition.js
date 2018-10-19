@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrentMeteo from './CurrentMeteo';
 
+
 class GetPosition extends React.Component{
 
   state = {
@@ -8,7 +9,8 @@ class GetPosition extends React.Component{
     arrondissement: undefined,
     region: undefined,
     pays: undefined,
-    Loading: true
+    Loading: true,
+    Show : false,
   }
 
   componentDidMount() {
@@ -21,7 +23,6 @@ class GetPosition extends React.Component{
 
       .then(response => this.setState({city: response.address.city, arrondissement: response.address.postcode, region : response.address.state, pays: response.address.country, Loading: false}))
     }
-
   })
 }
 
