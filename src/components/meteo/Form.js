@@ -94,6 +94,7 @@ class Form extends React.Component{
         fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
         .then(res => res.json())
         .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+        this.getForecastMeteo(city)
     } 
 
 
@@ -121,13 +122,13 @@ class Form extends React.Component{
             dataPol : data_pol.data.current.pollution.aqius,
             error: ""
         })
+        this.getForecastMeteo(city)
     }
 
     //Fetch ForecastMeteo
-
-    getForecastDate= () => {
-        console.log("into function", this.state.city)
-      axios.get(`${url}${this.state.value},fr&lang=${lang}&APPID=${key}&units=${unit}`)
+    getForecastMeteo = (city) => {
+        console.log("into function", city)
+      axios.get(`${url}${city},fr&lang=${lang}&APPID=${key}&units=${unit}`)
             .then(res => {
               let temp_min = []
               let temp_max = []
