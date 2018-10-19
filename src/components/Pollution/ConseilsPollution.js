@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./conseilsPollution.css";
 import Grid from '@material-ui/core/Grid';
+import './conseilsPollution.css'
 
 
 
@@ -115,14 +116,23 @@ class ConseilsPagePollution extends Component {
         })
        
     }
-    getCssAdvise = () => {
-        return(this.state.adviseDefault? "border" : "no-border")
+    // getCssAdvise = () => {
+    //     return(this.state.adviseDefault? "border" : "no-border")
+    // }
+    // getCssAdviseCyclo = () => {
+    //     return(this.state.adviseCyclo? "border" : "no-border")
+    // }
+    // getCssAdviseHouse = () => {
+    //     return(this.state.adviseHouse? "border" : "no-border")
+    // }
+    getCssAdviseIconPieton = () => {
+        return(this.state.adviseDefault? "radius-border" : "no-radius")
     }
-    getCssAdviseCyclo = () => {
-        return(this.state.adviseCyclo? "border" : "no-border")
+    getCssAdviseIconCyclo = () => {
+        return(this.state.adviseCyclo? "radius-border" : "no-radius")
     }
-    getCssAdviseHouse = () => {
-        return(this.state.adviseHouse? "border" : "no-border")
+    getCssAdviseIconHouse = () => {
+        return(this.state.adviseHouse? "radius-border" : "no-radius")
     }
     render() { 
         
@@ -131,17 +141,22 @@ class ConseilsPagePollution extends Component {
         return ( 
             <Grid container spacing={16} alignItems="center" direction="column">
                 <Grid item xs={12} sm={6} md={4} lg={3}>         
-                    <button className={this.getCssAdvise()} onClick={this.handleClickPieton}>
+                    {/* <button className={this.getCssAdvise()} onClick={this.handleClickPieton}>
                         piéton
-                    </button>
-                    <button className={this.getCssAdviseCyclo()} onClick={this.handleClickCyclo}>
+                    </button> */}
+                    {/* <div className="icon-conseil"> */}
+                    <span className={this.getCssAdviseIconPieton()} ><i onClick={this.handleClickPieton} class="material-icons">directions_walk</i></span>
+                    {/* </div> */}
+                    <span className={this.getCssAdviseIconCyclo()} ><i onClick={this.handleClickCyclo} class="material-icons">directions_bike</i></span>
+                    {/* <button className={this.getCssAdviseCyclo()} onClick={this.handleClickCyclo}>
                         cycliste
-                    </button>
-                    <button className={this.getCssAdviseHouse()} onClick={this.handleClickHouse}>
+                    </button> */}
+                    <span className={this.getCssAdviseIconHouse()} ><i onClick={this.handleClickHouse}  class="material-icons">home</i></span>
+                    {/* <button className={this.getCssAdviseHouse()} onClick={this.handleClickHouse}>
                         maison
-                    </button>
+                    </button> */}
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}> 
+                <Grid item xs={12} sm={6} md={4} lg={3} className="conseil-blocConseil"> 
                     <p>{adviseDefault}{this.state.adviseCyclo}{this.state.adviseHouse}</p>
                 </Grid>         
             </Grid>

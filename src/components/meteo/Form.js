@@ -1,9 +1,7 @@
 import React from "react";
-// imports pollution
-// import PollutionRealTime from '../Pollution/PollutionRealTime'
-// imports météo
 import PrintSearch from './current/PrintSearch'
 import Icon from './current/Icon';
+import Background from './current/Background';
 import PagePollution from "../Pollution/PagePollution";
 import IndiceDuJours from '../Pollution/IndiceDuJours'
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
@@ -13,18 +11,17 @@ import Footer from '../Footer';
 import DateIndex from '../date/DateIndex'
 import './form.css';
 import axios from 'axios'
-
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
-// import Home from "../Home";
-// imports mascottes
 import Mascotte from './Mascotte'
 
 
 
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+//http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
+// AgM8MuxtXNcfwPrHN -- clef guillaume
 
 
 //Api Forecast
@@ -51,6 +48,13 @@ class Form extends React.Component{
         loaded :false,
         tempMax: [],
         tempMin : [],
+        loading: true, // permet de mettre en attente le chargement du background 
+        imgBackground: undefined
+    }
+    
+    componentWillMount() {
+        this.getLoc()        
+        //loaded :false
     }
     // Fetch Geoloc via IP
     getLoc = async (e) => {
@@ -85,9 +89,10 @@ class Form extends React.Component{
             city: response.name,
             humidity: response.main.humidity,
             description: response.weather[0].description,
-            icon : response.weather[0].icon,
+            icon : response.weather[0].icon, //sert à afficher l'icone et le background.
+            imgBackground: response.weather[0].icon, //sert à afficher le background.
             degre : "C°",
-            
+            loading: false,
             error: ""
         }))
        //fetch pollution
@@ -104,7 +109,7 @@ class Form extends React.Component{
         let city = this.state.value;
         const units = "&units=metric";
         const lang = "&lang=fr";
-        e.preventDefault();
+        e.preventDefault();// eviter que la page se recharge  a chaque recherche.
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
         const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
@@ -120,6 +125,8 @@ class Form extends React.Component{
             icon : data.weather[0].icon,
             degre : "C°",
             dataPol : data_pol.data.current.pollution.aqius,
+            imgBackground: data.weather[0].icon,
+            loading : false,
             error: ""
         })
         this.getForecastMeteo(city)
@@ -165,52 +172,56 @@ class Form extends React.Component{
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
-        
     }
     
     home =() => (
-    <div className="page-parent" >
-
-        <div className="page-child">
-          <DateIndex />
+    <div>
+        <div className="bloc-central-form bloc-central" >
+            <div className="page-child">
+            <DateIndex />
+            </div>
+            <div className="page-child">
+                <Titles/>
+            </div>        
+        
+            <div className="page-child">
+            { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
+                <PrintSearch
+                city={this.state.city}
+                temperature={this.state.temperature} 
+                degre={this.state.degre}
+                description={this.state.description}
+                humidity={this.state.humidity}/>
+                <Icon icon={this.state.icon}/>
+            </div>
+            <div>
+                {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
+            </div>
+            <div>
+            <IndiceDuJours indice={this.state.dataPol} />
+            </div>  
         </div>
-        <div className="page-child">
-            <Titles/>
-        </div>        
-       
-        <div className="page-child">
-        { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
-            <PrintSearch
-            city={this.state.city}
-            temperature={this.state.temperature} 
-            degre={this.state.degre}
-            description={this.state.description}
-            humidity={this.state.humidity}/>
-            <Icon icon={this.state.icon}/>
-        </div>
-        <div className="page-child">
-        <IndiceDuJours indice={this.state.dataPol} />
-        </div>
-        <div className="page-child-bottom">
-        <Footer />
-        </div>   
+        <div className="page-footer">
+            <Footer />
+        </div> 
     </div>
         
     )
     componentDidMount(){
+        //lance la methode getloc
         this.getLoc() 
     }
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    console.log( "render");
-    console.log('city into render',this.state.city)
-    const pagePollution = props => < PagePollution indice={this.state.dataPol} />
+    
     const pageForecastmeteo = props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city}/>
+    const pagePollution = props => < PagePollution indice={this.state.dataPol} />
+   
+   ///link en variable
     const Accueil = props => <Link to="/" {...props} />
     const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
     const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
-
 
     return (
     <BrowserRouter>
