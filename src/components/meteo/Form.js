@@ -115,9 +115,7 @@ class Form extends React.Component{
     }
 
     handleChange = (event) => {
-        this.setState({value: event.target.value})
-        console.log( " event Handel ",this.state.value);
-        
+        this.setState({value: event.target.value})        
     }
     
     home =() => (
@@ -159,14 +157,10 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    console.log( "render");
     const pagePollution = props => < PagePollution indice={this.state.dataPol} />
     const Accueil = props => <Link to="/" {...props} />
     const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
     const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
-
-    console.log("****INFO POUR DELPH from composent Form*****")
-    console.log(this.state.imgBackground)
 
     return (
     <BrowserRouter>
