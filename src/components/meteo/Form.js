@@ -34,7 +34,9 @@ class Form extends React.Component{
         value: undefined,
         temperature: undefined,
         city: undefined,
+        humidityText: undefined,
         humidity: undefined,
+        pourcentage: undefined,
         description: undefined,
         icon : undefined,
         degre : null,
@@ -78,7 +80,9 @@ class Form extends React.Component{
         this.setState({
             temperature : Math.floor(response.main.temp),
             city: response.name,
-            humidity: response.main.humidity,
+            humidityText : "Humidité",
+            humidity:response.main.humidity,
+            pourcentage: "%",
             description: response.weather[0].description,
             icon : response.weather[0].icon, //sert à afficher l'icone et le background.
             imgBackground: response.weather[0].icon, //sert à afficher le background.
@@ -109,7 +113,9 @@ class Form extends React.Component{
             temp_min : data.main.temp_min,
             temp_max : data.main.temp_max,
             city: data.name,
+            humidityText : "Humidité",
             humidity: data.main.humidity,
+            pourcentage : "%",
             description: data.weather[0].description,
             icon : data.weather[0].icon,
             degre : "C°",

@@ -23,7 +23,8 @@ class Home extends Component {
                     temperature={this.props.temperature} 
                     degre={this.props.degre}
                     description={this.props.description}
-                    humidity={this.props.humidity}/>
+                    humidity={this.props.humidity}
+                    pourcentage={this.props.pourcentage}/>
                     <Icon icon={this.props.icon}/>            
                 <div>
                     {this.props.loading ? "En cours de chargement" : <Background imgBackground={this.props.imgBackground} /> }
@@ -35,5 +36,5 @@ class Home extends Component {
          );
     }
 }
- 
+
 export default Home;
