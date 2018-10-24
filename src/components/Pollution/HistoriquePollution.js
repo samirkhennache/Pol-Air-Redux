@@ -3,6 +3,7 @@ import {Line} from 'react-chartjs-2'
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Footer from '../Footer';
 
 
 
@@ -25,7 +26,7 @@ class HistoriquePollution extends Component {
         allData = await call.json()
         allData =allData.features.sort(function(a,b){return a.attributes.date_echea - b.attributes.date_echea}) 
         //recuperation de data sur une année
-        this.GetYear();    
+        this.GetYear();
     }
 
     GetYear(){
@@ -194,6 +195,7 @@ class HistoriquePollution extends Component {
                     }          
                 }}
             />}
+            <Footer />
       </div>
         );
     }
