@@ -9,36 +9,7 @@ import ButtonPollution from './ButtonPollution'
 
 
 class IndiceDuJours extends Component {
-    //creaetion d'un tab pour afficher un la quilite de l'air
-    state = {
-       
-        quality :["Très Faible","Faible","Moyen","Elevé","Très Elevé"],
 
-      }
-    
-      //getQualite permet de retourner un element du quality 
-      //en fonction de this.props.indice qui correspond a la valeur passé en props depuis le parent PollutionRealTime
-      GetMessageQuality(){
-
-        if(this.props.indice<=25)
-            return this.state.quality[0]
-        else if(this.props.indice<=50)
-            return this.state.quality[1]
-        else if( this.props.indice<=100)
-            return this.state.quality[2]
-        else if(this.props.indice<=125)
-            return this.state.quality[3]
-        else if(this.props.indice<=150)
-            return this.state.quality[3]
-        else if(this.props.indice<=175)
-            return this.state.quality[4]
-        else if(this.props.indice<=200)
-            return this.state.quality[4]
-        else if(this.props.indice<=300)
-            return this.state.quality[5]
-        else
-            return this.state.quality[6]
-    }
 
       //styleIndice permet de recuperer le style de l'indice à partir du fichiet IndiceDuJours.css
     StyleIndice(){

@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import { Link } from 'react-router-dom'
 
 const styles = theme => ({
     
@@ -14,8 +12,8 @@ const ButtonPollution = (props) => {
 
   return (
     <div>
-      <Button component={Link} to="/HistoriquePollution" variant="fab" mini color="primary" aria-label="Add" className={classes.button}>
-        <AddIcon />
+      <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button}>
+      <i class="material-icons">directions_walk</i>
       </Button>     
     </div>
   );
