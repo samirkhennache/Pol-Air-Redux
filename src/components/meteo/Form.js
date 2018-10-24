@@ -16,6 +16,7 @@ const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
+// ehvBN549ec3xDmbbW -- clef prudence
 
 
 //Api Forecast
