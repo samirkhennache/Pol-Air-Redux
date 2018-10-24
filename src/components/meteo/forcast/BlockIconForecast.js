@@ -1,9 +1,10 @@
 import React from 'react'
 
-const BlockIconForecast = () => {
+const BlockIconForecast = (props) => {
+
     return (
         <div>
-            test
+            {props.icon_forecast}
         </div>
     )
 }

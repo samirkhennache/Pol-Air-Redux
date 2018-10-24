@@ -5,11 +5,9 @@ class ForecastMeteo extends Component {
 
   render() {
 
-    console.log(this.props)
-
     return (
       <div>
-        <BlockForcastMeteo tempMin={this.props.tempMin} tempMax={this.props.tempMax} city={this.props.city}/>
+        <BlockForcastMeteo imgBackground={this.props.imgBackground} description={this.props.description} temperature={this.props.temperature} icon_forecast={this.props.icon_forecast} tempMin={this.props.tempMin} tempMax={this.props.tempMax} city={this.props.city}/>
       </div>
      );
   }

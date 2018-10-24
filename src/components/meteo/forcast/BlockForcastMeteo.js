@@ -3,6 +3,7 @@ import BlockForcastMeteoDate from './BlockForcastMeteoDate';
 import BlockForecastMeteoTemp from './BlockForecastMeteoTemp';
 import './BlockForcastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
+import BlockForecastMeteoNow from './BlockForecastMeteoNow';
 
 
 //import Graphic from './Graphic'
@@ -12,15 +13,15 @@ import BlockIconForecast from './BlockIconForecast';
 class BlockForcastMeteo extends Component {
 
 
-  state = {
-    city : this.props.city,
-    tempMax: [],
-    tempMin : [],
-  }
+  // state = {
+  //   city : this.props.city,
+  //   tempMax: [],
+  //   tempMin : [],
+  // }
 
-  componentDidMount() {
+  // componentDidMount() {
     
-  }
+  // }
 
 
 
@@ -64,13 +65,13 @@ class BlockForcastMeteo extends Component {
 
     return (
       <div>
-        <h1>{this.props.city}</h1>
+        <BlockForecastMeteoNow imgBackground={this.props.imgBackground} temperature={this.props.temperature} description={this.props.description} city={this.props.city}/>
         {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
         <div>
           {this.props.tempMin.map((x, index) => (
              <div key={index} className='blockMeteo'>
              <BlockForcastMeteoDate dateApp={index+1} />
-             <BlockIconForecast/>
+             <BlockIconForecast icon_forecast={this.props.icon_forecast[index]}/>
              <BlockForecastMeteoTemp temp_min={this.props.tempMin[index]} temp_max={this.props.tempMax[index]} />
            </div>
           ))}

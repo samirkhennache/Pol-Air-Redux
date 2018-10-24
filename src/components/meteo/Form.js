@@ -14,8 +14,9 @@ import Home from './Home'
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
+const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
+
 
 
 //Api Forecast
@@ -127,17 +128,24 @@ class Form extends React.Component{
             .then(res => {
               let temp_min = []
               let temp_max = []
+              let iconForecast = []
               for (let i = 1; i <= 4; i++) {
                 let temperature_min = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_min.push(Math.floor(Math.min(...temperature_min.map(x=> x.main.temp_min))))
       
                 let temperature_max = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_max.push(Math.floor(Math.max(...temperature_max.map(x=> x.main.temp_max))))
+
+                let icone_forecast = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
+                iconForecast.push(Math.max(...icone_forecast.map(x=> x.weather[0].icon).slice(3,6).map(x => parseInt(x.slice(0,2), 10))))
+
               }
+                iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))             
+              
               this.setState({
                 tempMin : temp_min,
                 tempMax: temp_max,
-                icon_forecast : ['01d','01d','01d','01d']
+                icon_forecast : iconForecast
             })
             
             })
@@ -185,7 +193,7 @@ class Form extends React.Component{
             </form>
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
-                <Route path="/ForecastMeteo" render={props => < ForecastMeteo icon_forecast={this.state.icon_forecast} tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
+                <Route path="/ForecastMeteo" render={props => < ForecastMeteo imgBackground={this.state.imgBackground} description={this.state.description} temperature={this.state.temperature} icon_forecast={this.state.icon_forecast} tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
                 <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
             </Switch>
             </div>
