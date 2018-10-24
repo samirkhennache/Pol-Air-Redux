@@ -1,19 +1,29 @@
+.container-footer{
+    background-color: #3f51b5;
+}
 .list-footer li {
     list-style-type: none;
     margin: 5px;
 }
 .list-footer a {
     text-decoration: none;
-    color: rgb(80, 80, 80);
+    color: white;
+    font-size : 14px;
     transition: all 0.3s ease;
 }
+
 .list-footer a:hover {
     color: black;
-    
 }
+
 .list-footer {
-    background: rgb(220, 220, 220);
     padding: 20px 0 20px 0;
     text-align: center;
     margin: 0;
+}
+
+.copyright{
+    color: white;
+    font-size : 10px;
+    margin-bottom: 0;
 }
