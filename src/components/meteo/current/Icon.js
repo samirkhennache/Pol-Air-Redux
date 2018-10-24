@@ -1,17 +1,14 @@
 import React from "react";
 import './Icon.css';
 
-class Icon extends React.Component{
 
-  render() {
-    let icon = `http://openweathermap.org/img/w/${this.props.icon}.png`
-    
+const Icon =({icon}) => {
     return(
       <div>
-        <img className="icon-meteo" src={icon} alt=""></img>
+        <img className="icon-meteo" src={`/img/${icon}.png`} alt=""></img>
       </div>
     )
   }
-}
+
 
 export default Icon;

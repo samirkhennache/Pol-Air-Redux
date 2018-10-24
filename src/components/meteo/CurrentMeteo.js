@@ -17,7 +17,9 @@ class CurrentMeteo extends React.Component {
     temperature: undefined,
     temp_min: undefined,
     temp_max: undefined,
+    humidityText: undefined,
     humidity: undefined,
+    pourcentage: undefined,
     description: undefined,
     icon : undefined,
     degre : null,
@@ -34,7 +36,9 @@ class CurrentMeteo extends React.Component {
     temperature : Math.floor(data.main.temp),
     temp_min : data.main.temp_min,
     temp_max : data.main.temp_max,
+    humidityText: "Humidité",
     humidity: data.main.humidity,
+    pourcentage : "%",
     description: data.weather[0].description,
     icon : data.weather[0].icon,
     degre : "°C",
@@ -53,7 +57,9 @@ class CurrentMeteo extends React.Component {
         description={this.state.description}
         />
         <Humidity 
+        humidityText={this.state.humidityText}
         humidity={this.state.humidity}
+        pourcentage={this.state.pourcentage}
         />
         <Icon 
         icon={this.state.icon}
