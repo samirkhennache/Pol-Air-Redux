@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import BlockForcastMeteoDate from './BlockForcastMeteoDate';
 import BlockForecastMeteoTemp from './BlockForecastMeteoTemp';
 import './BlockForcastMeteo.css'
+import BlockIconForecast from './BlockIconForecast';
 
 
 //import Graphic from './Graphic'
@@ -69,6 +70,7 @@ class BlockForcastMeteo extends Component {
           {this.props.tempMin.map((x, index) => (
              <div key={index} className='blockMeteo'>
              <BlockForcastMeteoDate dateApp={index+1} />
+             <BlockIconForecast/>
              <BlockForecastMeteoTemp temp_min={this.props.tempMin[index]} temp_max={this.props.tempMax[index]} />
            </div>
           ))}

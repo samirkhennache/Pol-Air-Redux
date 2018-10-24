@@ -42,6 +42,7 @@ class Form extends React.Component{
         loaded :false,
         tempMax: [],
         tempMin : [],
+        icon_forecast : undefined,
         loading: true, // permet de mettre en attente le chargement du background 
         imgBackground: undefined
     }
@@ -136,6 +137,7 @@ class Form extends React.Component{
               this.setState({
                 tempMin : temp_min,
                 tempMax: temp_max,
+                icon_forecast : ['01d','01d','01d','01d']
             })
             
             })
@@ -183,7 +185,7 @@ class Form extends React.Component{
             </form>
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
-                <Route path="/ForecastMeteo" render={props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
+                <Route path="/ForecastMeteo" render={props => < ForecastMeteo icon_forecast={this.state.icon_forecast} tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
                 <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
             </Switch>
             </div>
