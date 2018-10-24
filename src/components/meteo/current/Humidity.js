@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 
 
-const Humidity = ({humidity}) => {
-return (
-  <div >
-  <p>{humidity}</p>
-  </div>
-  )
-}
+// const Humidity = ({humidity,pourcentage}) => {
+// return (
+//   <div >
+//     <p>Taux d'humidité : {humidity}{pourcentage}</p>
+//   </div>
+//   )
+// }
 
-export default Humidity;
+// export default Humidity;

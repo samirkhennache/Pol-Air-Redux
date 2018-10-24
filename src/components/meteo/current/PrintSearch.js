@@ -7,7 +7,7 @@ const PrintSearch = ({city,temperature,description,humidity,icon,degre}) => {
         <p>{city}</p>
         <p>{temperature}{degre}</p>
         <p>{description}</p>
-        <p>{humidity}</p>
+        <p>Humidité : {humidity} %</p>
         <p>{icon}</p>
       </div>
     )

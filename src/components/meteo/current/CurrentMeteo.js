@@ -49,13 +49,13 @@ class CurrentMeteo extends React.Component {
         temperature={this.state.temperature}
         degre={this.state.degre}
         />
-        <Description 
+        <Description
         description={this.state.description}
         />
-        <Humidity 
+        <Humidity
         humidity={this.state.humidity}
         />
-        <Icon 
+        <Icon
         icon={this.state.icon}
         />
         <Background

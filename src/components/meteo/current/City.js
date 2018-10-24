@@ -1,12 +1,12 @@
-import React from "react";
+// import React from "react";
 
 
-const City = ({city}) => {
-return ( 
-  <div >
-  <p>{city}</p>
-  </div>
-  )
-}
+// const City = ({city}) => {
+// return (
+//   <div >
+//   <p>{city}</p>
+//   </div>
+//   )
+// }
 
-export default City;
+// export default City;
