@@ -23,7 +23,7 @@ class Home extends Component {
             </div>        
         
             <div className="page-child">
-            { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description}/> }
+            { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description} imgBackground={this.props.imgBackground}/> }
                 <PrintSearch
                 city={this.props.city}
                 temperature={this.props.temperature} 
