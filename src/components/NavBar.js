@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import OpenMenu from './OpenMenu'
-import Logo_PolAir from '../img/Logo_PolAir.svg';
+import Logo_PolAir_Blanc from '../img/Logo_PolAir_Blanc.svg';
 import './NavBar.css';
 
 
@@ -31,7 +31,7 @@ const ButtonAppBar = (props) => {
         <Toolbar>
           <OpenMenu openAccueil={props.accueil} openForeCastMeteo={props.forecastmeteo} openHistoriquePollution ={props.historiquePollution} />
           <div className="logo">
-            <img src={Logo_PolAir} alt="Pol'Air" className="logo"/>
+            <img src={Logo_PolAir_Blanc} alt="Pol'Air" className="logo"/>
           </div>
         </Toolbar>
       </AppBar>
