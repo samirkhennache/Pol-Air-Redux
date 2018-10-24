@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {Typography,Paper} from '@material-ui/core'
 import './IndiceDuJours.css'
-// import PagePollution from './PagePollution';
-// import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import IndicePollutionSolo from './IndicePollutionSolo'
+import SmileyPollution from './SmileyPollution'
+import ButtonPollution from './ButtonPollution'
+
+
 
 
 
@@ -75,21 +77,29 @@ class IndiceDuJours extends Component {
         else
             return 11
     }
+    
 
     render() { 
         // const pagePollution = (props) => <PagePollution indice={this.props.indice} />
         
        return(
-           <div>
-                {this.props.indice && <Paper className ="indice-du-jour">
-                {this.props.indice && <Typography  variant="display2"  className="quality-typography">
-                Qualité de l'air
-                </Typography>}
-                {this.props.indice && <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>}
-                <span className ={`indice ${this.StyleIndice()}`}>{this.GetFrenchIndice()}</span>  
-            </Paper>}
+        <div>
+           <div className="indiceDuJour-index">
+                <div><p className="indiceDuJour-part1">POLLUTION</p></div>
+                <div className="indiceDuJour-part2">
+                    <div className="bouton-plus-index">
+                        <ButtonPollution className="button-indice-index"/>
+                    </div>
+                    <div className="indice-smiley">
+                        <div className="indice-smiley-child">{this.props.indice && <IndicePollutionSolo indice={this.props.indice}/>}</div>
+                        <div className="indice-smiley-child">{this.props.indice && <SmileyPollution indice={this.props.indice}/>}</div>               
+                    </div>
+               </div>
+            </div>
         </div>
-        )  
+        )
+        
+
     }
 }
  

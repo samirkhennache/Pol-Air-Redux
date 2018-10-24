@@ -1,38 +1,5 @@
-.bloc-central-form{
-  background: rgba(200, 200, 200, 0.5);   
-}
-.bloc-central{
-  width: 70%; 
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 15px; 
-}
-.page-child{
+.form-center{
   text-align: center;
   width: 100%;
   margin: 10px auto 10px auto;
-}
-
-.page-footer{
-  text-align: center;
-  margin: 10px auto 0 auto;
-  width: 100%;
-}
-@media all and (max-width: 768px){
-  .page-child,
-  .page-child-top,
-  .page-child-bottom{
-    width: 100%;
-  }
-}
-/* ################# */
-/* css composant météo */
-.bloc-details{
-  display: flex;
-  justify-content: center;
-}
-.details2 {
-  flex-direction: column;
 }
