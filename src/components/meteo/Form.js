@@ -1,19 +1,13 @@
 import React from "react";
-import PrintSearch from './current/PrintSearch'
-import Icon from './current/Icon';
-import Background from './current/Background';
 import PagePollution from "../Pollution/PagePollution";
-import IndiceDuJours from '../Pollution/IndiceDuJours'
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import ForecastMeteo from './forcast/ForecastMeteo'
-import Titles from '../Titles';
-import Footer from '../Footer';
-import DateIndex from '../date/DateIndex'
 import './form.css';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
-import Mascotte from './Mascotte'
+import Home from './Home'
+
 
 
 
@@ -52,10 +46,6 @@ class Form extends React.Component{
         imgBackground: undefined
     }
     
-    componentWillMount() {
-        this.getLoc()        
-        //loaded :false
-    }
     // Fetch Geoloc via IP
     getLoc = async (e) => {
         navigator.geolocation.getCurrentPosition(  (position) => {
@@ -102,8 +92,6 @@ class Form extends React.Component{
         this.getForecastMeteo(city)
     } 
 
-
-    
     // Fetch SearchBar
     getData = async (e) => {
         let city = this.state.value;
@@ -134,7 +122,6 @@ class Form extends React.Component{
 
     //Fetch ForecastMeteo
     getForecastMeteo = (city) => {
-        console.log("into function", city)
       axios.get(`${url}${city},fr&lang=${lang}&APPID=${key}&units=${unit}`)
             .then(res => {
               let temp_min = []
@@ -174,73 +161,33 @@ class Form extends React.Component{
         this.setState({value: event.target.value})
     }
     
-    home =() => (
-    <div>
-        <div className="bloc-central-form bloc-central" >
-            <div className="page-child">
-            <DateIndex />
-            </div>
-            <div className="page-child">
-                <Titles/>
-            </div>        
-        
-            <div className="page-child">
-            { this.state.dataPol && <Mascotte temperature={this.state.temperature} dataPol={this.state.dataPol} description={this.state.description}/> }
-                <PrintSearch
-                city={this.state.city}
-                temperature={this.state.temperature} 
-                degre={this.state.degre}
-                description={this.state.description}
-                humidity={this.state.humidity}/>
-                <Icon icon={this.state.icon}/>
-            </div>
-            <div>
-                {this.state.loading ? "En cours de chargement" : <Background imgBackground={this.state.imgBackground} /> }
-            </div>
-            <div>
-            <IndiceDuJours indice={this.state.dataPol} />
-            </div>  
-        </div>
-        <div className="page-footer">
-            <Footer />
-        </div> 
-    </div>
-        
-    )
     componentDidMount(){
         //lance la methode getloc
         this.getLoc() 
     }
 
+    ///link en variable
+    Accueil = props => <Link to="/" {...props} />
+    Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
+    pollution = props => <Link to="/HistoriquePollution" {...props} /> 
+
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-    
-    const pageForecastmeteo = props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city}/>
-    const pagePollution = props => < PagePollution indice={this.state.dataPol} />
-   
-   ///link en variable
-    const Accueil = props => <Link to="/" {...props} />
-    const Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
-    const pollution = props => <Link to="/HistoriquePollution" {...props} /> 
-
     return (
     <BrowserRouter>
             <div>
-           <NavBar accueil={Accueil} forecastmeteo={Forecastmeteo}  historiquePollution ={pollution}/>
+           <NavBar accueil={this.Accueil} forecastmeteo={this.Forecastmeteo}  historiquePollution ={this.pollution}/>
             <form className="page-child" onSubmit ={this.getData} >
                 <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
                 <button className="btn-valid">Valider</button>
             </form>
-            
-
             <Switch>
-                <Route exact path="/" component={()=>this.home()}/>
-                <Route path="/ForecastMeteo" component={pageForecastmeteo} />            
-                <Route path="/HistoriquePollution" component ={pagePollution} />
+                <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
+                <Route path="/ForecastMeteo" render={props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
+                <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
             </Switch>
             </div>
       </BrowserRouter>
-    
     )
   }
 }

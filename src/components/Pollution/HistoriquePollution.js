@@ -73,15 +73,12 @@ class HistoriquePollution extends Component {
            this.setState({chartData: chartData})
           return(data)
         }
-
         ///methode pour recuperer 1 mois 
     GetMonth(){
-
         let date =[];
         let data =[];
         let chartData ={}
         for (let i= 0; i<31; i++){
-
             date.push(myLabel[myLabel.length-31+i])
             data.push(myData[myData.length-31+i])
             chartData ={
@@ -129,12 +126,10 @@ class HistoriquePollution extends Component {
     ///evement qui lorsque on passe d'un onglet à un autre 
     handleChange = (event, value) => {
         this.setState({ value });
-        console.log(value);
         
       };
     render() {
         return (
-
         <div>
             <Paper>
             <Tabs 
@@ -203,5 +198,4 @@ class HistoriquePollution extends Component {
         );
     }
 }
-
 export default HistoriquePollution;
