@@ -1,0 +1,30 @@
+.indice-pollution-main {
+    border: 1px solid rgba(0, 0, 0 0);
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    display: inline-table;
+}
+.indice-pollution-solo {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 45px;
+    font-weight: normal;
+    color: white;
+}
+.solo-tres-faible{
+   background-color:#79BC6A
+}
+.solo-faible{
+   background-color: #BBCF4C
+}
+.solo-moyen{
+  background-color: #EEC20B
+}
+.solo-eleve{
+  background-color: #F29305
+}
+.solo-res-eleve{
+   background-color:#960018
+}
