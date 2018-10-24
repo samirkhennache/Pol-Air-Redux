@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
-import IndiceDuJours from './IndiceDuJours';
 import ConseilsPollution from './ConseilsPollution'
 import HistoriquePollution from './HistoriquePollution'
 import './pagePollution.css'
+import IndicePollutionSolo from './IndicePollutionSolo';
 
 class PagePollution extends Component {
     state = {  }
     render() { 
         return ( 
-            <div>         
-                <IndiceDuJours indice={this.props.indice}/>
+            <div>
+                <IndicePollutionSolo indice={this.props.indice}/>
                 <ConseilsPollution indice={this.props.indice}/>
                 <HistoriquePollution/>
             </div>
