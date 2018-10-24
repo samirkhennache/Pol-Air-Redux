@@ -14,8 +14,9 @@ import Home from './Home'
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
+const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
+// ehvBN549ec3xDmbbW -- clef prudence
 
 
 //Api Forecast
@@ -33,7 +34,9 @@ class Form extends React.Component{
         value: undefined,
         temperature: undefined,
         city: undefined,
+        humidityText: undefined,
         humidity: undefined,
+        pourcentage: undefined,
         description: undefined,
         icon : undefined,
         degre : null,
@@ -77,7 +80,9 @@ class Form extends React.Component{
         this.setState({
             temperature : Math.floor(response.main.temp),
             city: response.name,
-            humidity: response.main.humidity,
+            humidityText : "Humidité",
+            humidity:response.main.humidity,
+            pourcentage: "%",
             description: response.weather[0].description,
             icon : response.weather[0].icon, //sert à afficher l'icone et le background.
             imgBackground: response.weather[0].icon, //sert à afficher le background.
@@ -108,7 +113,9 @@ class Form extends React.Component{
             temp_min : data.main.temp_min,
             temp_max : data.main.temp_max,
             city: data.name,
+            humidityText : "Humidité",
             humidity: data.main.humidity,
+            pourcentage : "%",
             description: data.weather[0].description,
             icon : data.weather[0].icon,
             degre : "C°",
@@ -177,7 +184,7 @@ class Form extends React.Component{
     <BrowserRouter>
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.Forecastmeteo}  historiquePollution ={this.pollution}/>
-            <form className="page-child" onSubmit ={this.getData} >
+            <form className="form-center" onSubmit ={this.getData} >
                 <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
                 <button className="btn-valid">Valider</button>
             </form>
