@@ -16,7 +16,7 @@ class Home extends Component {
             <div>        
                 <div><DateIndex/></div>
                 <div><Titles/></div>
-                { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description}/> }       
+                { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description} imgBackground={this.props.imgBackground}/> }       
                                 
                 <PrintSearch
                     city={this.props.city}
