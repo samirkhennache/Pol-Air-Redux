@@ -1,23 +1,22 @@
-.border {
-    font-weight: bolder;
+.bloc-conseils{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 20px 0;
 }
 .conseil-blocConseil p{
     text-align: center;
-    margin: 0 10px 20px 10px;
 }
-.radius-border {
-    background: rgb(180, 180, 180);
-    border-radius: 12px;
-    padding: 10px 5px 0 5px;
-    margin: 0 5px 0 5px;
+.opacity{
+    opacity: 0.5;
+    margin: 10px;
 }
-.no-radius {
-    
-    padding: 10px 5px 0 5px;
-    margin: 0 5px 0 5px;
+.no-opacity{
+    opacity: 1;
+    margin: 10px;
 }
-/* .icon-conseil{
-    height: 36px;
-    width: 36px;
-    border: 1px solid red;
-} */
+.icon-conseils{
+    display: flex;
+}

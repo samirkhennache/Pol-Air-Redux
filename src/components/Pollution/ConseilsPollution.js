@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import "./conseilsPollution.css";
-import Grid from '@material-ui/core/Grid';
 import './conseilsPollution.css'
+import ButtonConseilPieton from './ButtonConseilPieton';
+import ButtonConseilCyclo from './ButtonConseilCyclo';
+import ButtonConseilHouse from './ButtonConseilHouse';
 
 
 
@@ -118,27 +120,27 @@ class ConseilsPagePollution extends Component {
     }
      
     getCssAdviseIconPieton = () => {
-        return(this.state.adviseDefault? "radius-border" : "no-radius")
+        return(this.state.adviseDefault? "no-opacity" : "opacity")
     }
     getCssAdviseIconCyclo = () => {
-        return(this.state.adviseCyclo? "radius-border" : "no-radius")
+        return(this.state.adviseCyclo? "no-opacity" : "opacity")
     }
     getCssAdviseIconHouse = () => {
-        return(this.state.adviseHouse? "radius-border" : "no-radius")
+        return(this.state.adviseHouse? "no-opacity" : "opacity")
     }
     render() { 
         const adviseDefault = this.state.adviseDefault ? this.getConseilsPieton() : ""
         return ( 
-            <Grid container spacing={16} alignItems="center" direction="column">
-                <Grid item xs={12} sm={6} md={4} lg={3}>         
-                    <span className={this.getCssAdviseIconPieton()} ><i onClick={this.handleClickPieton} class="material-icons">directions_walk</i></span>
-                    <span className={this.getCssAdviseIconCyclo()} ><i onClick={this.handleClickCyclo} class="material-icons">directions_bike</i></span>
-                    <span className={this.getCssAdviseIconHouse()} ><i onClick={this.handleClickHouse}  class="material-icons">home</i></span>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3} className="conseil-blocConseil"> 
+            <div className="bloc-conseils">
+                <div className="icon-conseils">
+                    <div className={this.getCssAdviseIconPieton()}><a onClick={this.handleClickPieton}><ButtonConseilPieton/></a></div>
+                    <div className={this.getCssAdviseIconCyclo()} ><a onClick={this.handleClickCyclo}><ButtonConseilCyclo/></a></div>
+                    <div className={this.getCssAdviseIconHouse()} ><a onClick={this.handleClickHouse}><ButtonConseilHouse/></a></div>
+                </div>
+                <div className="conseil-blocConseil"> 
                     <p>{adviseDefault}{this.state.adviseCyclo}{this.state.adviseHouse}</p>
-                </Grid>         
-            </Grid>
+                </div>
+            </div>
          );
     }
 }
