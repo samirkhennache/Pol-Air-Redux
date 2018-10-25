@@ -135,4 +135,4 @@ class ModalesPolluants extends React.Component {
 
 
 
-export default withMobileDialog()(ModalesPolluants);
+export default withMobileDialog({breakpoint: 'xs'})(ModalesPolluants);
