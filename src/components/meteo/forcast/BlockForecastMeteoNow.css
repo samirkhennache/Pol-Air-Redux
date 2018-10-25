@@ -1,0 +1,11 @@
+.background {
+height: 100px;
+  background-color: aqua;
+  border: solid 1px black;
+}
+.mon-image{
+  height: 100px;
+}
+.imageForecast{
+  max-width: 100%;
+}
