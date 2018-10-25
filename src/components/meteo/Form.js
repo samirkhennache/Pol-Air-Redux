@@ -201,7 +201,7 @@ class Form extends React.Component{
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
-                <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
+                <Route path="/HistoriquePollution" render ={props => < PagePollution {...this.state} />} />
             </Switch>
             </div>
       </BrowserRouter>
