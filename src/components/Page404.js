@@ -8,7 +8,6 @@ const Page404 = () => {
         <div
             style={{
 		        height:'100vh',
-		        backgroundColor: 'yellow',
 	        }}>
 
             <img 
@@ -19,7 +18,8 @@ const Page404 = () => {
                 position: 'absolute',
                 top: '50%',
                 left: '50%',
-                transform: 'translate(-50%, -50%)'
+                transform: 'translate(-50%, -50%)',
+                marginTop: '5vh'
 		        }} 
                 alt="error404" 
             />

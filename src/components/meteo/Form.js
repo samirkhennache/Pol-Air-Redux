@@ -7,6 +7,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 import Home from './Home'
+import Page404 from '../Page404'
 
 
 
@@ -202,6 +203,7 @@ class Form extends React.Component{
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
                 <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
+                <Route exact path="/*" component={Page404}/>
             </Switch>
             </div>
       </BrowserRouter>
