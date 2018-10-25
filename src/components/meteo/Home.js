@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid } from '@material-ui/core';
 //import PrintSearch from './current/PrintSearch'
-import Icon from './current/Icon';
+import MeteoDuJours from '../Pollution/MeteoDuJours'
 import Background from './current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours'
 //import Titles from '../Titles';
@@ -39,13 +39,10 @@ class Home extends Component {
                         <Grid container xs={12} md={6}> {/*Container logo + city + date + description*/}
                             <Grid item xs={6} md={3}> {/*Container poltution (indice + icone)*/}
                                 <IndiceDuJours indice={this.props.dataPol} />
-                            </Grid>
+                            </Grid>                            
                             <Grid item xs={6} md={3}> {/*Container météo (température + icone*/}
-                                {this.props.temperature} 
-                                {this.props.degre}
-                                {/*humidity={this.props.humidity}
-                                pourcentage={this.props.pourcentage}/>*/}
-                                <Icon icon={this.props.icon}/> 
+                                {/* attention le composant meteo du jour est dans pollution, c'est une copie de indice du jour */}
+                                <MeteoDuJours temperature={this.props.temperature} degres={this.props.degre} icon={this.props.icon}/>
                             </Grid>
                         </Grid>
                     </Grid>
