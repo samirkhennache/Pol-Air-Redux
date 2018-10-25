@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ButtonBack from './ButtonBack'
-import ButtonForth from './ButtonForth'
+//import ButtonBack from './ButtonBack'
+//import ButtonForth from './ButtonForth'
 import './Calendar.css';
 
 const formatDate = (date) => {
@@ -45,10 +45,10 @@ class DateIndex extends Component {
   
     render() { 
         return (
-          <div className="calendar">
-            <ButtonBack method={this.decrem} />
-              <h1>{this.state.date}</h1> 
-            <ButtonForth method={this.increm} />
+          <div>
+            {/*<ButtonBack method={this.decrem} />*/}
+            {this.state.date} 
+            {/* <ButtonForth method={this.increm} /> */}
           </div>
         );
     }
