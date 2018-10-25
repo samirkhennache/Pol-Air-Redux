@@ -1,0 +1,11 @@
+.home-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100vw;
+    text-align: center;
+}
+
+.home-opacity {
+    background: rgb(255, 255, 255, 0.5);
+}
+
