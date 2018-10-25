@@ -2,5 +2,22 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 2px solid black
+    border: 2px solid black;
+    background-color: white;
+}
+
+.blockMeteoNowTemperature {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: red;
+}
+
+.divRound{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: aqua;
+    display: inline-table;
+    margin-left: 2vh
 }

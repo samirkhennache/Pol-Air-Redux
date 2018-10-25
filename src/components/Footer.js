@@ -11,7 +11,7 @@ class Footer extends Component {
         <div className="container-footer">
           <ul className="list-footer">
             <li><Button color="primary" component={Link} to="/">Accueil</Button></li>
-            <li><Button color="primary" component={Link} to="/ForecastMeteo">Prévisions météo</Button></li>
+            <li><Button color="primary" component={Link} to="/BlockForcastMeteo">Prévisions météo</Button></li>
             <li><Button color="primary" component={Link} to="/HistoriquePollution">Historique pollution</Button></li>
             <li><Button color="primary" component={Link} to="">Itinéraire</Button></li>
           </ul>
