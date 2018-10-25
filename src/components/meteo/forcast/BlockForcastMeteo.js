@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BlockForcastMeteoDate from './BlockForcastMeteoDate';
 import BlockForecastMeteoTemp from './BlockForecastMeteoTemp';
-import './BlockForcastMeteo.css'
+import './BlockForecastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
 import BlockForecastMeteoNow from './BlockForecastMeteoNow';
 import Background from '../current/Background';
