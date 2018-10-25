@@ -1,0 +1,24 @@
+.home-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100vw;
+    text-align: center;
+}
+
+.home-opacity {
+    background-image: linear-gradient(to left, rgba(250,250,250,0), rgba(250,250,250,0.5));
+}
+
+.home-city-date-description {
+    padding-right: 4vw;
+}
+.index-vertical-row {
+    width: 5px;
+    height: auto;
+    align-items: center;
+    vertical-align: middle;
+    background-color: lightgrey;
+    opacity : 0.2;
+    border-radius: 1em;
+    
+}

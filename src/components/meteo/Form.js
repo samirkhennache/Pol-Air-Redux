@@ -7,6 +7,8 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 import Home from './Home'
+import Page404 from '../Page404'
+import Footer from "../Footer";
 
 
 
@@ -14,10 +16,12 @@ import Home from './Home'
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
+
+const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
-
+// fJ75xRvQChZAzF7qo -- clef Delph
+// Wu8scKsgzFQ8Md6Jv -- Clef Samir
 
 
 
@@ -203,7 +207,9 @@ class Form extends React.Component{
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
                 <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
+                <Route exact path="/*" component={Page404}/>
             </Switch>
+            <Footer />
             </div>
       </BrowserRouter>
     )
