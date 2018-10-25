@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import "./conseilsPollution.css";
-import './conseilsPollution.css'
 import ButtonConseilPieton from './ButtonConseilPieton';
 import ButtonConseilCyclo from './ButtonConseilCyclo';
 import ButtonConseilHouse from './ButtonConseilHouse';
