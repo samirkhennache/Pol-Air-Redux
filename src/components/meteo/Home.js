@@ -26,16 +26,11 @@ class Home extends Component {
                                 { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description} imgBackground={this.props.imgBackground}/> }
                             </Grid>
                             
-                            <Grid item xs={8} md={8} alignContent={'flex-end'}> {/*Container city + date + description*/}
-                                <Grid container>
-                                    {this.props.city}
-                                </Grid>
-                                <Grid container className="index-block-city">
-                                    <DateIndex/>
-                                </Grid>
-                                <Grid container className="index-block-city">
-                                    {this.props.description}
-                                </Grid>
+                            <Grid item xs={8} md={8} direction={'column'} align="right" className="index-city-date-description"> {/*Container city + date + description*/}
+                                {this.props.city}
+                                <DateIndex/>
+                                {this.props.description}
+                               
                             </Grid>
                         </Grid>
                     </Grid>
