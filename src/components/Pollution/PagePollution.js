@@ -3,6 +3,7 @@ import ConseilsPollution from './ConseilsPollution'
 import HistoriquePollution from './HistoriquePollution'
 import PagePollutionToday from './PagePollutionToday'
 import './pagePollution.css'
+import BlocPolluants from './BlocPolluants';
 
 class PagePollution extends Component {
     state = {  }
@@ -16,6 +17,7 @@ class PagePollution extends Component {
                 }
                 </div>
                 <ConseilsPollution indice={this.props.indice}/>
+                <BlocPolluants/>
                 <HistoriquePollution/>
             </div>
         );
