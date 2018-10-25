@@ -4,20 +4,33 @@
     align-items: center;
     border: 2px solid black;
     background-color: white;
+    opacity: 0.8;
 }
 
 .blockMeteoNowTemperature {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    color: red;
+    color: white;
 }
 
 .divRound{
     height: 100px;
     width: 100px;
     border-radius: 50px;
-    background-color: aqua;
+    background-color: #3F51B5;
     display: inline-table;
     margin-left: 2vh
+}
+
+.MeteoDate{
+    color: black;
+}
+
+.MeteoIcon{
+    width: 50%;
+}
+
+.MeteoTemperature {
+
 }

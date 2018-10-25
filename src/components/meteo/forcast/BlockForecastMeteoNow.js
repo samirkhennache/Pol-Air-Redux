@@ -1,16 +1,23 @@
 import React from 'react'
-import './BlockForecastMeteoNow.css'
+import Grid from '@material-ui/core/Grid';
 
 const BlockForecastMeteoNow = (props) => {
     
     return(
         <div>
-            <h1 className='blockMeteoNowCity'>{props.city}</h1>
-            <div className='divRound'>
-            <h1 className='blockMeteoNowTemperature'>{props.temperature}</h1>
+      <Grid container className='today-bloc'>
+        <Grid item xs={6}>
+        <div className='divRound'>
+            <h1 className='blockMeteoNowTemperature'>{props.temperature}°C</h1>
             </div>
-            <h1>{props.description}</h1>
-        </div>
+        </Grid>
+        <Grid item xs={6} >
+        <div className="font-ville" >{props.city}</div>
+        <div className="font-aujourdhui" >Aujourd'hui</div>
+        <div className="font-messageQuality">{props.description}</div>
+        </Grid>
+      </Grid>
+    </div>
     )
 
 }
