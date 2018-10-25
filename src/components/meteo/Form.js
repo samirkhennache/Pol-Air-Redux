@@ -19,6 +19,7 @@ const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
 // fJ75xRvQChZAzF7qo -- clef Delph
+// Wu8scKsgzFQ8Md6Jv -- Clef Samir
 
 
 
