@@ -19,14 +19,14 @@ class Home extends Component {
             
                 <Grid container> {/*Container global*/}
                     
-                    <Grid item xs={12} md={6}> 
+                    <Grid item xs={12} md={7}> 
                         <Grid container className="home-opacity"> {/*Container logo + city + date + description*/}
                             
                             <Grid item xs={4} md={4}> {/*Container logo*/}
                                 { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description} imgBackground={this.props.imgBackground}/> }
                             </Grid>
                             
-                            <Grid item xs={8} md={8} direction={'column'} align="right" className="index-city-date-description"> {/*Container city + date + description*/}
+                            <Grid item xs={8} md={8} direction={'column'} align="right" className="home-city-date-description"> {/*Container city + date + description*/}
                                 <div className="city-all-pages">{this.props.city}</div>
                                 <DateIndex className="date-all-page"/>
                                 <div className="comment-all-page">{this.props.description}</div>
@@ -35,22 +35,23 @@ class Home extends Component {
                         </Grid>
                     </Grid>
 
-                    <Grid item xs={12} md={6}> {/*Container indices polution + météo*/}
-                        <Grid container xs={12} md={6}> {/*Container logo + city + date + description*/}
-                            <Grid item xs={6} md={3}> {/*Container poltution (indice + icone)*/}
+                    <Grid container xs={12} md={5} direction={'raw'} wrap="nowrap" justify="center"> {/*Container indices polution + météo*/}
+                            
                                 <IndiceDuJours indice={this.props.dataPol} />
-                            </Grid>                            
-                            <Grid item xs={6} md={3}> {/*Container météo (température + icone*/}
+                                <span className="index-vertical-row"></span>
                                 {/* attention le composant meteo du jour est dans pollution, c'est une copie de indice du jour */}
                                 <MeteoDuJours temperature={this.props.temperature} degres={this.props.degre} icon={this.props.icon}/>
-                            </Grid>
+                            
                         </Grid>
-                    </Grid>
+                        
+                        <Grid item xs={12} md={12}>
+                            <Footer />
+                        </Grid>
                 </Grid>
                 <div>
                     {this.props.loading ? "En cours de chargement" : <Background imgBackground={this.props.imgBackground} /> }
                 </div>
-                <Footer />
+                
             </div>
         );
     }
