@@ -12,11 +12,12 @@ import Home from './Home'
 
 
 // Clés API
-const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+const api_Key_Current_Weather = "AgM8MuxtXNcfwPrHN";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
+// 588b34ef0ccd1ce25e0cd600e9e852fb -- clef Delph
 
 
 //Api Forecast
