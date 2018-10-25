@@ -18,7 +18,7 @@ class Mascotte extends React.Component {
 
         if(this.props.imgBackground.endsWith('n'))
             return nuit
-        else if(this.props.dataPol>=100)
+        else if(this.props.dataPol>=150)
             return pollution
         else if(this.props.temperature<=0)
             return glacial
