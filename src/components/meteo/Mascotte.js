@@ -7,6 +7,7 @@ import chaud from '../../img/04_Mascotte_chaud.svg';
 import canicule from '../../img/05_Mascotte_canicule.svg';
 import glacial from '../../img/06_Mascotte_glacial.svg';
 import pollution from '../../img/07_Mascotte_pollution.svg';
+import nuit from '../../img/08_Mascotte_nuit.svg';
 
 class Mascotte extends React.Component {
 
@@ -15,7 +16,9 @@ class Mascotte extends React.Component {
     // Conditions d'affichage de la mascotte avec Haute pollution en priorité
     getBear() {
 
-        if(this.props.dataPol>=100)
+        if(this.props.imgBackground.endsWith('n'))
+            return nuit
+        else if(this.props.dataPol>=150)
             return pollution
         else if(this.props.temperature<=0)
             return glacial

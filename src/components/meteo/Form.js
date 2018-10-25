@@ -12,12 +12,11 @@ import Home from './Home'
 
 
 // Clés API
-const api_Key_Current_Weather = "AgM8MuxtXNcfwPrHN";
+const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
-// 588b34ef0ccd1ce25e0cd600e9e852fb -- clef Delph
 
 
 //Api Forecast
@@ -192,7 +191,7 @@ class Form extends React.Component{
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/ForecastMeteo" render={props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
-                <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
+                <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
             </Switch>
             </div>
       </BrowserRouter>

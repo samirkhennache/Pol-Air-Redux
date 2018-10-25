@@ -1,0 +1,39 @@
+.backPollution {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vh;
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+  }
+  .today-bloc{
+     
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 20px 30px 20px;
+      background-color: rgba(255, 255, 255, 0.4)
+    }
+  .indice-today {
+      height: 100px;
+  }
+  .text-today{
+      text-align: right;
+  }
+  .font-ville{
+      font-size: 40px;
+      text-transform: uppercase;
+      color: rgb(29, 10, 96);
+  }
+  .font-aujourdhui{
+      font-weight: bold;
+      color: rgb(29, 10, 96);
+  }
+  .font-messageQuality{
+      font-size: 30px;
+      text-transform: uppercase;
+      color: rgb(29, 10, 96);
+      margin-top: 30px;
+  }
