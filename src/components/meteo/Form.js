@@ -23,8 +23,6 @@ const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // fJ75xRvQChZAzF7qo -- clef Delph
 // Wu8scKsgzFQ8Md6Jv -- Clef Samir
 
-
-
 //Api Forecast
 
 const key = "012c3731b7b5a25ce2858d5bdf0c1134"
