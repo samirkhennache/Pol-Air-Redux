@@ -32,12 +32,12 @@ class  IndicePollutionSolo extends Component {
             return 'solo-tres-faible'
         else if(this.props.indice<=50)
             return 'solo-faible'
-        else if( this.props.indice<=75)
+        else if( this.props.indice<=125)
             return 'solo-moyen'
-        else if(this.props.indice<=100)
+        else if(this.props.indice<=175)
             return 'solo-eleve'
-        else
-            return'tres-eleve'
+        else if (this.props.indice>175)
+            return'solo-tres-eleve'
     }
     render() { 
         return (
