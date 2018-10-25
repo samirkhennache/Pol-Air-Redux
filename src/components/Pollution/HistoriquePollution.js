@@ -332,10 +332,8 @@ class HistoriquePollution extends Component {
     render() { 
         return (
         <div className = 'blocGraph'>
-           
-            <div className ='graph'>
-            <div className ='btns-graph'>
-            <Hidden smDown>
+           <div className ='btns-graph'>
+                <Hidden smDown>
                 <Button 
                 variant="contained" 
                 color={this.state.colorYear}
@@ -361,9 +359,8 @@ class HistoriquePollution extends Component {
                 Semaine
                 </Button>
             </Hidden>
-                
-            <Hidden mdUp >
-            <Button 
+                <Hidden mdUp >
+                <Button 
                 variant="contained" 
                 color={ this.state.colorMonthHidden}
                 size="medium"
@@ -380,11 +377,119 @@ class HistoriquePollution extends Component {
                 Semaine
                 </Button>
             </Hidden>
-            </div> 
-            <Hidden smDown>
-            {this.state.value === 0 && <Line key='year-full' data ={this.state.chartData}
-                 options={{
-                    responsive:true,
+                <div className= 'graphZone'>
+                    <div className ='graph-full'>
+                        <Hidden smDown>
+                        {this.state.value === 0 && <Line key='year-full' data ={this.state.chartData}
+                            options={{
+                                responsive:true,
+                                legend:{
+                                    display:false
+                                },
+                                layout: {
+                                    padding: {
+                                        left: 0,
+                                        right: 40,
+                                        top: 20,
+                                        bottom: 0
+                                    },
+                                },
+                                title: {
+                                    display: false,
+                                    text: 'Indice de Pollution',
+                                    fontSize:30,
+                                },
+                                scales:{
+                                    yAxes:[{
+                                        ticks :{
+                                            fontColor: "black",
+                                            beginAtZero:true,
+                                            max:10
+                                        }
+                                    }],
+                                    xAxes:[{
+                                        ticks :{
+                                            fontColor: "black",
+                                        }
+                                    }]
+                                    
+                                }          
+                            }}
+                        />}
+                        {this.state.value === 1 && <Line key ='month-full' data ={this.GetMonth()} 
+                        options={{
+                            legend:{
+                                display:false
+                            },
+                            title: {
+                                display: false,
+                                text: 'Indice de Pollution',
+                                fontSize:30,
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 40,
+                                    top: 20,
+                                    bottom: 0
+                                },
+                            },
+                                scales:{
+                                    yAxes:[{
+                                        ticks :{
+                                            fontColor: "black",
+                                            beginAtZero:true,
+                                            max:10
+                                        }
+                                    }],
+                                    xAxes:[{
+                                    ticks :{
+                                        fontColor: "black",
+                                    }
+                                }]
+                                }          
+                            }}
+                        />}
+                        {!this.onlyOne&&this.state.value === 2 &&  <Line key ='week-full' data ={this.GetWeek()} 
+                        options={{
+                            legend:{
+                                display:false
+                            },
+                            title: {
+                                display: false,
+                                text: 'Indice de Pollution',
+                                fontSize:30,
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 40,
+                                    top: 20,
+                                    bottom: 0
+                                },
+                            },
+                            scales:{
+                                yAxes:[{
+                                    ticks :{
+                                        fontColor: "black",
+                                        beginAtZero:true,
+                                        max:10
+                                    }
+                                }],
+                                xAxes:[{
+                                ticks :{
+                                    fontColor: "black",
+                                }
+                            }]
+                                }          
+                            }}
+                        />}
+                        </Hidden>
+                    </div>
+                    <div className ='graph'>
+                        <Hidden mdUp>
+                {(this.state.value === 1||this.state.onlyOne) && <Line key= 'month' data ={this.GetMonth()} 
+                options={{
                     legend:{
                         display:false
                     },
@@ -393,103 +498,72 @@ class HistoriquePollution extends Component {
                         text: 'Indice de Pollution',
                         fontSize:30,
                     },
-                       scales:{
-                           yAxes:[{
-                               ticks :{
-                                   beginAtZero:true,
-                                   max:10
-                               }
-                           }]
-                       }          
-                }}
-            />}
-            {this.state.value === 1 && <Line key ='month-full' data ={this.GetMonth()} 
-             options={{
-                 legend:{
-                     display:false
-                 },
-                title: {
-                    display: false,
-                    text: 'Indice de Pollution',
-                    fontSize:30,
-                },
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 40,
+                            top: 20,
+                            bottom: 0
+                        },
+                    },
+                    
                     scales:{
                         yAxes:[{
                             ticks :{
+                                fontColor: "black",
                                 beginAtZero:true,
-                                max :10,
+                                max:10
                             }
-                        }]
-                    }          
-                }}
-            />}
-            {!this.onlyOne&&this.state.value === 2 &&  <Line key ='week-full' data ={this.GetWeek()} 
-             options={{
-                legend:{
-                    display:false
-                },
-                title: {
-                    display: false,
-                    text: 'Indice de Pollution',
-                    fontSize:30,
-                },
-                scales:{
+                        }],
+                        xAxes:[{
+                        ticks :{
+                            fontColor: "black",
+                        }
+                    }]
+                        }          
+                    }}
+                />}
+                {  this.state.value === 2 &&  <Line key='week' data ={this.GetWeek()} 
+                options={{
+                    legend:{
+                        display:false
+                    },
+                    title: {
+                        display: false,
+                        text: 'Indice de Pollution',
+                        fontSize:30,
+                    },
+                    layout: {
+                        padding: {
+                            left: 0,
+                            right: 40,
+                            top: 20,
+                            bottom: 0
+                        },
+                    },
+                    scales:{
                         yAxes:[{
                             ticks :{
+                                fontColor: "black",
                                 beginAtZero:true,
-                                max :10,
+                                max:10
                             }
-                        }]
-                    }          
-                }}
-            />}
-            </Hidden>
-            <Hidden mdUp>
-            {(this.state.value === 1||this.state.onlyOne) && <Line key= 'month' data ={this.GetMonth()} 
-             options={{
-                legend:{
-                    display:false
-                },
-                title: {
-                    display: false,
-                    text: 'Indice de Pollution',
-                    fontSize:30,
-                },
-                 
-                scales:{
-                        yAxes:[{
-                            ticks :{
-                                beginAtZero:true,
-                                max :10,
-                            }
-                        }]
-                    }          
-                }}
-            />}
-            {  this.state.value === 2 &&  <Line key='week' data ={this.GetWeek()} 
-             options={{
-                legend:{
-                    display:false
-                },
-                title: {
-                    display: false,
-                    text: 'Indice de Pollution',
-                    fontSize:30,
-                },
-                scales:{
-                        yAxes:[{
-                            ticks :{
-                                beginAtZero:true,
-                                max :10,
-                            }
-                        }]
-                    }          
-                }}
-            />}
-            </Hidden>
-            </div>
+                        }],
+                        xAxes:[{
+                        ticks :{
+                            fontColor: "black",
+                        }
+                    }]
+                        }          
+                    }}
+                />}
+                </Hidden>
+                    </div>
+                </div>
+            </div> 
+            
             <div  className ="btn-retour-centred">
-            <Button 
+                <Button 
                 variant="contained" 
                 color="primary"
                 size="large"
@@ -498,8 +572,7 @@ class HistoriquePollution extends Component {
                 Retour
                 </Button>
             </div>
-            
-      </div>
+        </div>
         );
     }
 }

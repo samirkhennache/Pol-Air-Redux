@@ -12,3 +12,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/*FONTS --------------------------*/
+.city-all-pages {
+  font-family: 'Open Sans', sans-serif;
+  font-size: calc(10px + 5vw);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: white;
+  width: 50vw;
+  word-wrap: break-word;
+  text-shadow: 0.05em 0.05em 0.05em darkgray;
+}
+.date-all-page {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0.05em 0.05em 0.05em darkgray;
+}
+.comment-all-page {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: white;
+  margin-top: 30px;
+  text-shadow: 0.05em 0.05em 0.05em darkgray;
+}
+@media all and (min-width:425px){
+  .city-all-pages{
+    width: auto;
+  }
+}

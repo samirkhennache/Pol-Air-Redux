@@ -1,42 +1,15 @@
 import React, { Component } from 'react';
-import {Typography,Paper} from '@material-ui/core'
 import './IndiceDuJours.css'
-// import PagePollution from './PagePollution';
-// import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import IndicePollutionSolo from './IndicePollutionSolo'
+import SmileyPollution from './SmileyPollution'
+import ButtonPollution from './ButtonPollution'
+
+
 
 
 
 class IndiceDuJours extends Component {
-    //creaetion d'un tab pour afficher un la quilite de l'air
-    state = {
-       
-        quality :["Très Faible","Faible","Moyen","Elevé","Très Elevé"],
 
-      }
-    
-      //getQualite permet de retourner un element du quality 
-      //en fonction de this.props.indice qui correspond a la valeur passé en props depuis le parent PollutionRealTime
-      GetMessageQuality(){
-
-        if(this.props.indice<=25)
-            return this.state.quality[0]
-        else if(this.props.indice<=50)
-            return this.state.quality[1]
-        else if( this.props.indice<=100)
-            return this.state.quality[2]
-        else if(this.props.indice<=125)
-            return this.state.quality[3]
-        else if(this.props.indice<=150)
-            return this.state.quality[3]
-        else if(this.props.indice<=175)
-            return this.state.quality[4]
-        else if(this.props.indice<=200)
-            return this.state.quality[4]
-        else if(this.props.indice<=300)
-            return this.state.quality[5]
-        else
-            return this.state.quality[6]
-    }
 
       //styleIndice permet de recuperer le style de l'indice à partir du fichiet IndiceDuJours.css
     StyleIndice(){
@@ -75,21 +48,29 @@ class IndiceDuJours extends Component {
         else
             return 11
     }
+    
 
     render() { 
         // const pagePollution = (props) => <PagePollution indice={this.props.indice} />
         
        return(
-           <div>
-                {this.props.indice && <Paper className ="indice-du-jour">
-                {this.props.indice && <Typography  variant="display2"  className="quality-typography">
-                Qualité de l'air
-                </Typography>}
-                {this.props.indice && <Typography variant="headline" className="quality" >{this.GetMessageQuality()}</Typography>}
-                <span className ={`indice ${this.StyleIndice()}`}>{this.GetFrenchIndice()}</span>  
-            </Paper>}
+        <div>
+           <div className="indiceDuJour-index">
+                <div><p className="indiceDuJour-part1">POLLUTION</p></div>
+                <div className="indiceDuJour-part2">
+                    <div className="bouton-plus-index">
+                        <ButtonPollution className="button-indice-index"/>
+                    </div>
+                    <div className="indice-smiley">
+                        <div className="indice-smiley-child">{this.props.indice && <IndicePollutionSolo indice={this.props.indice}/>}</div>
+                        <div className="indice-smiley-child">{this.props.indice && <SmileyPollution indice={this.props.indice}/>}</div>               
+                    </div>
+               </div>
+            </div>
         </div>
-        )  
+        )
+        
+
     }
 }
  

@@ -1,12 +1,13 @@
 import React from "react";
 import PagePollution from "../Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import ForecastMeteo from './forcast/ForecastMeteo'
+import BlockForcastMeteo from './forcast/BlockForcastMeteo'
 import './form.css';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 import Home from './Home'
+import Page404 from '../Page404'
 
 
 
@@ -14,8 +15,10 @@ import Home from './Home'
 // Clés API
 const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "AgM8MuxtXNcfwPrHN";
+const api_Key_Current_Pol = "ehvBN549ec3xDmbbW";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
+// ehvBN549ec3xDmbbW -- clef prudence
+
 
 
 //Api Forecast
@@ -33,7 +36,9 @@ class Form extends React.Component{
         value: undefined,
         temperature: undefined,
         city: undefined,
+        humidityText: undefined,
         humidity: undefined,
+        pourcentage: undefined,
         description: undefined,
         icon : undefined,
         degre : null,
@@ -42,6 +47,7 @@ class Form extends React.Component{
         loaded :false,
         tempMax: [],
         tempMin : [],
+        icon_forecast : undefined,
         loading: true, // permet de mettre en attente le chargement du background 
         imgBackground: undefined
     }
@@ -77,7 +83,9 @@ class Form extends React.Component{
         this.setState({
             temperature : Math.floor(response.main.temp),
             city: response.name,
-            humidity: response.main.humidity,
+            humidityText : "Humidité",
+            humidity:response.main.humidity,
+            pourcentage: "%",
             description: response.weather[0].description,
             icon : response.weather[0].icon, //sert à afficher l'icone et le background.
             imgBackground: response.weather[0].icon, //sert à afficher le background.
@@ -108,7 +116,9 @@ class Form extends React.Component{
             temp_min : data.main.temp_min,
             temp_max : data.main.temp_max,
             city: data.name,
+            humidityText : "Humidité",
             humidity: data.main.humidity,
+            pourcentage : "%",
             description: data.weather[0].description,
             icon : data.weather[0].icon,
             degre : "C°",
@@ -122,20 +132,28 @@ class Form extends React.Component{
 
     //Fetch ForecastMeteo
     getForecastMeteo = (city) => {
-      axios.get(`${url}${city},fr&lang=${lang}&APPID=${key}&units=${unit}`)
+      axios.get(`${url}${city}&lang=${lang}&APPID=${key}&units=${unit}`)
             .then(res => {
               let temp_min = []
               let temp_max = []
+              let iconForecast = []
               for (let i = 1; i <= 4; i++) {
                 let temperature_min = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_min.push(Math.floor(Math.min(...temperature_min.map(x=> x.main.temp_min))))
       
                 let temperature_max = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_max.push(Math.floor(Math.max(...temperature_max.map(x=> x.main.temp_max))))
+
+                let icone_forecast = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
+                iconForecast.push(Math.max(...icone_forecast.map(x=> x.weather[0].icon).slice(3,6).map(x => parseInt(x.slice(0,2), 10))))
+
               }
+                iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))             
+              
               this.setState({
                 tempMin : temp_min,
                 tempMax: temp_max,
+                icon_forecast : iconForecast
             })
             
             })
@@ -168,7 +186,7 @@ class Form extends React.Component{
 
     ///link en variable
     Accueil = props => <Link to="/" {...props} />
-    Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
+    BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} /> 
     pollution = props => <Link to="/HistoriquePollution" {...props} /> 
 
   // RENDER ////////////////////////////////////////////////////////////
@@ -176,15 +194,16 @@ class Form extends React.Component{
     return (
     <BrowserRouter>
             <div>
-           <NavBar accueil={this.Accueil} forecastmeteo={this.Forecastmeteo}  historiquePollution ={this.pollution}/>
-            <form className="page-child" onSubmit ={this.getData} >
+           <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
+            <form className="form-center" onSubmit ={this.getData} >
                 <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
                 <button className="btn-valid">Valider</button>
             </form>
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
-                <Route path="/ForecastMeteo" render={props => < ForecastMeteo tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
-                <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
+                <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
+                <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
+                <Route exact path="/*" component={Page404}/>
             </Switch>
             </div>
       </BrowserRouter>

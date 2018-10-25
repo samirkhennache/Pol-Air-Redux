@@ -1,18 +1,22 @@
-.blocGraph{
-    margin: auto;
-  
+.graphZone{
+    background-color: white;
 }
 .graph{
+    background-color: white;
+    width: 100%;
+    height: 100%;
     margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    padding-right: 20px;
-    
+    margin-right: auto; 
+}
+.graph-full{
+    background-color: white;
     width: 80%;
-    height: auto;
+    height: 25%;
+    margin-left: auto;
+    margin-right: auto; 
 }
 .btns-graph{
-   padding-left: 40px;
+    margin-top: 20px;
  
      
 }
@@ -21,5 +25,6 @@
     justify-content: center;
     margin-top: 20px;
 }
+
  
  
