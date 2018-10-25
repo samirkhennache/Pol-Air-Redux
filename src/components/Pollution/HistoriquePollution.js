@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Line} from 'react-chartjs-2'
 import Button from '@material-ui/core/Button';
 import Hidden from '@material-ui/core/Hidden';
-import { Link } from 'react-router-dom'
 import './HistoriquePollution.css'
 
 
@@ -47,14 +46,11 @@ class HistoriquePollution extends Component {
         ///axe y: les indices
         let myYearData=[];
         let chartData ={};
-
         let greenZone =[];
         let greenYellowZone =[];
         let yellowZone =[];
         let orangeZone =[];
         let redZone =[];
-
-
         
         allData.map(element =>{
             let date  = new Date(element.attributes.date_echea)
@@ -93,7 +89,6 @@ class HistoriquePollution extends Component {
         yellowZone.push(6);
         orangeZone.push(8);
         redZone.push(10);
-        
         /**
          * créer un clone de l'objet state 
          */
@@ -215,8 +210,6 @@ class HistoriquePollution extends Component {
                 },
             ]
             }
-       
-        
             this.setState({chartData :chartData});
             return(chartData);
     }
@@ -419,74 +412,6 @@ class HistoriquePollution extends Component {
                                 }          
                             }}
                         />}
-                        {/* {this.state.value === 1 && <Line key ='month-full' data ={this.state.chartData} 
-                        options={{
-                            legend:{
-                                display:false
-                            },
-                            title: {
-                                display: false,
-                                text: 'Indice de Pollution',
-                                fontSize:30,
-                            },
-                            layout: {
-                                padding: {
-                                    left: 0,
-                                    right: 40,
-                                    top: 20,
-                                    bottom: 0
-                                },
-                            },
-                                scales:{
-                                    yAxes:[{
-                                        ticks :{
-                                            fontColor: "black",
-                                            beginAtZero:true,
-                                            max:10
-                                        }
-                                    }],
-                                    xAxes:[{
-                                    ticks :{
-                                        fontColor: "black",
-                                    }
-                                }]
-                                }          
-                            }}
-                        />}
-                        {!this.onlyOne&&this.state.value === 2 &&  <Line key ='week-full' data ={this.GetWeek()} 
-                        options={{
-                            legend:{
-                                display:false
-                            },
-                            title: {
-                                display: false,
-                                text: 'Indice de Pollution',
-                                fontSize:30,
-                            },
-                            layout: {
-                                padding: {
-                                    left: 0,
-                                    right: 40,
-                                    top: 20,
-                                    bottom: 0
-                                },
-                            },
-                            scales:{
-                                yAxes:[{
-                                    ticks :{
-                                        fontColor: "black",
-                                        beginAtZero:true,
-                                        max:10
-                                    }
-                                }],
-                                xAxes:[{
-                                ticks :{
-                                    fontColor: "black",
-                                }
-                            }]
-                                }          
-                            }}
-                        />} */}
                         </Hidden>
                     </div>
                     <div className ='graph'>
@@ -570,17 +495,6 @@ class HistoriquePollution extends Component {
                     </div>
                 </div>
             </div> 
-            
-            <div  className ="btn-retour-centred">
-                <Button 
-                variant="contained" 
-                color="primary"
-                size="large"
-                component={Link} to="/"
-                >
-                Retour
-                </Button>
-            </div>
         </div>
         );
     }

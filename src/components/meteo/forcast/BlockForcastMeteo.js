@@ -5,7 +5,6 @@ import './BlockForcastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
 import BlockForecastMeteoNow from './BlockForecastMeteoNow';
 import Background from '../current/Background';
-import Footer from '../../Footer';
 
 
 
@@ -81,7 +80,6 @@ class BlockForcastMeteo extends Component {
            </div>
           ))}
         </div>
-        <Footer/>
       </div>
 
      );
