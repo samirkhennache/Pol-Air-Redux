@@ -201,7 +201,7 @@ class Form extends React.Component{
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
-<Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
+                <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
             </Switch>
             </div>
       </BrowserRouter>
