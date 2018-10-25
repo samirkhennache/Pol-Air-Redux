@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import NavBar from '../NavBar'
 import Home from './Home'
 import Page404 from '../Page404'
+import Footer from "../Footer";
 
 
 
@@ -20,7 +21,6 @@ const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // ehvBN549ec3xDmbbW -- clef prudence
 // fJ75xRvQChZAzF7qo -- clef Delph
 // Wu8scKsgzFQ8Md6Jv -- Clef Samir
-
 
 
 //Api Forecast
@@ -207,6 +207,7 @@ class Form extends React.Component{
                 <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
                 <Route exact path="/*" component={Page404}/>
             </Switch>
+            <Footer />
             </div>
       </BrowserRouter>
     )

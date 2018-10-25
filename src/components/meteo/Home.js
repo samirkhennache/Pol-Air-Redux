@@ -5,7 +5,6 @@ import MeteoDuJours from '../Pollution/MeteoDuJours'
 import Background from './current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours'
 //import Titles from '../Titles';
-import Footer from '../Footer';
 import DateIndex from '../date/DateIndex';
 import Mascotte from './Mascotte';
 import './home.css';
@@ -45,13 +44,11 @@ class Home extends Component {
                         </Grid>
                         
                         <Grid item xs={12} md={12}>
-                            <Footer />
                         </Grid>
                 </Grid>
                 <div>
                     {this.props.loading ? "En cours de chargement" : <Background imgBackground={this.props.imgBackground} /> }
                 </div>
-                
             </div>
         );
     }

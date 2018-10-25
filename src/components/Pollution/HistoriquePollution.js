@@ -3,8 +3,6 @@ import {Line} from 'react-chartjs-2'
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Footer from '../Footer';
-
 
 
 ///declaration de varriables globales
@@ -195,7 +193,6 @@ class HistoriquePollution extends Component {
                     }          
                 }}
             />}
-            <Footer />
       </div>
         );
     }
