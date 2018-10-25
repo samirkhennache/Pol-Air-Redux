@@ -1,10 +1,11 @@
-.meteoBackground {
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100vh;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -100;
+.background {
+height: 100px;
+  background-color: aqua;
+  border: solid 1px black;
+}
+.mon-image{
+  height: 100px;
+}
+.imageForecast{
+  max-width: 100%;
 }

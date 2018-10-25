@@ -5,10 +5,10 @@ const BlockForecastMeteoNow = (props) => {
     
     return(
         <div>
-            <img src={require(`../../../img/backgrounds/bkg${props.imgBackground}.jpg`)} className="meteoBackground"  alt="test"/>
-            <h1>{props.imgBackground}</h1>
-            <h1>{props.city}</h1>
-            <h1>{props.temperature}</h1>
+            <h1 className='blockMeteoNowCity'>{props.city}</h1>
+            <div className='divRound'>
+            <h1 className='blockMeteoNowTemperature'>{props.temperature}</h1>
+            </div>
             <h1>{props.description}</h1>
         </div>
     )

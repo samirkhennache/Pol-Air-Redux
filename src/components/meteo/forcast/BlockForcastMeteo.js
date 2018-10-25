@@ -4,6 +4,7 @@ import BlockForecastMeteoTemp from './BlockForecastMeteoTemp';
 import './BlockForcastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
 import BlockForecastMeteoNow from './BlockForecastMeteoNow';
+import Background from '../current/Background';
 
 
 //import Graphic from './Graphic'
@@ -62,10 +63,12 @@ class BlockForcastMeteo extends Component {
 
 
   render() {
-
     return (
       <div>
-        <BlockForecastMeteoNow imgBackground={this.props.imgBackground} temperature={this.props.temperature} description={this.props.description} city={this.props.city}/>
+        <div>
+          {this.props.loading ? "En cours de chargement" : <Background imgBackground={this.props.imgBackground} />}
+        </div>
+        <BlockForecastMeteoNow className='blockMeteoNow' temperature={this.props.temperature} description={this.props.description} city={this.props.city}/>
         {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
         <div>
           {this.props.tempMin.map((x, index) => (

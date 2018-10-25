@@ -4,7 +4,7 @@ const BlockIconForecast = (props) => {
 
     return (
         <div>
-            {props.icon_forecast}
+            <img src={`/img/${props.icon_forecast}.png`} alt="" />
         </div>
     )
 }

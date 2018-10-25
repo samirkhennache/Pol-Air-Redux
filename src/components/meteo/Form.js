@@ -1,7 +1,7 @@
 import React from "react";
 import PagePollution from "../Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import ForecastMeteo from './forcast/ForecastMeteo'
+import BlockForcastMeteo from './forcast/BlockForcastMeteo'
 import './form.css';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -131,7 +131,7 @@ class Form extends React.Component{
 
     //Fetch ForecastMeteo
     getForecastMeteo = (city) => {
-      axios.get(`${url}${city},fr&lang=${lang}&APPID=${key}&units=${unit}`)
+      axios.get(`${url}${city}&lang=${lang}&APPID=${key}&units=${unit}`)
             .then(res => {
               let temp_min = []
               let temp_max = []
@@ -185,7 +185,7 @@ class Form extends React.Component{
 
     ///link en variable
     Accueil = props => <Link to="/" {...props} />
-    Forecastmeteo = props => <Link to="/ForecastMeteo" {...props} /> 
+    BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} /> 
     pollution = props => <Link to="/HistoriquePollution" {...props} /> 
 
   // RENDER ////////////////////////////////////////////////////////////
@@ -193,14 +193,14 @@ class Form extends React.Component{
     return (
     <BrowserRouter>
             <div>
-           <NavBar accueil={this.Accueil} forecastmeteo={this.Forecastmeteo}  historiquePollution ={this.pollution}/>
+           <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
             <form className="form-center" onSubmit ={this.getData} >
                 <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
                 <button className="btn-valid">Valider</button>
             </form>
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
-                <Route path="/ForecastMeteo" render={props => < ForecastMeteo imgBackground={this.state.imgBackground} description={this.state.description} temperature={this.state.temperature} icon_forecast={this.state.icon_forecast} tempMin={this.state.tempMin} tempMax={this.state.tempMax} city={this.state.city} {...props}/>} />            
+                <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
                 <Route path="/HistoriquePollution" render ={props => < PagePollution indice={this.state.dataPol} {...props} />} />
             </Switch>
             </div>
