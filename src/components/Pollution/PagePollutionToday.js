@@ -51,10 +51,10 @@ class PagePollutionToday extends Component {
             </div>
             <div className="text-today">
                 <div>
-                    <div className="font-ville" >{this.props.city}</div>
-                    <div className="font-aujourdhui" >Aujourd'hui</div>
+                    <div className="city-all-pages" >{this.props.city}</div>
+                    <div className="date-all-page " >Aujourd'hui</div>
                 </div>
-                <div className={`font-messageQuality`}>{this.GetMessageQuality()}</div>
+                <div className="comment-all-page">{this.GetMessageQuality()}</div>
             </div>
             <img 
                 src={require(`../../img/backgrounds/bkg${this.props.imgBackground}.jpg`)} 
