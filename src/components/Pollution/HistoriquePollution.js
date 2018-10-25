@@ -217,7 +217,7 @@ class HistoriquePollution extends Component {
             }
        
         
-            //this.setState({chartData :chartData});
+            this.setState({chartData :chartData});
             return(chartData);
     }
     /**
@@ -285,7 +285,7 @@ class HistoriquePollution extends Component {
                 },
             ]
             }  
-            //this.setState({chartData :chartData})
+            this.setState({chartData :chartData})
             return(chartData);
     }
 
@@ -297,7 +297,7 @@ class HistoriquePollution extends Component {
      * evements qui lorsque on passe d'un onglet à un autre 
      */
     handleChangeYear = () => {
-        
+        this.GetYear()
         this.setState({ value :0,
                         onlyOne :true,
                         colorYear :'primary',
@@ -380,11 +380,14 @@ class HistoriquePollution extends Component {
                 <div className= 'graphZone'>
                     <div className ='graph-full'>
                         <Hidden smDown>
-                        {this.state.value === 0 && <Line key='year-full' data ={this.state.chartData}
+                        {  <Line key='year-full' data ={this.state.chartData}
                             options={{
                                 responsive:true,
                                 legend:{
                                     display:false
+                                },
+                                animation: {
+                                    duration: 0,
                                 },
                                 layout: {
                                     padding: {
@@ -416,7 +419,7 @@ class HistoriquePollution extends Component {
                                 }          
                             }}
                         />}
-                        {this.state.value === 1 && <Line key ='month-full' data ={this.GetMonth()} 
+                        {/* {this.state.value === 1 && <Line key ='month-full' data ={this.state.chartData} 
                         options={{
                             legend:{
                                 display:false
@@ -483,13 +486,16 @@ class HistoriquePollution extends Component {
                             }]
                                 }          
                             }}
-                        />}
+                        />} */}
                         </Hidden>
                     </div>
                     <div className ='graph'>
                         <Hidden mdUp>
-                {(this.state.value === 1||this.state.onlyOne) && <Line key= 'month' data ={this.GetMonth()} 
+                {(this.state.value === 1||this.state.onlyOne) && <Line key= 'month' data ={this.state.chartData} 
                 options={{
+                    animation: {
+                        duration: 0,
+                    },
                     legend:{
                         display:false
                     },
@@ -523,8 +529,11 @@ class HistoriquePollution extends Component {
                         }          
                     }}
                 />}
-                {  this.state.value === 2 &&  <Line key='week' data ={this.GetWeek()} 
+                {  this.state.value === 2 &&  <Line key='week' data ={this.state.chartData} 
                 options={{
+                    animation: {
+                        duration: 0,
+                    },
                     legend:{
                         display:false
                     },
