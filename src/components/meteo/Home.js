@@ -27,9 +27,9 @@ class Home extends Component {
                             </Grid>
                             
                             <Grid item xs={8} md={8} direction={'column'} align="right" className="index-city-date-description"> {/*Container city + date + description*/}
-                                {this.props.city}
-                                <DateIndex/>
-                                {this.props.description}
+                                <div className="city-all-pages">{this.props.city}</div>
+                                <DateIndex className="date-all-page"/>
+                                <div className="comment-all-page">{this.props.description}</div>
                                
                             </Grid>
                         </Grid>
