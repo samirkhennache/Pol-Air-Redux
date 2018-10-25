@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import OpenMenu from './OpenMenu'
 import Logo_PolAir_Blanc from '../img/Logo_PolAir_Blanc.svg';
 import './NavBar.css';
+import { Link } from 'react-router-dom'
 
 
 const styles = {
@@ -30,9 +31,9 @@ const ButtonAppBar = (props) => {
       <AppBar position="static">
         <Toolbar>
           <OpenMenu openAccueil={props.accueil} openForeCastMeteo={props.forecastmeteo} openHistoriquePollution ={props.historiquePollution} />
-          <div className="logo">
+          <Link exact to="/" className="logo">
             <img src={Logo_PolAir_Blanc} alt="Pol'Air" className="logo"/>
-          </div>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
