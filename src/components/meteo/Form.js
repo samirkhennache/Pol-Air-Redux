@@ -50,6 +50,10 @@ const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // ehvBN549ec3xDmbbW -- clef prudence
 // fJ75xRvQChZAzF7qo -- clef Delph
 // Wu8scKsgzFQ8Md6Jv -- Clef Samir
+// 5tzeyxRv5omhmxG6P -- Clef paolo1
+// K7ozT4wzfP89xvNDj -- Clef paolo2
+// FSirY4x7sshw6meaw -- Clef paolo3
+
 
 //Api Forecast
 
@@ -138,9 +142,11 @@ class Form extends React.Component{
         e.preventDefault();// eviter que la page se recharge  a chaque recherche.
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
-        const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
-        const data_pol = await api_call_pol.json();
-        // setState
+        if(api_call.ok){
+            const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
+            const data_pol = await api_call_pol.json();
+            if(api_call_pol.ok) {
+            // setState
         this.setState({
             temperature : Math.floor(data.main.temp),
             temp_min : data.main.temp_min,
@@ -158,6 +164,19 @@ class Form extends React.Component{
             error: ""
         })
         this.getForecastMeteo(city)
+    }
+}
+else {
+    this.setState({error : "Ville non reconnue"});
+    alert("Veuillez verifier votre saisie !");
+    e.preventDefault();
+}
+    }
+
+    //Fetch city and country from JSON
+    getAllCity = async () => {
+        const data = await axios.get('')
+        console.log(data.data)
     }
 
     //Fetch ForecastMeteo
@@ -211,7 +230,7 @@ class Form extends React.Component{
     
     componentDidMount(){
         //lance la methode getloc
-        this.getLoc() 
+        this.getLoc()
     }
 
     ///link en variable
