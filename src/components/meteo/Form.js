@@ -14,7 +14,9 @@ import Footer from "../Footer";
 
 
 // Clés API
-const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
+//588b34ef0ccd1ce25e0cd600e9e852fb -- clef de Delph
+//0f53c26a9c88a54d8706c8b3c9d2b880 -- clef de quelqu'un
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
@@ -67,7 +69,7 @@ class Form extends React.Component{
             if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
+                .then(response => this.GetMeteoPollution(response.address.town,latitude,longitude) )
                 
             }
         })
