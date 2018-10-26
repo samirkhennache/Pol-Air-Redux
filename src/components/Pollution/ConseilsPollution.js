@@ -11,9 +11,9 @@ class ConseilsPagePollution extends Component {
        
         quality :["Très Faible","Faible","Modéré","Médiocre","Elevé","Très Elevé","Dangereux"],
         messagePieton : [
-            `C'est parti pour les activitées en plein air, allez au parc, profitez-en, respirez à fond !!`,
+            `C'est parti pour les activités en plein air, allez au parc, profitez-en, respirez à fond !!`,
             `Rien à signaler, pensez à regarder l'indice de pollution pendant les heures de pointe`,
-            `Éviter les arthères bouchées par les voitures, pensez à vos enfants et faites un petit détour `,
+            `Éviter les artères bouchées par les voitures, pensez à vos enfants et faites un petit détour `,
             `Les personnes sensibles sont fortement exposées, reportez leurs activités physiques en plein air et ajustez leurs trajets`,
             `Port du masque conseillé, les personnes sensibles doivent rester à l'intérieur`,
             `Port du masque obligatoire, reportez vos déplacements et ne pratiquez pas d'activités physiques`,
@@ -29,12 +29,12 @@ class ConseilsPagePollution extends Component {
             `Danger de mort, masque adapté obligatoire`
         ],
         messageHouse : [
-            `Aérer bien votre intérieur, n'hésitez pas à rennouveler votre air aussi souvent que possible`,
-            `Aérer bien votre intérieur, n'hésitez pas à rennouveler votre air aussi souvent que possible `,
+            `Aérer bien votre intérieur, n'hésitez pas à renouveler votre air aussi souvent que possible`,
+            `Aérer bien votre intérieur, n'hésitez pas à renouveler votre air aussi souvent que possible `,
             `Pensez à aérer votre intérieur au moins 1 fois par jour pendant 10 minutes`,
             `Évitez d'aérer votre maison, surtout si vous habitez au rez-de-chaussé ou au 1er étage`,
-            `N'ouvrez pas vos fenetres, attendez un moment plus propice où la pollution sera moins forte`,
-            `N'ouvrez pas vos fenetres, utiliser un purificateur d'air`,
+            `N'ouvrez pas vos fenêtres, attendez un moment plus propice où la pollution sera moins forte`,
+            `N'ouvrez pas vos fenêtres, utiliser un purificateur d'air`,
             `Danger de mort, masque adapté obligatoire`
         ],
         adviseDefault: true,
