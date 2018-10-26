@@ -22,6 +22,9 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
+      backgroundColor: 'white',
+      opacity: 0.5,
+      borderRadius: 5,
     },
     dense: {
       marginTop: 16,
