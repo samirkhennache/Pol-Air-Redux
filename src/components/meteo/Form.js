@@ -134,6 +134,12 @@ class Form extends React.Component{
         this.getForecastMeteo(city)
     }
 
+    //Fetch city and country from JSON
+    getAllCity = async () => {
+        const data = await axios.get(CityJSON)
+        console.log(data.data)
+    }
+
     //Fetch ForecastMeteo
     getForecastMeteo = (city) => {
       axios.get(`${url}${city}&lang=${lang}&APPID=${key}&units=${unit}`)
@@ -185,7 +191,8 @@ class Form extends React.Component{
     
     componentDidMount(){
         //lance la methode getloc
-        this.getLoc() 
+        this.getLoc()
+        this.getAllCity()
     }
 
     ///link en variable
