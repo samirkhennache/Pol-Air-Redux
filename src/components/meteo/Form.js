@@ -69,7 +69,7 @@ class Form extends React.Component{
             if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.GetMeteoPollution(response.address.town,latitude,longitude) )
+                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
                 
             }
         })
