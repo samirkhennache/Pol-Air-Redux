@@ -10,11 +10,39 @@ import Home from './Home'
 import Page404 from '../Page404'
 import Footer from "../Footer";
 
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+    },
+    dense: {
+      marginTop: 16,
+    },
+    menu: {
+      width: 200,
+    },
+    button: {
+        margin: theme.spacing.unit,
+        height: 55,
+        marginTop: 16,
+    },
+    input: {
+    display: 'none',
+    },
+  });
 
 
 
 // Clés API
-const api_Key_Current_Weather = "0f53c26a9c88a54d8706c8b3c9d2b880";
+const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
 //http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
 
 const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
@@ -212,14 +240,26 @@ else {
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+    const { classes } = this.props;
     return (
     <BrowserRouter>
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-            <form className="form-center" onSubmit ={this.getData} >
-                <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
-                <button className="btn-valid">Valider</button>
+           <form className={classes.container} className="form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                <TextField
+                    id="outlined-search"
+                    label="Votre ville"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange}
+                />
+                 <Button variant="contained" color="primary" type="submit" className="btn-valid" className={classes.button}>
+                    Rechercher
+                </Button>
             </form>
+
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
@@ -233,4 +273,4 @@ else {
   }
 }
 
-export default Form;
+export default withStyles(styles)(Form);
