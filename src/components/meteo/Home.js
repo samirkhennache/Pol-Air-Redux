@@ -17,7 +17,7 @@ class Home extends Component {
 
             <div className="home-container">
             
-                <Grid container alignItems="center" > {/*Container global*/}                    
+                <Grid container align-items="center" > {/*Container global*/}                    
                     <Grid item xs={12} md={7} > 
                         <Grid item container className="home-opacity" justify-content ="space-beetween" direction="row" align-items="center"> {/*Container logo + city + date + description*/}                            
                             <Grid item xs={5} md={4} className="mascotte-bor"> {/*Container logo*/}

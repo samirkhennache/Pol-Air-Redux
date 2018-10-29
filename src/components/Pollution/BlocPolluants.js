@@ -7,11 +7,11 @@ class BlocPolluants extends Component {
     render() { 
         return (  
             <div className="bloc-polluants">
-                <hr className="sep"/>
+                <hr className="display-none-hr"/>
                 <div className="polluants">
                     <ModalesPolluants/>
                 </div >
-                <hr className="sep" />
+                <hr />
             </div>
         );
     }
