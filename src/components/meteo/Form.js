@@ -46,7 +46,8 @@ const styles = theme => ({
 
 // Clés API
 const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
-//http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
+//588b34ef0ccd1ce25e0cd600e9e852fb -- clef de Delph
+//0f53c26a9c88a54d8706c8b3c9d2b880 -- clef de quelqu'un
 
 const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
