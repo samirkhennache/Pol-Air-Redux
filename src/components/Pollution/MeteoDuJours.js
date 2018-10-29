@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './IndiceDuJours.css'
 import IndiceMeteoSolo from './IndiceMeteoSolo'
 import IconMeteo from './IconMeteo'
-import ButtonPollution from './ButtonPollution'
+import ButtonMeteo from './ButtonMeteo'
 
 
 class MeteoDuJours extends Component {
@@ -22,7 +22,7 @@ class MeteoDuJours extends Component {
                         <div className="indice-smiley-child"><IconMeteo icon={this.props.icon}/></div>               
                     </div>
                     <div className="bouton-plus-index">
-                        <ButtonPollution className="button-indice-index"/>
+                        <ButtonMeteo className="button-indice-index"/>
                     </div>
                </div>
             </div>

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-
+import ArrowUpward from '@material-ui/icons/ArrowUpward'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
 
 class BlockForecastMeteoTemp extends Component {
 
     render() {
         return ( 
             <div>
-                <h1>Max {this.props.temp_max}°C</h1>
-                <h1>Min {this.props.temp_min}°C</h1>
+                <ArrowUpward/>{this.props.temp_max}°C
+                <ArrowDownward/>{this.props.temp_min}°C
             </div>
          );
     }

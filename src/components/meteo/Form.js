@@ -10,6 +10,37 @@ import Home from './Home'
 import Page404 from '../Page404'
 import Footer from "../Footer";
 
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      backgroundColor: 'white',
+      opacity: 0.5,
+      borderRadius: 5,
+    },
+    dense: {
+      marginTop: 16,
+    },
+    menu: {
+      width: 200,
+    },
+    button: {
+        margin: theme.spacing.unit,
+        height: 55,
+        marginTop: 16,
+    },
+    input: {
+    display: 'none',
+    },
+  });
 
 
 
@@ -17,17 +48,20 @@ import Footer from "../Footer";
 const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
 //588b34ef0ccd1ce25e0cd600e9e852fb -- clef de Delph
 //0f53c26a9c88a54d8706c8b3c9d2b880 -- clef de quelqu'un
-//http://api.openweathermap.org/data/2.5/weather?q=paris&units=metric&lang=fr&APPID=0f53c26a9c88a54d8706c8b3c9d2b880
-const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
+
+const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
-// Wu8scKsgzFQ8Md6Jv -- clef Samir
-
+// fJ75xRvQChZAzF7qo -- clef Delph
+// Wu8scKsgzFQ8Md6Jv -- Clef Samir
+// 5tzeyxRv5omhmxG6P -- Clef paolo1
+// K7ozT4wzfP89xvNDj -- Clef paolo2
+// FSirY4x7sshw6meaw -- Clef paolo3
 
 
 //Api Forecast
 
-const key = "012c3731b7b5a25ce2858d5bdf0c1134"
+const key = "588b34ef0ccd1ce25e0cd600e9e852fb"
 const unit = 'metric'
 const lang = 'fr'
 const url = 'http://api.openweathermap.org/data/2.5/forecast?q='
@@ -112,9 +146,11 @@ class Form extends React.Component{
         e.preventDefault();// eviter que la page se recharge  a chaque recherche.
         const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
-        const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
-        const data_pol = await api_call_pol.json();
-        // setState
+        if(api_call.ok){
+            const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
+            const data_pol = await api_call_pol.json();
+            if(api_call_pol.ok) {
+            // setState
         this.setState({
             temperature : Math.floor(data.main.temp),
             temp_min : data.main.temp_min,
@@ -132,6 +168,19 @@ class Form extends React.Component{
             error: ""
         })
         this.getForecastMeteo(city)
+    }
+}
+else {
+    this.setState({error : "Ville non reconnue"});
+    alert("Veuillez verifier votre saisie !");
+    e.preventDefault();
+}
+    }
+
+    //Fetch city and country from JSON
+    getAllCity = async () => {
+        const data = await axios.get('')
+        console.log(data.data)
     }
 
     //Fetch ForecastMeteo
@@ -185,7 +234,7 @@ class Form extends React.Component{
     
     componentDidMount(){
         //lance la methode getloc
-        this.getLoc() 
+        this.getLoc()
     }
 
     ///link en variable
@@ -195,14 +244,26 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+    const { classes } = this.props;
     return (
     <BrowserRouter>
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-            <form className="form-center" onSubmit ={this.getData} >
-                <input type ="text" name="city" placeholder="Votre ville" onChange={this.handleChange}/>
-                <button className="btn-valid">Valider</button>
+           <form className={classes.container} className="form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                <TextField
+                    id="outlined-search"
+                    label="Votre ville"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange}
+                />
+                 <Button variant="contained" color="primary" type="submit" className="btn-valid" className={classes.button}>
+                    Rechercher
+                </Button>
             </form>
+
             <Switch>
                 <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
                 <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
@@ -216,4 +277,4 @@ class Form extends React.Component{
   }
 }
 
-export default Form;
+export default withStyles(styles)(Form);
