@@ -38,7 +38,7 @@ class Mascotte extends React.Component {
 
     render() { 
         return ( 
-            <div >
+            <div className="mascotte-border">
                 <img src={this.getBear()} alt="Mascotte du jour" style={{ height: "30vh" }}/>
             </div>
         )
