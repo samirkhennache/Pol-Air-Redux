@@ -32,7 +32,7 @@ class Home extends Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={5} >
+                    <Grid item xs={12} md={5} className="blocPolAir">
                         <Grid container justify="center"> {/*Container indices polution + météo*/}
                             <IndiceDuJours indice={this.props.dataPol} />
                             <span className="index-vertical-row"></span>
