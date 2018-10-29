@@ -23,6 +23,9 @@
 .main-child{
     vertical-align: middle;
 }
+.blocPolAir{
+    padding: 10px 0 10px 0;
+}
 @media all and (max-width: 370px){
     .mascotte-border img{
         width: 100%;

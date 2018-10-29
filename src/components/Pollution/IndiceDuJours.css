@@ -8,6 +8,7 @@
 .indiceDuJour-part1{
     font-size: 26px;
     color: white;
+    margin-top: 10px;
 }
 .indiceDuJour-part2{
     display: flex;

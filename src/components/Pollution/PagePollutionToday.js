@@ -26,9 +26,9 @@ class PagePollutionToday extends Component {
         else if(this.props.indice<=200)
             return this.state.quality[4]
         else if(this.props.indice<=300)
-            return this.state.quality[5]
-        else
-            return this.state.quality[6]
+            return this.state.quality[4]
+        else if (this.props.indice >= 300)
+            return this.state.quality[4]
     }
     StyleIndice(){
         if(this.props.indice<=25)
