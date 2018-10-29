@@ -81,7 +81,7 @@ class Form extends React.Component{
         icon : undefined,
         degre : null,
         dataPol:undefined,
-        error: undefined,
+        error: false,
         loaded :false,
         tempMax: [],
         tempMin : [],
@@ -171,9 +171,8 @@ class Form extends React.Component{
     }
 }
 else {
-    this.setState({error : "Ville non reconnue"});
-    alert("Veuillez verifier votre saisie !");
-    e.preventDefault();
+    this.setState({error : true});
+    
 }
     }
 
@@ -250,15 +249,29 @@ else {
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
            <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                <TextField
+                {!this.state.error&&<TextField
                     id="outlined-search"
                     label="Votre ville"
                     type="search"
                     className={classes.textField}
                     margin="normal"
                     variant="outlined"
+                    onChange={this.handleChange} 
+                    value = {this.state.value} 
+                     
+                    
+                />}
+                 {this.state.error&&<TextField
+                    error
+                    id="outlined-search"
+                    label="Verifier votre saisie"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
                     onChange={this.handleChange}
-                />
+                     
+                />}
                 <Button variant="contained" color="primary" type="submit" className={classes.button}>
                     Rechercher
                 </Button>
