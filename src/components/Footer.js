@@ -17,48 +17,58 @@ class Footer extends Component {
             <li><Button color="primary" component={Link} to="">Itinéraire</Button></li>
           </ul>
 
+
+          {/* Les avatars sont importés d'un composents material.io.
+          La photo est importée directement du compte gitHub correspondant.
+          Au rollover sur l'Avatar className="avatar2", la photo avatar disparait 
+          pour rendre visible le logo gitHub en background.
+
+          Pour pallier au problème de sécurité généré par target="_blank" 
+          cf cet article pour plus d'info: 
+          https://blog.dareboost.com/fr/2017/03/target-blank-rel-noopener-securite-performance/
+          */}
           <div className="footer-avatar">
               <p className="copyright">© / La Pol'Air team </p>
             
               <div className="avatar"> 
-                <a href="https://github.com/prudenceG" target="_blank" rel="noopener noreferrer" title="Prudence" className="avatar2">
-                  <Avatar alt="Prudence" src="https://avatars0.githubusercontent.com/u/36316271?s=400&v=4" />
+                <a href="https://github.com/prudenceG" target="_blank" rel="noopener noreferrer" title="Prudence" >
+                  <Avatar alt="Prudence" src="https://avatars0.githubusercontent.com/u/36316271?s=400&v=4" className="avatar2"/>
                 </a>
               </div>
 
               <div className="avatar"> 
-                <a href="https://github.com/af1ne" target="_blank" rel="noopener noreferrer" title="Delph" className="avatar2">
-                  <Avatar alt="Delphine BRUNET alias af1ne" src="https://avatars2.githubusercontent.com/u/39528061?s=400&u=1b5accaaf40b82dfd766d3032e9038d0597aeb89&v=4" />
+                <a href="https://github.com/af1ne" target="_blank" rel="noopener noreferrer" title="Delph" >
+                  <Avatar alt="Delphine BRUNET alias af1ne" src="https://avatars2.githubusercontent.com/u/39528061?s=400&u=1b5accaaf40b82dfd766d3032e9038d0597aeb89&v=4" className="avatar2" />
                 </a> 
               </div>
 
               <div className="avatar"> 
-                <a href="https://github.com/GuillaumeFerry" target="_blank" rel="noopener noreferrer" title="Guillaume" className="avatar2">
-                  <Avatar alt="Guillaume FERRY" src="https://avatars2.githubusercontent.com/u/42844637?s=400&v=4" />
+                <a href="https://github.com/GuillaumeFerry" target="_blank" rel="noopener noreferrer" title="Guillaume" >
+                  <Avatar alt="Guillaume FERRY" src="https://avatars2.githubusercontent.com/u/42844637?s=400&v=4" className="avatar2"/>
                 </a>
               </div>
 
               <div className="avatar"> 
-                <a href="https://github.com/walidinkk" target="_blank" rel="noopener noreferrer" title="Walid" className="avatar2">
-                  <Avatar alt="Walid BENMAKHLOUF" src="https://avatars0.githubusercontent.com/u/42183943?s=400&v=4"/>
+                <a href="https://github.com/walidinkk" target="_blank" rel="noopener noreferrer" title="Walid" >
+                  <Avatar alt="Walid BENMAKHLOUF" src="https://avatars0.githubusercontent.com/u/42183943?s=400&v=4" className="avatar2"/>
                 </a>
               </div>
 
               <div className="avatar"> 
-                <a href="https://github.com/samirkhennache" target="_blank" rel="noopener noreferrer" title="Samir" className="avatar2">
-                  <Avatar alt="Samir KHENNACHE" src="https://avatars0.githubusercontent.com/u/39196407?s=400&v=4"/>
+                <a href="https://github.com/samirkhennache" target="_blank" rel="noopener noreferrer" title="Samir" >
+                  <Avatar alt="Samir KHENNACHE" src="https://avatars0.githubusercontent.com/u/39196407?s=400&v=4" className="avatar2"/>
                 </a>
               </div>
 
                <div className="avatar">  
-                <a href="https://github.com/Chopin85" target="_blank" rel="noopener noreferrer" title="Paolo" className="avatar2">
-                  <Avatar alt="Paolo CATALANI" src="https://avatars1.githubusercontent.com/u/32762917?s=400&v=4" />
+                <a href="https://github.com/Chopin85" target="_blank" rel="noopener noreferrer" title="Paolo" >
+                  <Avatar alt="Paolo CATALANI" src="https://avatars1.githubusercontent.com/u/32762917?s=400&v=4" className="avatar2" />
                 </a>
               </div>
 
               <div className="avatar">
-                <a href="https://github.com/Vassili7115" target="_blank" rel="noopener noreferrer" title="Matthieu" className="avatar2">
-                  <Avatar alt="Matthieu RANUCCI" src="https://avatars1.githubusercontent.com/u/35661086?s=400&v=4" />
+                <a href="https://github.com/Vassili7115" target="_blank" rel="noopener noreferrer" title="Matthieu" >
+                  <Avatar alt="Matthieu RANUCCI" src="https://avatars1.githubusercontent.com/u/35661086?s=400&v=4" className="avatar2" />
                 </a>
               </div>              
             </div>
