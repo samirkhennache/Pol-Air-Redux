@@ -31,7 +31,7 @@ const ButtonAppBar = (props) => {
       <AppBar position="static">
         <Toolbar>
           <OpenMenu openAccueil={props.accueil} openForeCastMeteo={props.forecastmeteo} openHistoriquePollution ={props.historiquePollution} />
-          <Link exact to="/" className="logo">
+          <Link to="/" className="logo">
             <img src={Logo_PolAir_Blanc} alt="Pol'Air" className="logo"/>
           </Link>
         </Toolbar>

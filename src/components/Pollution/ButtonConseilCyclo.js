@@ -13,7 +13,7 @@ const ButtonPollution = (props) => {
   return (
     <div>
       <Button variant="fab" mini color="primary" aria-label="Add" className={classes.button}>
-      <i onClick={this.handleClickCyclo} class="material-icons">directions_bike</i>
+      <i onClick={this.handleClickCyclo} className="material-icons">directions_bike</i>
       </Button>     
     </div>
   );

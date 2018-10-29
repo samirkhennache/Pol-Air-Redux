@@ -17,13 +17,13 @@ class Home extends Component {
 
             <div className="home-container">
             
-                <Grid container alignItems="center" > {/*Container global*/}                    
+                <Grid container align-items="center" > {/*Container global*/}                    
                     <Grid item xs={12} md={7} > 
-                        <Grid container direction="row" alignItems="center" justify="space-beetween" className="home-opacity"> {/*Container logo + city + date + description*/}                            
+                        <Grid item container className="home-opacity" justify-content ="space-beetween" direction="row" align-items="center"> {/*Container logo + city + date + description*/}                            
                             <Grid item xs={5} md={4} className="mascotte-bor"> {/*Container logo*/}
                                 { this.props.dataPol && <Mascotte temperature={this.props.temperature} dataPol={this.props.dataPol} description={this.props.description} imgBackground={this.props.imgBackground}/> }
                             </Grid>                            
-                            <Grid item xs={7} md={8} direction={'column'} align="right" className="main-main"> {/*Container city + date + description*/}
+                            <Grid item container xs={7} md={8} direction={'column'} align="right" className="main-main"> {/*Container city + date + description*/}
                                 <div className="main-child">
                                     <div className="city-all-pages">{this.props.city}</div>
                                     <div className="date-all-page"><DateIndex /></div>
@@ -32,8 +32,8 @@ class Home extends Component {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12} md={5} className="blocPolAir">
-                        <Grid container justify="center"> {/*Container indices polution + météo*/}
+                    <Grid item xs={12} md={5} >
+                        <Grid item container justify="center"> {/*Container indices polution + météo*/}
                             <IndiceDuJours indice={this.props.dataPol} />
                             <span className="index-vertical-row"></span>
                             {/* attention le composant meteo du jour est dans pollution, c'est une copie de indice du jour */}
