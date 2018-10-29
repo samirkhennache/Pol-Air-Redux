@@ -49,7 +49,7 @@ const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
 //588b34ef0ccd1ce25e0cd600e9e852fb -- clef de Delph
 //0f53c26a9c88a54d8706c8b3c9d2b880 -- clef de quelqu'un
 
-const api_Key_Current_Pol = "fJ75xRvQChZAzF7qo";
+const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 // AgM8MuxtXNcfwPrHN -- clef guillaume
 // ehvBN549ec3xDmbbW -- clef prudence
 // fJ75xRvQChZAzF7qo -- clef Delph

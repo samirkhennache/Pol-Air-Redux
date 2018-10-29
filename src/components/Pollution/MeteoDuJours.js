@@ -16,7 +16,7 @@ class MeteoDuJours extends Component {
         <div>
            <div className="indiceDuJour-index">
                 <div><p className="indiceDuJour-part1">MÉTÉO</p></div>
-                <div className="indiceDuJour-part2">
+                <div className="indiceDuJour-part2 indiceDuJour-part2-meteo">
                     <div className="indice-smiley">
                         <div className="indice-smiley-child"><IndiceMeteoSolo temperature={this.props.temperature} degres={this.props.degre}/></div>
                         <div className="indice-smiley-child"><IconMeteo icon={this.props.icon}/></div>               

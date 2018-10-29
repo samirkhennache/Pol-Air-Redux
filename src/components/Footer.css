@@ -29,15 +29,13 @@
 .copyright{
     color: white;
     font-size : 13px;
-    margin-bottom: 0;
-    margin-right: 10px;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
 }
-.footer-avatar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+.group-avatar{
+    margin: 0 0 5px 0;
 
+}
 .avatar {
     background-image: url("../img/GitHub-Mark-32px.png");
     background-repeat: round;

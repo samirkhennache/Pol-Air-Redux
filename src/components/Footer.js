@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import {Button, Avatar} from '@material-ui/core/';
 
 import './Footer.css';
@@ -27,9 +28,10 @@ class Footer extends Component {
           cf cet article pour plus d'info: 
           https://blog.dareboost.com/fr/2017/03/target-blank-rel-noopener-securite-performance/
           */}
-          <div className="footer-avatar">
-              <p className="copyright">© / La Pol'Air team </p>
-            
+          <Grid container direction="row" justify="center" align="center">
+              <Grid item className="copyright">© / La Pol'Air team </Grid>
+              <Grid item>
+              <Grid container direction={'row'} justify="center" align="center" className="group-avatar">
               <div className="avatar"> 
                 <a href="https://github.com/prudenceG" target="_blank" rel="noopener noreferrer" title="Prudence" >
                   <Avatar alt="Prudence" src="https://avatars0.githubusercontent.com/u/36316271?s=400&v=4" className="avatar2"/>
@@ -70,8 +72,10 @@ class Footer extends Component {
                 <a href="https://github.com/Vassili7115" target="_blank" rel="noopener noreferrer" title="Matthieu" >
                   <Avatar alt="Matthieu RANUCCI" src="https://avatars1.githubusercontent.com/u/35661086?s=400&v=4" className="avatar2" />
                 </a>
-              </div>              
-            </div>
+              </div>
+              </Grid>
+              </Grid>           
+          </Grid>
         </div>
       );
     }
