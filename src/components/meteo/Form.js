@@ -249,7 +249,7 @@ else {
     <BrowserRouter>
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-           <form className={classes.container} className="form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+           <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                 <TextField
                     id="outlined-search"
                     label="Votre ville"
@@ -259,7 +259,7 @@ else {
                     variant="outlined"
                     onChange={this.handleChange}
                 />
-                 <Button variant="contained" color="primary" type="submit" className="btn-valid" className={classes.button}>
+                <Button variant="contained" color="primary" type="submit" className={classes.button}>
                     Rechercher
                 </Button>
             </form>
