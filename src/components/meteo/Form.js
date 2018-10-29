@@ -14,6 +14,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+let data = {};
+
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -42,7 +44,7 @@ const styles = theme => ({
     },
   });
 
-
+//const normalizecity = [city, city_district, locality, town, borough, municipality, village, hamlet, quarter, neighbourhood]
 
 // Clés API
 const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
@@ -103,39 +105,99 @@ class Form extends React.Component{
             if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
-                
+                .then(response => this.GetMeteoPollution(response.address,latitude,longitude) )
+                .then(response => console.log(response) )
             }
         })
         
     }        
     //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
-    GetMeteoPollution(city,latitude,longitude){ 
-    const units = "&units=metric";
-    const lang = "&lang=fr";
-    
-    //fetch meteo
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
-    .then(res => res.json())
-    .then(response => 
+    GetMeteoPollution = async (adress,latitude,longitude) =>{ 
+        const units = "&units=metric";
+        const lang = "&lang=fr";
+        
+        console.log("adress city is : ", adress.city)
+        //fetch meteo
+        let getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+        console.log(getFetchMeteo)
+        if (getFetchMeteo.ok) {
+            data = await getFetchMeteo.json()
+            this.getForecastMeteo(adress.city)
+        } else if (!getFetchMeteo.ok) {
+            getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.city_district}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+            if (getFetchMeteo.ok) {
+                data = await getFetchMeteo.json()
+                this.getForecastMeteo(adress.city_district)
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.locality}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.locality)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.town}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.town)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.borough}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.borough)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.municipality}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.municipality)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.village}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.village)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.hamlet}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.hamlet)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.quarter}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.quarter)
+                }
+            } else if (!getFetchMeteo.ok) {
+                getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${adress.neighbourhood}${units}${lang}&APPID=${api_Key_Current_Weather}`)
+                if (getFetchMeteo.ok) {
+                    data = await getFetchMeteo.json()
+                    this.getForecastMeteo(adress.neighbourhood)
+                }
+            }
+        }
         this.setState({
-            temperature : Math.floor(response.main.temp),
-            city: response.name,
-            humidityText : "Humidité",
-            humidity:response.main.humidity,
-            pourcentage: "%",
-            description: response.weather[0].description,
-            icon : response.weather[0].icon, //sert à afficher l'icone et le background.
-            imgBackground: response.weather[0].icon, //sert à afficher le background.
-            degre : "C°",
-            loading: false,
-            error: ""
-        }))
-       //fetch pollution
-        fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
-        .then(res => res.json())
-        .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
-        this.getForecastMeteo(city)
+        temperature : Math.floor(data.main.temp),
+        city: data.name,
+        humidityText : "Humidité",
+        humidity:data.main.humidity,
+        pourcentage: "%",
+        description: data.weather[0].description,
+        icon : data.weather[0].icon, //sert à afficher l'icone et le background.
+        imgBackground: data.weather[0].icon, //sert à afficher le background.
+        degre : "C°",
+        loading: false,
+        error: ""
+        })
+        
+        //fetch pollution
+            fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
+            .then(res => res.json())
+            .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+            
+            
     } 
 
     // Fetch SearchBar
