@@ -29,6 +29,7 @@ code {
   font-size: 20px;
   font-weight: 600;
   color: white;
+  word-wrap: break-word;
   text-shadow: 0.05em 0.05em 0.05em darkgray;
 }
 .comment-all-page {
@@ -37,8 +38,10 @@ code {
   font-weight: 400;
   color: white;
   margin-top: 30px;
+  word-wrap: break-word;
   text-shadow: 0.05em 0.05em 0.05em darkgray;
 }
+
 @media all and (min-width:425px){
   .city-all-pages{
     width: auto;
