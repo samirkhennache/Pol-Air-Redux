@@ -266,7 +266,6 @@ class Form extends React.Component{
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                             <TextField
-                                error ={this.state.error}
                                 id="outlined-search"
                                 label="Votre ville"
                                 type="search"
@@ -287,7 +286,6 @@ class Form extends React.Component{
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                             <TextField
-                                error ={this.state.error}
                                 id="outlined-search"
                                 label="Votre ville"
                                 type="search"
@@ -308,7 +306,6 @@ class Form extends React.Component{
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                             <TextField
-                                error ={this.state.error}
                                 id="outlined-search"
                                 label="Votre ville"
                                 type="search"
@@ -327,7 +324,7 @@ class Form extends React.Component{
                             indice={this.state.dataPol} 
                             imgBackground={this.state.imgBackground} 
                             loading={this.state.loading}
-                            {...props} />
+                            {...this.state} />
                     </div>
                 }/>
                 <Route exact path="/*" render={(props)=><Page404 />}/>
