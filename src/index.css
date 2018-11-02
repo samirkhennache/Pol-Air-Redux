@@ -19,6 +19,7 @@ code {
   font-size: calc(10px + 5vw);
   font-weight: 700;
   text-transform: uppercase;
+  text-align: right;
   color: white;
   width: 50vw;
   word-wrap: break-word;
@@ -28,6 +29,7 @@ code {
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: 600;
+  text-align: right;
   color: white;
   word-wrap: break-word;
   text-shadow: 0.05em 0.05em 0.05em darkgray;
@@ -36,14 +38,15 @@ code {
   font-family: 'Open Sans', sans-serif;
   font-size: 28px;
   font-weight: 400;
+  text-align: right;
   color: white;
-  margin-top: 30px;
+  margin: 25px 0 5px 0;
   word-wrap: break-word;
   text-shadow: 0.05em 0.05em 0.05em darkgray;
 }
 
-@media all and (min-width:425px){
+@media all and (min-width:426px){
   .city-all-pages{
-    width: auto;
+    width: 100%;
   }
 }

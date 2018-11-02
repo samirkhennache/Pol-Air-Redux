@@ -61,7 +61,9 @@ class BlockForcastMeteo extends Component {
 //     let test = d.setTime(((d.getTime()-n)/1000)+86400*day)
 //     return test
 // }
-
+componentDidMount() {
+  window.scrollTo(0, 0)
+}
 
   render() {
     return (

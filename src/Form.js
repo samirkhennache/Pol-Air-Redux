@@ -265,68 +265,39 @@ else {
     <BrowserRouter>
             <div>
             <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-            
+            <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                <TextField
+                    id="outlined-search"
+                    label="Votre ville"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange}
+                />
+                <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                    Rechercher
+                </Button>
+            </form>
             <Switch>
             <Route  exact path="/" render={(props)=>
                 <div>
-                <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                    <TextField
-                        id="outlined-search"
-                        label="Votre ville"
-                        type="search"
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        onChange={this.handleChange}
-                    />
-                    <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                        Rechercher
-                    </Button>
-                </form>
-                <Home {...this.state}/>
+                    <Home {...this.state}/>
                 </div>
             }/>
                 <Route path="/BlockForcastMeteo" render={props =>
                     <div>
-                        <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                            <TextField
-                                id="outlined-search"
-                                label="Votre ville"
-                                type="search"
-                                className={classes.textField}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={this.handleChange}
-                            />
-                            <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                                Rechercher
-                            </Button>
-                        </form>
-                        < BlockForcastMeteo {...this.state}/>
+                        <BlockForcastMeteo {...this.state}/>
                     </div>
                 } />            
                 <Route exact path="/HistoriquePollution" render ={props => 
                     <div>
-                        <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                            <TextField
-                                id="outlined-search"
-                                label="Votre ville"
-                                type="search"
-                                className={classes.textField}
-                                margin="normal"
-                                variant="outlined"
-                                onChange={this.handleChange}
-                            />
-                            <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                                Rechercher
-                            </Button>
-                        </form>
                         < PagePollution 
                             city={this.state.city} 
                             indice={this.state.dataPol} 
                             imgBackground={this.state.imgBackground} 
                             loading={this.state.loading}
-                            {...props} />
+                            {...this.state} />
                     </div>
                 }/>
                 <Route exact path="/*" render={(props)=><Page404 />}/>
