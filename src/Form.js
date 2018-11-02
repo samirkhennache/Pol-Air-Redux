@@ -173,29 +173,28 @@ class Form extends React.Component{
             const data_pol = await api_call_pol.json();
             if(api_call_pol.ok) {
             // setState
-        this.setState({
-            temperature : Math.floor(data.main.temp),
-            temp_min : data.main.temp_min,
-            temp_max : data.main.temp_max,
-            city: data.name,
-            humidityText : "Humidité",
-            humidity: data.main.humidity,
-            pourcentage : "%",
-            description: data.weather[0].description,
-            icon : data.weather[0].icon,
-            degre : "C°",
-            dataPol : data_pol.data.current.pollution.aqius,
-            imgBackground: data.weather[0].icon,
-            loading : false,
-            error: ""
-        })
-        this.getForecastMeteo(city)
-    }
-}
-else {
-    this.setState({error : true});
-    
-}
+                this.setState({
+                    temperature : Math.floor(data.main.temp),
+                    temp_min : data.main.temp_min,
+                    temp_max : data.main.temp_max,
+                    city: data.name,
+                    humidityText : "Humidité",
+                    humidity: data.main.humidity,
+                    pourcentage : "%",
+                    description: data.weather[0].description,
+                    icon : data.weather[0].icon,
+                    degre : "C°",
+                    dataPol : data_pol.data.current.pollution.aqius,
+                    imgBackground: data.weather[0].icon,
+                    loading : false,
+                    error: ""
+                })
+                this.getForecastMeteo(city)
+            }
+        }
+        else {
+        this.setState({ error : true,value :'Vérifiez votre saisie!'});
+        }
     }
 
     //Fetch ForecastMeteo
@@ -221,11 +220,9 @@ else {
               this.setState({
                 tempMin : temp_min,
                 tempMax: temp_max,
-                icon_forecast : iconForecast
-            })
+                icon_forecast : iconForecast})
             
             })
-      
         }
 
         getDateAddOne(day) {
@@ -262,105 +259,69 @@ else {
     const { classes } = this.props;
     return (
     <BrowserRouter>
-            <div>
-           <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-           
+        <div>
+            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
             <Switch>
-            <Route  exact path="/" render={(props)=>
-                <div>
-                <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                {!this.state.error&&<TextField
-                    id="outlined-search"
-                    label="Votre ville"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange} 
-                    value = {this.state.value}
-                />}
-                 {this.state.error&&<TextField
-                    error ={true}
-                    id="outlined-search"
-                    label="Veuillez verifier votre saisie !"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange}
-                    
-                     
-                />}
-                <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                    Rechercher
-                </Button>
-            </form>
-
-                <Home {...this.state}/>
-                </div>
-            }/>
-                <Route path="/BlockForcastMeteo" render={props =>
+                <Route  exact path="/" render={(props)=>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                {!this.state.error&&<TextField
-                    id="outlined-search"
-                    label="Votre ville"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange} 
-                    value = {this.state.value} 
-                />}
-                 {this.state.error&&<TextField
-                    error
-                    id="outlined-search"
-                    label="Veuillez verifier votre saisie !"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange}
-                     
-                />}
-                <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                    Rechercher
-                </Button>
-            </form>
-
+                            <TextField
+                                error ={this.state.error}
+                                id="outlined-search"
+                                label="Votre ville"
+                                type="search"
+                                className={classes.textField}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                                value = {this.state.value}
+                            />
+                            <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                                Rechercher
+                            </Button>
+                        </form>
+                        <Home {...this.state}/>
+                    </div>
+                }/>
+                <Route exact path="/BlockForcastMeteo" render={props =>
+                    <div>
+                        <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                            <TextField
+                                error ={this.state.error}
+                                id="outlined-search"
+                                label="Votre ville"
+                                type="search"
+                                className={classes.textField}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                                value = {this.state.value}
+                            />
+                            <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                                Rechercher
+                            </Button>
+                        </form>
                         < BlockForcastMeteo {...this.state}/>
                     </div>
                 } />            
                 <Route exact path="/HistoriquePollution" render ={props => 
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                {!this.state.error&&<TextField
-                    id="outlined-search"
-                    label="Votre ville"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange} 
-                    value = {this.state.value}
-                     
-                    
-                />}
-                 {this.state.error&&<TextField
-                    error
-                    id="outlined-search"
-                   label="Veuillez verifier votre saisie !"
-                    type="search"
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange}  
-                />}
-                <Button variant="contained" color="primary" type="submit" className={classes.button}>
-                    Rechercher
-                </Button>
-            </form>
-
+                            <TextField
+                                error ={this.state.error}
+                                id="outlined-search"
+                                label="Votre ville"
+                                type="search"
+                                className={classes.textField}
+                                margin="normal"
+                                variant="outlined"
+                                onChange={this.handleChange} 
+                                value = {this.state.value}
+                            />
+                            <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                                Rechercher
+                            </Button>
+                        </form>
                         < PagePollution 
                             city={this.state.city} 
                             indice={this.state.dataPol} 
@@ -374,8 +335,8 @@ else {
                 <Route exact path="/HistoriquePollution/*" render={(props)=><Page404 />}/>
             </Switch>
             <Footer />
-            </div>
-      </BrowserRouter>
+        </div>
+    </BrowserRouter>
     )
   }
 }
