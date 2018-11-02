@@ -21,8 +21,10 @@
 {
     .indiceDuJour-part2{
         flex-direction: column-reverse;
+        margin-bottom: 10px;
     }
     .indiceDuJour-part2-meteo {
         flex-direction: column;
+        margin-bottom: 10px;
     }
 }

@@ -12,6 +12,9 @@ import './home.css';
 
 class Home extends Component {
     state = {  }
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
     render() { 
         return ( 
 
