@@ -1,18 +1,20 @@
 import React from "react";
-import PagePollution from "../Pollution/PagePollution";
+import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import BlockForcastMeteo from './forcast/BlockForcastMeteo'
+import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
 import './form.css';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import NavBar from '../NavBar'
-import Home from './Home'
-import Page404 from '../Page404'
-import Footer from "../Footer";
+import NavBar from './components/NavBar'
+import Home from './components/meteo/Home'
 
+import Footer from "./components/Footer";
+import Page404 from './components/Page404';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+
 
 const styles = theme => ({
     container: {
@@ -42,7 +44,7 @@ const styles = theme => ({
     },
   });
 
-
+//const normalizecity = [city, city_district, locality, town, borough, municipality, village, hamlet, quarter, neighbourhood]
 
 // Clés API
 const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
@@ -55,7 +57,7 @@ const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 // fJ75xRvQChZAzF7qo -- clef Delph
 // Wu8scKsgzFQ8Md6Jv -- Clef Samir
 // 5tzeyxRv5omhmxG6P -- Clef paolo1
-// K7ozT4wzfP89xvNDj -- Clef paolo2
+// K7ozT4wzfP89xvNDj -- Clef paolo2 
 // FSirY4x7sshw6meaw -- Clef paolo3
 
 
@@ -103,38 +105,58 @@ class Form extends React.Component{
             if(this.state.loaded){
                 fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
                 .then(res => res.json())
-                .then(response => this.GetMeteoPollution(response.address.city,latitude,longitude) )
-                
+                .then(response => this.GetMeteoPollution(this.getCity(response.address),latitude,longitude) );
             }
-        })
-        
-    }        
+        })  
+    } 
+    getCity(address){
+        if(address.city !== undefined)
+            return(address.city);
+        else if(address.city_district !== undefined)
+            return(address.city_district);
+        else if(address.locality !== undefined)
+            return(address.locality);
+        else if(address.town !== undefined)
+            return(address.town);
+        else if(address.borough !== undefined)
+            return(address.borough);
+        else if(address.municipality !== undefined)
+            return(address.municipality);
+        else if(address.village !== undefined)
+            return(address.village);
+        else if(address.hamlet !== undefined)
+            return(address.hamlet);
+        else if(address.quarter !== undefined)
+            return(address.quarter);
+        else if(address.neighbourhood !== undefined)
+            return(address.neighbourhood);
+    } 
     //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
-    GetMeteoPollution(city,latitude,longitude){ 
-    const units = "&units=metric";
-    const lang = "&lang=fr";
-    
-    //fetch meteo
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`)
-    .then(res => res.json())
-    .then(response => 
+    GetMeteoPollution = async (city,latitude,longitude) =>{ 
+        const units = "&units=metric";
+        const lang = "&lang=fr";
+        //fetch meteo
+        let getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
+        const dataMeteo = await getFetchMeteo.json();
         this.setState({
-            temperature : Math.floor(response.main.temp),
-            city: response.name,
+            temperature : Math.floor(dataMeteo.main.temp),
+            city: dataMeteo.name,
             humidityText : "Humidité",
-            humidity:response.main.humidity,
+            humidity:dataMeteo.main.humidity,
             pourcentage: "%",
-            description: response.weather[0].description,
-            icon : response.weather[0].icon, //sert à afficher l'icone et le background.
-            imgBackground: response.weather[0].icon, //sert à afficher le background.
+            description: dataMeteo.weather[0].description,
+            icon : dataMeteo.weather[0].icon, //sert à afficher l'icone et le background.
+            imgBackground: dataMeteo.weather[0].icon, //sert à afficher le background.
             degre : "C°",
             loading: false,
             error: ""
-        }))
-       //fetch pollution
-        fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`)
-        .then(res => res.json())
-        .then(response => this.setState({ dataPol : response.data.current.pollution.aqius }))
+            })
+        //fetch pollution
+        let getFetchPollution = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`);
+        const dataPollution = await getFetchPollution.json();       
+        this.setState({ dataPol : dataPollution.data.current.pollution.aqius })  
+        
+        //**fetch forcatMeteo */
         this.getForecastMeteo(city)
     } 
 
@@ -174,12 +196,6 @@ else {
     this.setState({error : true});
     
 }
-    }
-
-    //Fetch city and country from JSON
-    getAllCity = async () => {
-        const data = await axios.get('')
-        console.log(data.data)
     }
 
     //Fetch ForecastMeteo
@@ -248,7 +264,44 @@ else {
     <BrowserRouter>
             <div>
            <NavBar accueil={this.Accueil} forecastmeteo={this.BlockForcastMeteo}  historiquePollution ={this.pollution}/>
-           <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+           
+            <Switch>
+            <Route  exact path="/" render={(props)=>
+                <div>
+                <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                {!this.state.error&&<TextField
+                    id="outlined-search"
+                    label="Votre ville"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange} 
+                    value = {this.state.value}
+                />}
+                 {this.state.error&&<TextField
+                    error ={true}
+                    id="outlined-search"
+                    label="Veuillez verifier votre saisie !"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange}
+                    
+                     
+                />}
+                <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                    Rechercher
+                </Button>
+            </form>
+
+                <Home {...this.state}/>
+                </div>
+            }/>
+                <Route path="/BlockForcastMeteo" render={props =>
+                    <div>
+                        <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                 {!this.state.error&&<TextField
                     id="outlined-search"
                     label="Votre ville"
@@ -258,8 +311,6 @@ else {
                     variant="outlined"
                     onChange={this.handleChange} 
                     value = {this.state.value} 
-                     
-                    
                 />}
                  {this.state.error&&<TextField
                     error
@@ -277,11 +328,50 @@ else {
                 </Button>
             </form>
 
-            <Switch>
-                <Route exact path="/" render={(props)=><Home {...this.state}/>}/>
-                <Route path="/BlockForcastMeteo" render={props => < BlockForcastMeteo {...this.state}/>} />            
-                <Route path="/HistoriquePollution" render ={props => < PagePollution city={this.state.city} indice={this.state.dataPol} imgBackground={this.state.imgBackground} loading={this.state.loading}{...props} />} />
-                <Route exact path="/*" component={Page404}/>
+                        < BlockForcastMeteo {...this.state}/>
+                    </div>
+                } />            
+                <Route exact path="/HistoriquePollution" render ={props => 
+                    <div>
+                        <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                {!this.state.error&&<TextField
+                    id="outlined-search"
+                    label="Votre ville"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange} 
+                    value = {this.state.value}
+                     
+                    
+                />}
+                 {this.state.error&&<TextField
+                    error
+                    id="outlined-search"
+                   label="Veuillez verifier votre saisie !"
+                    type="search"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange}  
+                />}
+                <Button variant="contained" color="primary" type="submit" className={classes.button}>
+                    Rechercher
+                </Button>
+            </form>
+
+                        < PagePollution 
+                            city={this.state.city} 
+                            indice={this.state.dataPol} 
+                            imgBackground={this.state.imgBackground} 
+                            loading={this.state.loading}
+                            {...props} />
+                    </div>
+                }/>
+                <Route exact path="/*" render={(props)=><Page404 />}/>
+                <Route exact path="/BlockForcastMeteo/*" render={(props)=><Page404 />}/>
+                <Route exact path="/HistoriquePollution/*" render={(props)=><Page404 />}/>
             </Switch>
             <Footer />
             </div>
