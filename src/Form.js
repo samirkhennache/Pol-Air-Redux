@@ -266,14 +266,12 @@ class Form extends React.Component{
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                             <TextField
-                                id="outlined-search"
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
                             />
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
@@ -286,14 +284,12 @@ class Form extends React.Component{
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                             <TextField
-                                id="outlined-search"
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
                             />
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
@@ -305,15 +301,13 @@ class Form extends React.Component{
                 <Route exact path="/HistoriquePollution" render ={props => 
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                            <TextField
-                                id="outlined-search"
+                            <TextField 
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
                             />
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
