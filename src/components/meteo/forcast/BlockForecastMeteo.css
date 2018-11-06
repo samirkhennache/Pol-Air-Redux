@@ -38,3 +38,11 @@
 .MeteoIcon{
     width: 50%;
 }
+
+@media all and (min-width: 900px){
+    .bloc-page-meteo{
+        width: 70%;
+        margin: auto;
+        margin-bottom: 15%;
+    }
+}

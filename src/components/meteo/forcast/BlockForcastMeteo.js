@@ -67,7 +67,7 @@ componentDidMount() {
 
   render() {
     return (
-      <div>
+      <div className="bloc-page-meteo">
         <div>
           {this.props.loading ? "En cours de chargement" : <Background imgBackground={this.props.imgBackground} />}
         </div>
