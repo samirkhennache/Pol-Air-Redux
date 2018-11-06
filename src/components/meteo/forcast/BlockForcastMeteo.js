@@ -73,13 +73,16 @@ componentDidMount() {
         </div>
         <BlockForecastMeteoNow className='blockMeteoNow' temperature={this.props.temperature} description={this.props.description} city={this.props.city}/>
         {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
-        <div>
-          {this.props.tempMin.map((x, index) => (
-             <div key={index} className='blockMeteo'>
-             <BlockForcastMeteoDate dateApp={index+1} />
-             <BlockIconForecast icon_forecast={this.props.icon_forecast[index]}/>
-             <BlockForecastMeteoTemp temp_min={this.props.tempMin[index]} temp_max={this.props.tempMax[index]} />
-           </div>
+        <div className='back-blockMeteo'>
+          {this.props.tempMin.map((x, index, t) => (
+            <div >
+              <div key={index} className='blockMeteo'>
+                <BlockForcastMeteoDate dateApp={index+1} />
+                <BlockIconForecast icon_forecast={this.props.icon_forecast[index]}/>
+                <BlockForecastMeteoTemp temp_min={this.props.tempMin[index]} temp_max={this.props.tempMax[index]} />   
+              </div>
+              {index !== t.length-1 ? <hr className="hr-meteo"/> : null }
+            </div>
           ))}
         </div>
       </div>
