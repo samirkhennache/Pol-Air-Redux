@@ -66,7 +66,7 @@ const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 const key = "588b34ef0ccd1ce25e0cd600e9e852fb"
 const unit = 'metric'
 const lang = 'fr'
-const url = 'http://api.openweathermap.org/data/2.5/forecast?q='
+const url = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
 // CLASS //////////////////////////////////////////////////////////////
 class Form extends React.Component{
@@ -136,7 +136,7 @@ class Form extends React.Component{
         const units = "&units=metric";
         const lang = "&lang=fr";
         //fetch meteo
-        let getFetchMeteo = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
+        let getFetchMeteo = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const dataMeteo = await getFetchMeteo.json();
         this.setState({
             temperature : Math.floor(dataMeteo.main.temp),
@@ -152,7 +152,7 @@ class Form extends React.Component{
             error: ""
             })
         //fetch pollution
-        let getFetchPollution = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`);
+        let getFetchPollution = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`);
         const dataPollution = await getFetchPollution.json();       
         this.setState({ dataPol : dataPollution.data.current.pollution.aqius })  
         
@@ -166,10 +166,10 @@ class Form extends React.Component{
         const units = "&units=metric";
         const lang = "&lang=fr";
         e.preventDefault();// eviter que la page se recharge  a chaque recherche.
-        const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
+        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
         const data = await api_call.json();
         if(api_call.ok){
-            const api_call_pol = await fetch(`http://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
+            const api_call_pol = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${data.coord.lat}&lon=${data.coord.lon}&key=${api_Key_Current_Pol}`);
             const data_pol = await api_call_pol.json();
             if(api_call_pol.ok) {
             // setState
@@ -187,13 +187,17 @@ class Form extends React.Component{
                     dataPol : data_pol.data.current.pollution.aqius,
                     imgBackground: data.weather[0].icon,
                     loading : false,
-                    error: ""
+                    error: "",
+                     
                 })
                 this.getForecastMeteo(city)
             }
+            
+
+         
         }
         else {
-        this.setState({ error : true,value :'Vérifiez votre saisie!'});
+        this.setState({ error : true });
         }
     }
 
@@ -256,6 +260,7 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+  
     const { classes } = this.props;
     return (
     <BrowserRouter>
@@ -265,16 +270,29 @@ class Form extends React.Component{
                 <Route  exact path="/" render={(props)=>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                            {!this.state.error &&
                             <TextField
-                                id="outlined-search"
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
@@ -285,16 +303,29 @@ class Form extends React.Component{
                 <Route exact path="/BlockForcastMeteo" render={props =>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                        {!this.state.error &&
                             <TextField
-                                id="outlined-search"
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
@@ -305,16 +336,29 @@ class Form extends React.Component{
                 <Route exact path="/HistoriquePollution" render ={props => 
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                        {!this.state.error &&
                             <TextField
-                                id="outlined-search"
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
-                                value = {this.state.value}
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
