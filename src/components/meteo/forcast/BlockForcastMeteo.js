@@ -75,7 +75,7 @@ componentDidMount() {
         {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
         <div className='back-blockMeteo'>
           {this.props.tempMin.map((x, index, t) => (
-            <div >
+            <div key={index} >
               <div key={index} className='blockMeteo'>
                 <BlockForcastMeteoDate dateApp={index+1} />
                 <BlockIconForecast icon_forecast={this.props.icon_forecast[index]}/>

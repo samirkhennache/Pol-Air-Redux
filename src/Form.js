@@ -187,13 +187,17 @@ class Form extends React.Component{
                     dataPol : data_pol.data.current.pollution.aqius,
                     imgBackground: data.weather[0].icon,
                     loading : false,
-                    error: ""
+                    error: "",
+                     
                 })
                 this.getForecastMeteo(city)
             }
+            
+
+         
         }
         else {
-        this.setState({ error : true,value :'Vérifiez votre saisie!'});
+        this.setState({ error : true });
         }
     }
 
@@ -256,6 +260,7 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+  
     const { classes } = this.props;
     return (
     <BrowserRouter>
@@ -265,6 +270,7 @@ class Form extends React.Component{
                 <Route  exact path="/" render={(props)=>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                            {!this.state.error &&
                             <TextField
                                 label="Votre ville"
                                 type="search"
@@ -272,7 +278,21 @@ class Form extends React.Component{
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
@@ -283,6 +303,7 @@ class Form extends React.Component{
                 <Route exact path="/BlockForcastMeteo" render={props =>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
+                        {!this.state.error &&
                             <TextField
                                 label="Votre ville"
                                 type="search"
@@ -290,7 +311,21 @@ class Form extends React.Component{
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
@@ -301,14 +336,29 @@ class Form extends React.Component{
                 <Route exact path="/HistoriquePollution" render ={props => 
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
-                            <TextField 
+                        {!this.state.error &&
+                            <TextField
                                 label="Votre ville"
                                 type="search"
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
                                 onChange={this.handleChange} 
+                                 
                             />
+                            }
+                            {this.state.error &&
+                            <TextField
+                            error
+                            label="Vérifiez votre saisie !"
+                            type="search"
+                            className={classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            onChange={this.handleChange} 
+                             
+                            />
+                            }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
