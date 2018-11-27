@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from 'react-redux';
+import {fetchGeolocation} from './actions/geolocActions';
 import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
@@ -57,7 +59,7 @@ const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 // fJ75xRvQChZAzF7qo -- clef Delph
 // Wu8scKsgzFQ8Md6Jv -- Clef Samir
 // 5tzeyxRv5omhmxG6P -- Clef paolo1
-// K7ozT4wzfP89xvNDj -- Clef paolo2 
+// K7ozT4wzfP89xvNDj -- Clef paolo2
 // FSirY4x7sshw6meaw -- Clef paolo3
 
 
@@ -70,7 +72,7 @@ const url = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
 // CLASS //////////////////////////////////////////////////////////////
 class Form extends React.Component{
-    
+
     // state
     state ={
         value: undefined,
@@ -88,51 +90,46 @@ class Form extends React.Component{
         tempMax: [],
         tempMin : [],
         icon_forecast : undefined,
-        loading: true, // permet de mettre en attente le chargement du background 
+        loading: true, // permet de mettre en attente le chargement du background
         imgBackground: undefined
     }
-    
+
     // Fetch Geoloc via IP
-    getLoc = async (e) => {
-        navigator.geolocation.getCurrentPosition(  (position) => {
-            const latitude =  position.coords.latitude;
-            const longitude =  position.coords.longitude;
-            //mettre a jour les states apres la recuperation des lat et long
-            this.setState({loaded :true});
-            ///si loaded = true lance le fetch pour recuperer le nom de la ville 
-            ///pour eviter de lancer le fetch  meteo avant la fin du fetch recuparation ville 
-            ///j'ai créer la fonction GetMetoePollution que j'ai appellé apres la recuperation des infos ville
-            if(this.state.loaded){
-                fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
-                .then(res => res.json())
-                .then(response => this.GetMeteoPollution(this.getCity(response.address),latitude,longitude) );
-            }
-        })  
-    } 
-    getCity(address){
-        if(address.city !== undefined)
-            return(address.city);
-        else if(address.city_district !== undefined)
-            return(address.city_district);
-        else if(address.locality !== undefined)
-            return(address.locality);
-        else if(address.town !== undefined)
-            return(address.town);
-        else if(address.borough !== undefined)
-            return(address.borough);
-        else if(address.municipality !== undefined)
-            return(address.municipality);
-        else if(address.village !== undefined)
-            return(address.village);
-        else if(address.hamlet !== undefined)
-            return(address.hamlet);
-        else if(address.quarter !== undefined)
-            return(address.quarter);
-        else if(address.neighbourhood !== undefined)
-            return(address.neighbourhood);
-    } 
+    // getLoc = async (e) => {
+    //     navigator.geolocation.getCurrentPosition(  (position) => {
+    //         const latitude =  position.coords.latitude;
+    //         const longitude =  position.coords.longitude;
+    //         //mettre a jour les states apres la recuperation des lat et long
+    //         console.log(latitude);
+
+
+
+    //     })
+    // }
+    // getCity(address){
+    //     if(address.city !== undefined)
+    //         return(address.city);
+    //     else if(address.city_district !== undefined)
+    //         return(address.city_district);
+    //     else if(address.locality !== undefined)
+    //         return(address.locality);
+    //     else if(address.town !== undefined)
+    //         return(address.town);
+    //     else if(address.borough !== undefined)
+    //         return(address.borough);
+    //     else if(address.municipality !== undefined)
+    //         return(address.municipality);
+    //     else if(address.village !== undefined)
+    //         return(address.village);
+    //     else if(address.hamlet !== undefined)
+    //         return(address.hamlet);
+    //     else if(address.quarter !== undefined)
+    //         return(address.quarter);
+    //     else if(address.neighbourhood !== undefined)
+    //         return(address.neighbourhood);
+    // }
     //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
-    GetMeteoPollution = async (city,latitude,longitude) =>{ 
+    GetMeteoPollution = async (city,latitude,longitude) =>{
         const units = "&units=metric";
         const lang = "&lang=fr";
         //fetch meteo
@@ -153,12 +150,12 @@ class Form extends React.Component{
             })
         //fetch pollution
         let getFetchPollution = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`);
-        const dataPollution = await getFetchPollution.json();       
-        this.setState({ dataPol : dataPollution.data.current.pollution.aqius })  
-        
+        const dataPollution = await getFetchPollution.json();
+        this.setState({ dataPol : dataPollution.data.current.pollution.aqius })
+
         //**fetch forcatMeteo */
         this.getForecastMeteo(city)
-    } 
+    }
 
     // Fetch SearchBar
     getData = async (e) => {
@@ -188,13 +185,13 @@ class Form extends React.Component{
                     imgBackground: data.weather[0].icon,
                     loading : false,
                     error: "",
-                     
+
                 })
                 this.getForecastMeteo(city)
             }
-            
 
-         
+
+
         }
         else {
         this.setState({ error : true });
@@ -211,7 +208,7 @@ class Form extends React.Component{
               for (let i = 1; i <= 4; i++) {
                 let temperature_min = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_min.push(Math.floor(Math.min(...temperature_min.map(x=> x.main.temp_min))))
-      
+
                 let temperature_max = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
                 temp_max.push(Math.floor(Math.max(...temperature_max.map(x=> x.main.temp_max))))
 
@@ -219,13 +216,13 @@ class Form extends React.Component{
                 iconForecast.push(Math.max(...icone_forecast.map(x=> x.weather[0].icon).slice(3,6).map(x => parseInt(x.slice(0,2), 10))))
 
               }
-                iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))             
-              
+                iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))
+
               this.setState({
                 tempMin : temp_min,
                 tempMax: temp_max,
                 icon_forecast : iconForecast})
-            
+
             })
         }
 
@@ -233,34 +230,35 @@ class Form extends React.Component{
             const n = this.getDate(day) + 86400
             return n
         }
-        
+
         getDate(day) {
             let d = new Date();
             let n = d.getTime() % 86400000
             let test = d.setTime(((d.getTime()-n)/1000)+86400*day)
             return test
         }
-        
+
 
     //Fin Fetch ForecastMeteo
 
     handleChange = (event) => {
         this.setState({value: event.target.value})
     }
-    
+
     componentDidMount(){
         //lance la methode getloc
-        this.getLoc()
+       // this.getLoc()
+        this.props.fetchGeolocation()
     }
 
     ///link en variable
     Accueil = props => <Link to="/" {...props} />
-    BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} /> 
-    pollution = props => <Link to="/HistoriquePollution" {...props} /> 
+    BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} />
+    pollution = props => <Link to="/HistoriquePollution" {...props} />
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
-  
+
     const { classes } = this.props;
     return (
     <BrowserRouter>
@@ -277,8 +275,8 @@ class Form extends React.Component{
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
-                                onChange={this.handleChange} 
-                                 
+                                onChange={this.handleChange}
+
                             />
                             }
                             {this.state.error &&
@@ -289,8 +287,8 @@ class Form extends React.Component{
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            onChange={this.handleChange} 
-                             
+                            onChange={this.handleChange}
+
                             />
                             }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
@@ -310,8 +308,8 @@ class Form extends React.Component{
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
-                                onChange={this.handleChange} 
-                                 
+                                onChange={this.handleChange}
+
                             />
                             }
                             {this.state.error &&
@@ -322,8 +320,8 @@ class Form extends React.Component{
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            onChange={this.handleChange} 
-                             
+                            onChange={this.handleChange}
+
                             />
                             }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
@@ -332,8 +330,8 @@ class Form extends React.Component{
                         </form>
                         < BlockForcastMeteo {...this.state}/>
                     </div>
-                } />            
-                <Route exact path="/HistoriquePollution" render ={props => 
+                } />
+                <Route exact path="/HistoriquePollution" render ={props =>
                     <div>
                         <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
                         {!this.state.error &&
@@ -343,8 +341,8 @@ class Form extends React.Component{
                                 className={classes.textField}
                                 margin="normal"
                                 variant="outlined"
-                                onChange={this.handleChange} 
-                                 
+                                onChange={this.handleChange}
+
                             />
                             }
                             {this.state.error &&
@@ -355,18 +353,18 @@ class Form extends React.Component{
                             className={classes.textField}
                             margin="normal"
                             variant="outlined"
-                            onChange={this.handleChange} 
-                             
+                            onChange={this.handleChange}
+
                             />
                             }
                             <Button variant="contained" color="primary" type="submit" className={classes.button}>
                                 Rechercher
                             </Button>
                         </form>
-                        < PagePollution 
-                            city={this.state.city} 
-                            indice={this.state.dataPol} 
-                            imgBackground={this.state.imgBackground} 
+                        < PagePollution
+                            city={this.state.city}
+                            indice={this.state.dataPol}
+                            imgBackground={this.state.imgBackground}
                             loading={this.state.loading}
                             {...this.state} />
                     </div>
@@ -382,4 +380,7 @@ class Form extends React.Component{
   }
 }
 
-export default withStyles(styles)(Form);
+const mapStateToProps = state =>({
+    city:state.city
+})
+export default connect(mapStateToProps,{fetchGeolocation})(withStyles(styles)(Form));

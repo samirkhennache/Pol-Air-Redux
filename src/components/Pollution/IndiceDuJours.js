@@ -3,6 +3,8 @@ import './IndiceDuJours.css'
 import IndicePollutionSolo from './IndicePollutionSolo'
 import SmileyPollution from './SmileyPollution'
 import ButtonPollution from './ButtonPollution'
+import {connect} from 'react-redux';
+import {GetPollution} from '../../actions/pollutionActions'
 
 
 
@@ -24,7 +26,7 @@ class IndiceDuJours extends Component {
         else
             return'tres-eleve'
     }
-    GetFrenchIndice = () => { 
+    GetFrenchIndice = () => {
         if(this.props.indice<=12)
             return 1
         else if(this.props.indice<=25)
@@ -48,11 +50,25 @@ class IndiceDuJours extends Component {
         else
             return 11
     }
-    
 
-    render() { 
+    componentDidMount() {
+
+
+        this.props.GetPollution(this.props.latitude,this.props.longitude)
+        console.log(this.props);
+
+
+
+
+    }
+    componentDidUpdate(){
+
+    }
+
+
+    render() {
         // const pagePollution = (props) => <PagePollution indice={this.props.indice} />
-        
+
        return(
         <div>
            <div className="indiceDuJour-index">
@@ -62,16 +78,21 @@ class IndiceDuJours extends Component {
                         <ButtonPollution className="button-indice-index"/>
                     </div>
                     <div className="indice-smiley">
-                        <div className="indice-smiley-child">{this.props.indice && <IndicePollutionSolo indice={this.props.indice}/>}</div>
-                        <div className="indice-smiley-child">{this.props.indice && <SmileyPollution indice={this.props.indice}/>}</div>               
+
+                        <div className="indice-smiley-child">{this.props.dataPol && <IndicePollutionSolo indice={this.props.dataPol}/>}</div>
+                        <div className="indice-smiley-child">{this.props.dataPol && <SmileyPollution indice={this.props.dataPol}/>}</div>
                     </div>
                </div>
             </div>
         </div>
         )
-        
+
 
     }
 }
- 
-export default IndiceDuJours;
+const mapStateToProps = state =>({
+    dataPol:state.pollutionReducer.dataPol,
+    dataCity : state.geolocReducer
+
+})
+export default connect(mapStateToProps,{GetPollution})(IndiceDuJours);
