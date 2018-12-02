@@ -1,3 +1,3 @@
-export const FETCH_GEOLOC = 'FETCH_GEOLOC';
+export const FETCH_FORCAST = 'FETCH_FORCAST';
 export const FETCH_POLLUTION = 'FETCH_POLLUTION';
 export const FETCH_METEO = 'FETCH_METEO';

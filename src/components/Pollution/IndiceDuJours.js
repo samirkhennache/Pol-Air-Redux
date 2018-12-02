@@ -53,9 +53,9 @@ class IndiceDuJours extends Component {
 
     componentDidMount() {
 
-
-        this.props.GetPollution(this.props.latitude,this.props.longitude)
         console.log(this.props);
+
+
 
 
 

@@ -1,11 +1,12 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {fetchGeolocation} from './actions/geolocActions';
+import {getFetchMeteo} from './actions/meteoActions';
+import {GetPollution} from './actions/pollutionActions';
+import {getForecastMeteo} from './actions/forcastMeteoAction';
 import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
 import './form.css';
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Home from './components/meteo/Home'
@@ -63,12 +64,7 @@ const api_Key_Current_Pol = "Wu8scKsgzFQ8Md6Jv";
 // FSirY4x7sshw6meaw -- Clef paolo3
 
 
-//Api Forecast
 
-const key = "588b34ef0ccd1ce25e0cd600e9e852fb"
-const unit = 'metric'
-const lang = 'fr'
-const url = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
 // CLASS //////////////////////////////////////////////////////////////
 class Form extends React.Component{
@@ -94,69 +90,22 @@ class Form extends React.Component{
         imgBackground: undefined
     }
 
-    // Fetch Geoloc via IP
-    // getLoc = async (e) => {
-    //     navigator.geolocation.getCurrentPosition(  (position) => {
-    //         const latitude =  position.coords.latitude;
-    //         const longitude =  position.coords.longitude;
-    //         //mettre a jour les states apres la recuperation des lat et long
-    //         console.log(latitude);
-
-
-
-    //     })
-    // }
-    // getCity(address){
-    //     if(address.city !== undefined)
-    //         return(address.city);
-    //     else if(address.city_district !== undefined)
-    //         return(address.city_district);
-    //     else if(address.locality !== undefined)
-    //         return(address.locality);
-    //     else if(address.town !== undefined)
-    //         return(address.town);
-    //     else if(address.borough !== undefined)
-    //         return(address.borough);
-    //     else if(address.municipality !== undefined)
-    //         return(address.municipality);
-    //     else if(address.village !== undefined)
-    //         return(address.village);
-    //     else if(address.hamlet !== undefined)
-    //         return(address.hamlet);
-    //     else if(address.quarter !== undefined)
-    //         return(address.quarter);
-    //     else if(address.neighbourhood !== undefined)
-    //         return(address.neighbourhood);
-    // }
-    //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
-    GetMeteoPollution = async (city,latitude,longitude) =>{
-        const units = "&units=metric";
-        const lang = "&lang=fr";
-        //fetch meteo
-        let getFetchMeteo = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
-        const dataMeteo = await getFetchMeteo.json();
-        this.setState({
-            temperature : Math.floor(dataMeteo.main.temp),
-            city: dataMeteo.name,
-            humidityText : "Humidité",
-            humidity:dataMeteo.main.humidity,
-            pourcentage: "%",
-            description: dataMeteo.weather[0].description,
-            icon : dataMeteo.weather[0].icon, //sert à afficher l'icone et le background.
-            imgBackground: dataMeteo.weather[0].icon, //sert à afficher le background.
-            degre : "C°",
-            loading: false,
-            error: ""
-            })
-        //fetch pollution
-        let getFetchPollution = await fetch(`https://api.airvisual.com/v2/nearest_city?lat=${latitude}&lon=${longitude}&key=${api_Key_Current_Pol}`);
-        const dataPollution = await getFetchPollution.json();
-        this.setState({ dataPol : dataPollution.data.current.pollution.aqius })
-
-        //**fetch forcatMeteo */
-        this.getForecastMeteo(city)
+    //Fetch Geoloc via IP
+    getLoc = () => {
+        navigator.geolocation.getCurrentPosition(  (position) => {
+            const latitude =  position.coords.latitude;
+            const longitude =  position.coords.longitude;
+            //mettre a jour les states apres la recuperation des lat et long
+            console.log(latitude);
+            this.props.GetPollution(latitude,longitude)
+              fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
+		.then(getFetchGeoLoc => getFetchGeoLoc.json())
+		.then(data =>{
+            this.props.getFetchMeteo(data)
+            this.props.getForecastMeteo(data)
+        })
+        })
     }
-
     // Fetch SearchBar
     getData = async (e) => {
         let city = this.state.value;
@@ -190,65 +139,18 @@ class Form extends React.Component{
                 this.getForecastMeteo(city)
             }
 
-
-
         }
         else {
         this.setState({ error : true });
         }
     }
-
-    //Fetch ForecastMeteo
-    getForecastMeteo = (city) => {
-      axios.get(`${url}${city}&lang=${lang}&APPID=${key}&units=${unit}`)
-            .then(res => {
-              let temp_min = []
-              let temp_max = []
-              let iconForecast = []
-              for (let i = 1; i <= 4; i++) {
-                let temperature_min = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
-                temp_min.push(Math.floor(Math.min(...temperature_min.map(x=> x.main.temp_min))))
-
-                let temperature_max = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
-                temp_max.push(Math.floor(Math.max(...temperature_max.map(x=> x.main.temp_max))))
-
-                let icone_forecast = res.data.list.filter((x) => x.dt >= this.getDate(i)  &&  x.dt <= this.getDateAddOne(i))
-                iconForecast.push(Math.max(...icone_forecast.map(x=> x.weather[0].icon).slice(3,6).map(x => parseInt(x.slice(0,2), 10))))
-
-              }
-                iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))
-
-              this.setState({
-                tempMin : temp_min,
-                tempMax: temp_max,
-                icon_forecast : iconForecast})
-
-            })
-        }
-
-        getDateAddOne(day) {
-            const n = this.getDate(day) + 86400
-            return n
-        }
-
-        getDate(day) {
-            let d = new Date();
-            let n = d.getTime() % 86400000
-            let test = d.setTime(((d.getTime()-n)/1000)+86400*day)
-            return test
-        }
-
-
-    //Fin Fetch ForecastMeteo
-
     handleChange = (event) => {
         this.setState({value: event.target.value})
     }
-
     componentDidMount(){
         //lance la methode getloc
-       // this.getLoc()
-        this.props.fetchGeolocation()
+        this.getLoc()
+       // this.props.fetchGeolocation()
     }
 
     ///link en variable
@@ -258,6 +160,8 @@ class Form extends React.Component{
 
   // RENDER ////////////////////////////////////////////////////////////
   render() {
+    console.log("stores form == ",this.props);
+
 
     const { classes } = this.props;
     return (
@@ -295,7 +199,7 @@ class Form extends React.Component{
                                 Rechercher
                             </Button>
                         </form>
-                        <Home {...this.state}/>
+                   <Home {...this.state}/>
                     </div>
                 }/>
                 <Route exact path="/BlockForcastMeteo" render={props =>
@@ -369,9 +273,9 @@ class Form extends React.Component{
                             {...this.state} />
                     </div>
                 }/>
-                <Route exact path="/*" render={(props)=><Page404 />}/>
-                <Route exact path="/BlockForcastMeteo/*" render={(props)=><Page404 />}/>
-                <Route exact path="/HistoriquePollution/*" render={(props)=><Page404 />}/>
+                <Route  component={Page404}/>
+                {/* <Route exact path="/BlockForcastMeteo/*" render={(props)=><Page404 />}/>
+                <Route exact path="/HistoriquePollution/*" render={(props)=><Page404 />}/> */}
             </Switch>
             <Footer />
         </div>
@@ -381,6 +285,9 @@ class Form extends React.Component{
 }
 
 const mapStateToProps = state =>({
-    city:state.city
+    dataForcastMeteo :state.forcastMeteoReducer,
+    dataMeteo :state.meteoReducer,
+    dataPol :state.pollutionReducer
+
 })
-export default connect(mapStateToProps,{fetchGeolocation})(withStyles(styles)(Form));
+export default connect(mapStateToProps,{getFetchMeteo,GetPollution,getForecastMeteo})(withStyles(styles)(Form));

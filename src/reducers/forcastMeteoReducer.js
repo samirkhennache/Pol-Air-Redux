@@ -1,15 +1,12 @@
-import  {FETCH_POLLUTION} from '../actions/types'
-
-
+import  {FETCH_FORCAST} from '../actions/types'
 const initialState ={};
 
 export default (state = initialState,action) =>{
     switch (action.type) {
-        case FETCH_POLLUTION:
+        case FETCH_FORCAST:
         return {
             ...state,
-            dataPol :action.payLoad
-
+            dataForcastMeteo :action.payLoad
         }
         default:
             return state

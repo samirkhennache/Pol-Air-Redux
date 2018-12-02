@@ -5,7 +5,11 @@ const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
 //588b34ef0ccd1ce25e0cd600e9e852fb -- clef de Delph
 //0f53c26a9c88a54d8706c8b3c9d2b880 -- clef de quelqu'un
 //methode GetMeteoPollution qui lance le fetch de meteo et la pollution
-export const GetMeteoPollution = (city)=> dispatch =>{
+export const  getFetchMeteo= (data)=> dispatch =>{
+    console.log(data);
+
+    const city = getCity(data.address)
+
     const units = "&units=metric";
     const lang = "&lang=fr";
     //fetch meteo
@@ -26,3 +30,30 @@ export const GetMeteoPollution = (city)=> dispatch =>{
         }
     }))
     }
+
+
+
+
+
+const getCity = (address) =>{
+if(address.city !== undefined)
+        return(address.city);
+else if(address.city_district !== undefined)
+        return(address.city_district);
+else if(address.locality !== undefined)
+        return(address.locality);
+else if(address.town !== undefined)
+        return(address.town);
+else if(address.borough !== undefined)
+        return(address.borough);
+else if(address.municipality !== undefined)
+        return(address.municipality);
+else if(address.village !== undefined)
+        return(address.village);
+else if(address.hamlet !== undefined)
+        return(address.hamlet);
+else if(address.quarter !== undefined)
+        return(address.quarter);
+else if(address.neighbourhood !== undefined)
+        return(address.neighbourhood);
+}
