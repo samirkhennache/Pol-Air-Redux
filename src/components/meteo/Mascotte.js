@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux';
 // import des mascottes
 import normal from '../../img/01_Mascotte_normal.svg';
 import pluie from '../../img/02_Mascotte_pluie.svg';
@@ -15,20 +16,21 @@ class Mascotte extends React.Component {
 
     // Conditions d'affichage de la mascotte avec Haute pollution en priorité
     getBear() {
+        console.log("mascotte",this.props);
 
-        if(this.props.imgBackground.endsWith('n'))
+        if(this.props.dataMeteo.imgBackground.endsWith('n'))
             return nuit
-        else if(this.props.dataPol>=150)
+        else if(this.props.dataMeteo.dataPol>=150)
             return pollution
-        else if(this.props.temperature<=0)
+        else if(this.props.dataMeteo.temperature<=0)
             return glacial
-        else if(this.props.temperature>=30)
+        else if(this.props.dataMeteo.temperature>=30)
             return canicule
-        else if(this.props.description.includes('pluie'))
+        else if(this.props.dataMeteo.description.includes('pluie'))
             return pluie
-        else if(this.props.temperature<=10)
+        else if(this.props.dataMeteo.temperature<=10)
             return froid
-        else if(this.props.temperature>=20)
+        else if(this.props.dataMeteo.temperature>=20)
             return chaud
         else{
             return normal
@@ -36,13 +38,15 @@ class Mascotte extends React.Component {
     }
 
 
-    render() { 
-        return ( 
+    render() {
+        return (
             <div className="mascotte-border">
                 <img src={this.getBear()} alt="Mascotte du jour" style={{ height: "30vh" }}/>
             </div>
         )
     }
 }
-    
-export default Mascotte;
+const mapStateToProps = state =>({
+    dataMeteo :state.meteoReducer.dataMeteo,
+})
+export default connect(mapStateToProps)(Mascotte);

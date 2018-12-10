@@ -27,6 +27,7 @@ export const  getFetchMeteo= (data)=> dispatch =>{
             icon : dataMeteo.weather[0].icon, //sert à afficher l'icone et le background.
             imgBackground: dataMeteo.weather[0].icon, //sert à afficher le background.
             degre : "C°",
+            loaded : true
         }
     }))
     }
