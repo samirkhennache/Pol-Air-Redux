@@ -5,6 +5,7 @@ import Drawer from "@material-ui/core/Drawer";
 import MenuIcon from "@material-ui/icons/Menu";
 import { IconButton } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
+import { Link } from 'react-router-dom'
 
 const styles = {
   list: {
@@ -28,43 +29,45 @@ class OpenMenu extends React.Component {
       [side]: open
     });
   };
+  Accueil = props => <Link to="/" {...props} />
+  BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} />
+  Pollution = props => <Link to="/HistoriquePollution" {...props} />
+render() {
+  const { classes } = this.props;
 
-  render() {
-    const { classes } = this.props;
+  const sideList = (
+    <div className={classes.list}>
+      <ListItem component={this.Accueil} button>Accueil</ListItem>
+      <ListItem component={this.BlockForcastMeteo} button>Prévisions météo</ListItem>
+      <ListItem component ={this.Pollution} button>Historique pollution</ListItem>
+    </div>
+  );
 
-    const sideList = (
-      <div className={classes.list}>
-        <ListItem component={this.props.openAccueil} button>Accueil</ListItem>
-        <ListItem component={this.props.openForeCastMeteo} button>Prévisions météo</ListItem>
-        <ListItem component ={this.props.openHistoriquePollution} button>Historique pollution</ListItem>
-      </div>
-    );
+  return (
+    <div>
+      <IconButton
+        className={classes.menuButton}
+        color="inherit"
+        aria-label="Menu"
+        onClick={this.toggleDrawer("left", true)}
+      >
+        <MenuIcon />
+      </IconButton>
 
-    return (
-      <div>
-        <IconButton
-          className={classes.menuButton}
-          color="inherit"
-          aria-label="Menu"
-          onClick={this.toggleDrawer("left", true)}
+      <Drawer
+        open={this.state.left}
+        onClose={this.toggleDrawer("left", false)}
+      >
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={this.toggleDrawer("left", false)}
+          onKeyDown={this.toggleDrawer("left", false)}
         >
-          <MenuIcon />
-        </IconButton>
-
-        <Drawer
-          open={this.state.left}
-          onClose={this.toggleDrawer("left", false)}
-        >
-          <div
-            tabIndex={0}
-            role="button"
-            onClick={this.toggleDrawer("left", false)}
-            onKeyDown={this.toggleDrawer("left", false)}
-          >
-            {sideList}
-          </div>
-        </Drawer>
-      </div>
+          {sideList}
+        </div>
+      </Drawer>
+    </div>
     );
   }
 }

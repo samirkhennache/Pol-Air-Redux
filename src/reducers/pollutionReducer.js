@@ -17,13 +17,13 @@ export default (state = initialState, action) => {
         case FETCH_POLLUTION_STARTED:
             return {
                 ...state,
-                loading:true
+                loadingPollution:true
 
             }
         case FETCH_POLLUTION_SUCCESS:
             return {
                 ...state,
-                loading:false,
+                loadingPollution:false,
                 loadedPollution :true,
                 dataPol: action.payload
 
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         case FETCH_POLLUTION_FAILURE:
             return {
                 ...state,
-                loading:false,
+               
                 error: action.payload.error
 
             }

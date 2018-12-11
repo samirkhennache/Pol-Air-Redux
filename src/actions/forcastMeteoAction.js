@@ -38,6 +38,30 @@ export const getForecastMeteo = (data) => dispatch => {
 		})
 		.catch(err => dispatch(fetchForcastMeteoFailure(err.message)))
 }
+export const getForecastMeteoCity = (city) => dispatch => {
+	dispatch(fetchForcastMeteoStarted());
+	axios.get(`${url}${city}&lang=${lang}&APPID=${key}&units=${unit}`)
+		.then(res => {
+			let temp_min = []
+			let temp_max = []
+			let iconForecast = []
+			for (let i = 1; i <= 4; i++) {
+				let temperature_min = res.data.list.filter((x) => x.dt >= getDate(i) && x.dt <= getDateAddOne(i))
+				temp_min.push(Math.floor(Math.min(...temperature_min.map(x => x.main.temp_min))))
+
+				let temperature_max = res.data.list.filter((x) => x.dt >= getDate(i) && x.dt <= getDateAddOne(i))
+				temp_max.push(Math.floor(Math.max(...temperature_max.map(x => x.main.temp_max))))
+
+				let icone_forecast = res.data.list.filter((x) => x.dt >= getDate(i) && x.dt <= getDateAddOne(i))
+				iconForecast.push(Math.max(...icone_forecast.map(x => x.weather[0].icon).slice(3, 6).map(x => parseInt(x.slice(0, 2), 10))))
+
+			}
+			iconForecast = iconForecast.map(x => x < 10 ? ("0" + x + "d") : (x + "d"))
+
+			dispatch(fetchForcastMeteoSuccess(temp_min, temp_max,iconForecast))
+		})
+		.catch(err => dispatch(fetchForcastMeteoFailure(err.message)))
+}
 
 const fetchForcastMeteoSuccess = (temp_min, temp_max,iconForecast) => ({
 	type: FETCH_FORCAST_SUCCESS,

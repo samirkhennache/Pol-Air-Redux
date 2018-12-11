@@ -41,12 +41,13 @@ class Mascotte extends React.Component {
     render() {
         return (
             <div className="mascotte-border">
-                <img src={this.getBear()} alt="Mascotte du jour" style={{ height: "30vh" }}/>
+               {this.props.loadedMeteo&& <img src={this.getBear()} alt="Mascotte du jour" style={{ height: "30vh" }}/>}
             </div>
         )
     }
 }
 const mapStateToProps = state =>({
     dataMeteo :state.meteoReducer.dataMeteo,
+    loadedMeteo: state.meteoReducer.loadedMeteo
 })
 export default connect(mapStateToProps)(Mascotte);

@@ -4,11 +4,13 @@ import { Grid } from '@material-ui/core';
 //import PrintSearch from './current/PrintSearch'
 import MeteoDuJours from '../Pollution/MeteoDuJours'
 import Background from './current/Background';
-import IndiceDuJours from '../Pollution/IndiceDuJours'
+import IndiceDuJours from '../Pollution/IndiceDuJours';
+import Form from '../../Form'
 //import Titles from '../Titles';
 import DateIndex from '../date/DateIndex';
 import Mascotte from './Mascotte';
 import './home.css';
+
 
 
 class Home extends Component {
@@ -33,7 +35,7 @@ render() {
 	return (
 
 			<div className="home-container">
-
+					<Form />
 					<Grid container align-items="center" > {/*Container global*/}
 							<Grid item xs={12} md={7} className="test-border">
 									<Grid item container className="home-opacity" justify-content ="space-beetween" direction="row" align-items="center"> {/*Container logo + city + date + description*/}
@@ -43,8 +45,6 @@ render() {
 											<Grid item container xs={7} md={8} direction="column" justify="space-around" align='right' alignItems="flex-end" className="main-main"> {/*Container city + date + description*/}
 															<div className="bloc-city-date">
 																	<div className="bloc-city">
-																	{console.log( " near my div ",this.props.dataMeteo)}
-																	{console.log( " near my div city ",this.props.dataMeteo.city)}
 																		<div className={`city-all-pages${this.getClasseName()}`}>{this.props.dataMeteo.city}</div>
 																	</div>
 																	<div className="date-all-page"><DateIndex /></div>
@@ -64,7 +64,7 @@ render() {
 					</Grid>
 
 					<div>
-							<Background imgBackground={this.props.dataMeteo.imgBackground} />
+				{this.props.loadedMeteo && this.props.loadedPollution&&<Background imgBackground={this.props.dataMeteo.imgBackground} />}
 					</div>
 
 			</div>
@@ -82,7 +82,7 @@ const mapStateToProps = state =>({
 	loadedMeteo :state.meteoReducer.loadedMeteo,
 	dataMeteo :state.meteoReducer.dataMeteo,
 	dataPol:state.pollutionReducer.dataPol,
-	loadedPollution :state.meteoReducer.loadedPollution,
+	loadedPollution :state.pollutionReducer.loadedPollution,
 
 })
 export default connect(mapStateToProps)(Home);

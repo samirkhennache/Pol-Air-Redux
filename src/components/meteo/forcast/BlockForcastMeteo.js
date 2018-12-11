@@ -6,6 +6,7 @@ import './BlockForecastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
 import BlockForecastMeteoNow from './BlockForecastMeteoNow';
 import Background from '../current/Background';
+import Form from '../../../Form';
 
 
 
@@ -26,6 +27,7 @@ componentDidMount() {
         <div>
         <Background imgBackground={this.props.dataMeteo.imgBackground} />
         </div>
+        <Form />
         <BlockForecastMeteoNow className='blockMeteoNow' temperature={this.props.dataMeteo.temperature} description={this.props.dataMeteo.description} city={this.props.dataMeteo.city}/>
         {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
         <div className='back-blockMeteo'>
