@@ -18,11 +18,11 @@ class App extends Component {
 
 	getLoc = () => {
 		navigator.geolocation.getCurrentPosition(  (position) => {
-				const latitude =  position.coords.latitude;
-				const longitude =  position.coords.longitude;
-				//mettre a jour les states apres la recuperation des lat et long
-				this.props.getPollution(latitude,longitude)
-					fetch(`${URL}${latitude}&lon=${longitude}&format=json`)
+			const latitude =  position.coords.latitude;
+			const longitude =  position.coords.longitude;
+			//mettre a jour les states apres la recuperation des lat et long
+			this.props.getPollution(latitude,longitude)
+				fetch(`${URL}${latitude}&lon=${longitude}&format=json`)
 	.then(getFetchGeoLoc => getFetchGeoLoc.json())
 	.then(data =>{
 		this.props.getFetchMeteo(data)
@@ -30,13 +30,11 @@ class App extends Component {
 			})
 		})
 	}
-
     componentDidMount(){
 			this.getLoc()
     }
-
-    render() {
-        return (
+	render() {
+		return (
 			<BrowserRouter>
         <div>
 					<NavBar />
@@ -49,8 +47,8 @@ class App extends Component {
 					<Footer />
         </div>
     </BrowserRouter>
-         );
-    }
+    );
+  }
 }
 const mapStateToProps = state =>({
     dataForcastMeteo :state.forcastMeteoReducer,
