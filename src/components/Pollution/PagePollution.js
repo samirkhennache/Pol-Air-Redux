@@ -5,7 +5,7 @@ import HistoriquePollution from './HistoriquePollution'
 import PagePollutionToday from './PagePollutionToday'
 import './pagePollution.css'
 import BlocPolluants from './BlocPolluants';
-import Form from '../../Form'
+import Form from '../form/Form'
 class PagePollution extends Component {
 
     componentDidMount() {

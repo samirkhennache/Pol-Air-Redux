@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {getFetchMeteoCity} from './actions/meteoActions';
-import {getPollution} from './actions/pollutionActions';
-import {getForecastMeteoCity} from './actions/forcastMeteoAction';
+import {getFetchMeteoCity} from '../../actions/meteoActions';
+import {getPollution} from '../../actions/pollutionActions';
+import {getForecastMeteoCity} from '../../actions/forcastMeteoAction';
 
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';

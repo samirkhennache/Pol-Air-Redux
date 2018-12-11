@@ -5,7 +5,7 @@ import { Grid } from '@material-ui/core';
 import MeteoDuJours from '../Pollution/MeteoDuJours'
 import Background from './current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours';
-import Form from '../../Form'
+import Form from '../form/Form'
 //import Titles from '../Titles';
 import DateIndex from '../date/DateIndex';
 import Mascotte from './Mascotte';

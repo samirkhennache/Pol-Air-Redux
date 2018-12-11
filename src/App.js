@@ -7,10 +7,10 @@ import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
 import './form.css';
-import NavBar from './components/NavBar'
+import NavBar from './menu/NavBar'
 import Home from './components/meteo/Home'
-import Footer from "./components/Footer";
-import Page404 from './components/Page404';
+import Footer from "./footer/Footer";
+import Page404 from './components/page404/Page404';
 
 
 const URL ="https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat="

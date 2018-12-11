@@ -6,7 +6,7 @@ import './BlockForecastMeteo.css'
 import BlockIconForecast from './BlockIconForecast';
 import BlockForecastMeteoNow from './BlockForecastMeteoNow';
 import Background from '../current/Background';
-import Form from '../../../Form';
+import Form from '../../form/Form';
 
 
 
