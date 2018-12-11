@@ -47,38 +47,37 @@ const api_Key_Current_Weather = "588b34ef0ccd1ce25e0cd600e9e852fb";
 class Form extends React.Component{
 
     // state
-    state ={
-        error: false,
-        value:""
-    }
+  state ={
+      error: false,
+      value:""
+  }
     // Fetch SearchBar
-    getData = async (e) => {
-        let city = this.state.value
-        const units = "&units=metric";
-        const lang = "&lang=fr";
-        e.preventDefault();// eviter que la page se recharge  a chaque recherche.
-        const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
-        const data = await api_call.json();
-        if(api_call.ok){
-            this.props.getPollution(data.coord.lat,data.coord.lon)
-            this.props.getFetchMeteoCity(city)
-            this.props.getForecastMeteoCity(city)
-            this.setState({ error : false });
-        }
-        else {
-        this.setState({ error : true });
-        }
-    }
+  getData = async (e) => {
+      let city = this.state.value
+      const units = "&units=metric";
+      const lang = "&lang=fr";
+      e.preventDefault();// eviter que la page se recharge  a chaque recherche.
+      const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}${units}${lang}&APPID=${api_Key_Current_Weather}`);
+      const data = await api_call.json();
+      if(api_call.ok){
+          this.props.getPollution(data.coord.lat,data.coord.lon)
+          this.props.getFetchMeteoCity(city)
+          this.props.getForecastMeteoCity(city)
+          this.setState({ error : false });
+      }
+      else {
+      this.setState({ error : true });
+      }
+  }
 
-    handleChange =(e) =>{
-      this.setState({value :e.target.value})
-    }
+  handleChange =(e) =>{
+    this.setState({value :e.target.value})
+  }
 
   // RENDER ////////////////////////////////////////////////////////////
-  render() {
-    const { classes } = this.props;
-    return (
-
+render() {
+  const { classes } = this.props;
+  return (
     <form className="{classes.container} form-center" noValidate autoComplete="off" onSubmit ={this.getData}>
         {!this.state.error &&
         <TextField
@@ -105,7 +104,6 @@ class Form extends React.Component{
             Rechercher
         </Button>
     </form>
-
     )
   }
 }

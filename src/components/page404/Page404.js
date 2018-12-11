@@ -1,17 +1,17 @@
 import React from 'react';
-import error from './../img/404.svg';
+import error from './../../img/404.svg';
 
 const Page404 = () => {
 
     return (
-        
+
         <div
             style={{
 		        height:'100vh',
 	        }}>
 
-            <img 
-                src={error} 
+            <img
+                src={error}
                 style={{
                 maxHeight:'80vh',
                 maxWidth: '80vw',
@@ -20,10 +20,10 @@ const Page404 = () => {
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 marginTop: '5vh'
-		        }} 
-                alt="error404" 
+		        }}
+                alt="error404"
             />
-            
+
         </div>
     )
 }

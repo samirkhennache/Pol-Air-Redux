@@ -6,16 +6,22 @@ import {getForecastMeteo,getForecastMeteoCity} from './actions/forcastMeteoActio
 import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
-import './form.css';
-import NavBar from './menu/NavBar'
+import './components/form/form.css'
+import NavBar from './components/menu/NavBar'
 import Home from './components/meteo/Home'
-import Footer from "./footer/Footer";
+import Footer from "./components/footer/Footer";
 import Page404 from './components/page404/Page404';
 
 
 const URL ="https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat="
 class App extends Component {
-
+	/**
+	 * get the lat and long using the API
+	 * trigger the actions :
+	 * getFetchMeteo
+	 * getPollution
+	 * getForecastMeteo
+	 */
 	getLoc = () => {
 		navigator.geolocation.getCurrentPosition(  (position) => {
 			const latitude =  position.coords.latitude;
@@ -30,9 +36,9 @@ class App extends Component {
 			})
 		})
 	}
-    componentDidMount(){
-			this.getLoc()
-    }
+	componentDidMount(){
+		this.getLoc()
+	}
 	render() {
 		return (
 			<BrowserRouter>

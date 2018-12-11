@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import OpenMenu from './OpenMenu'
-import Logo_PolAir_Blanc from '../img/Logo_PolAir_Blanc.svg';
+import OpenMenu from './OpenMenu';
+import Logo_PolAir_Blanc from '../../img/Logo_PolAir_Blanc.svg';
 import './NavBar.css';
 import { Link } from 'react-router-dom'
 

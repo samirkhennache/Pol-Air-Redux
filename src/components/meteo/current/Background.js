@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './Background.css';
 
 /*
@@ -9,19 +8,15 @@ de l'image correspondante.
 */
 
 const Background = ({imgBackground}) => {
-
-    return (
-
-        <div>
-
-            <img
-                src={require(`../../../img/backgrounds/bkg${imgBackground}.jpg`)}
-                className="meteoBackground"
-                alt="Temps actuel"
-            />
-
-        </div>
-    )
+  return (
+    <div>
+      <img
+        src={require(`../../../img/backgrounds/bkg${imgBackground}.jpg`)}
+        className="meteoBackground"
+        alt="Temps actuel"
+      />
+    </div>
+  )
 }
 
 export default Background;
