@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
 import {getFetchMeteo} from './actions/meteoActions';
-import {GetPollution} from './actions/pollutionActions';
+import {getPollution} from './actions/pollutionActions';
 import {getForecastMeteo} from './actions/forcastMeteoAction';
 import PagePollution from "./components/Pollution/PagePollution";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
@@ -97,7 +97,7 @@ class Form extends React.Component{
             const longitude =  position.coords.longitude;
             //mettre a jour les states apres la recuperation des lat et long
             console.log(latitude);
-            this.props.GetPollution(latitude,longitude)
+            this.props.getPollution(latitude,longitude)
               fetch(`https://eu1.locationiq.com/v1/reverse.php?key=311b5ecb2cf7bc&lat=${latitude}&lon=${longitude}&format=json`)
 		.then(getFetchGeoLoc => getFetchGeoLoc.json())
 		.then(data =>{
@@ -232,7 +232,7 @@ class Form extends React.Component{
                                 Rechercher
                             </Button>
                         </form>
-                        < BlockForcastMeteo {...this.state}/>
+                        < BlockForcastMeteo/>
                     </div>
                 } />
                 <Route exact path="/HistoriquePollution" render ={props =>
@@ -265,17 +265,10 @@ class Form extends React.Component{
                                 Rechercher
                             </Button>
                         </form>
-                        < PagePollution
-                            city={this.state.city}
-                            indice={this.state.dataPol}
-                            imgBackground={this.state.imgBackground}
-                            loading={this.state.loading}
-                            {...this.state} />
+                        < PagePollution />
                     </div>
                 }/>
                 <Route  component={Page404}/>
-                {/* <Route exact path="/BlockForcastMeteo/*" render={(props)=><Page404 />}/>
-                <Route exact path="/HistoriquePollution/*" render={(props)=><Page404 />}/> */}
             </Switch>
             <Footer />
         </div>
@@ -290,4 +283,4 @@ const mapStateToProps = state =>({
     dataPol :state.pollutionReducer
 
 })
-export default connect(mapStateToProps,{getFetchMeteo,GetPollution,getForecastMeteo})(withStyles(styles)(Form));
+export default connect(mapStateToProps,{getFetchMeteo,getPollution,getForecastMeteo})(withStyles(styles)(Form));

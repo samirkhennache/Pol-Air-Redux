@@ -3,7 +3,7 @@ import './indice-pollution-solo.css'
 
 class  IndicePollutionSolo extends Component {
 
-    GetFrenchIndice = () => { 
+    GetFrenchIndice = () => {
         if(this.props.indice<=12)
             return 1
         else if(this.props.indice<=25)
@@ -39,7 +39,7 @@ class  IndicePollutionSolo extends Component {
         else if (this.props.indice>175)
             return'solo-tres-eleve'
     }
-    render() { 
+    render() {
         return (
         <div className={`indice-pollution-main ${this.SoloStyleIndice()}`}>
             <div className={`indice-pollution-solo`}>{this.GetFrenchIndice()}</div>
@@ -47,5 +47,5 @@ class  IndicePollutionSolo extends Component {
         );
     }
 }
- 
+
 export default IndicePollutionSolo;

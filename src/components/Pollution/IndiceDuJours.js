@@ -4,7 +4,7 @@ import IndicePollutionSolo from './IndicePollutionSolo'
 import SmileyPollution from './SmileyPollution'
 import ButtonPollution from './ButtonPollution'
 import {connect} from 'react-redux';
-import {GetPollution} from '../../actions/pollutionActions'
+
 
 
 
@@ -79,8 +79,8 @@ class IndiceDuJours extends Component {
                     </div>
                     <div className="indice-smiley">
 
-                        <div className="indice-smiley-child">{this.props.dataPol && <IndicePollutionSolo indice={this.props.dataPol}/>}</div>
-                        <div className="indice-smiley-child">{this.props.dataPol && <SmileyPollution indice={this.props.dataPol}/>}</div>
+                        <div className="indice-smiley-child">{this.props.loadedPollution && <IndicePollutionSolo indice={this.props.dataPol}/>}</div>
+                        <div className="indice-smiley-child">{this.props.loadedPollution && <SmileyPollution indice={this.props.dataPol}/>}</div>
                     </div>
                </div>
             </div>
@@ -92,7 +92,8 @@ class IndiceDuJours extends Component {
 }
 const mapStateToProps = state =>({
     dataPol:state.pollutionReducer.dataPol,
+    loadedPollution : state.pollutionReducer.loadedPollution,
     dataCity : state.geolocReducer
 
 })
-export default connect(mapStateToProps,{GetPollution})(IndiceDuJours);
+export default connect(mapStateToProps)(IndiceDuJours);

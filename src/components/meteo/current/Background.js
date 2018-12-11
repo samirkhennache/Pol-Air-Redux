@@ -11,15 +11,15 @@ de l'image correspondante.
 const Background = ({imgBackground}) => {
 
     return (
-        
+
         <div>
 
-            <img 
-                src={require(`../../../img/backgrounds/bkg${imgBackground}.jpg`)} 
-                className="meteoBackground" 
-                alt="Temps actuel" 
+            <img
+                src={require(`../../../img/backgrounds/bkg${imgBackground}.jpg`)}
+                className="meteoBackground"
+                alt="Temps actuel"
             />
-            
+
         </div>
     )
 }
