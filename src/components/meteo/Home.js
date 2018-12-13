@@ -19,13 +19,16 @@ class Home extends Component {
       window.scrollTo(0, 0)
   }
   getClasseName(){
-  if(this.props.dataMeteo.city !== undefined && this.props.dataMeteo.city.length >9 )
+    const {dataMeteo } = this.props;
+    const {city} = dataMeteo
+  if(city !== undefined && city.length >9 )
       return "-small-font"
   else
       return ""
   }
   render() {
-  // if(this.props.loadedPollution&&this.props.loadedMeteo)
+    const {dataMeteo,dataPol,loadedPollution,imgBackground} = this.props;
+    const {city,description,loadedMeteo} = dataMeteo
     return (
       <div className="home-container">
         <Form />
@@ -38,11 +41,11 @@ class Home extends Component {
               <Grid item container xs={7} md={8} direction="column" justify="space-around" align='right' alignItems="flex-end" className="main-main"> {/*Container city + date + description*/}
                 <div className="bloc-city-date">
                   <div className="bloc-city">
-                    <div className={`city-all-pages${this.getClasseName()}`}>{this.props.dataMeteo.city}</div>
+                    <div className={`city-all-pages${this.getClasseName()}`}>{city}</div>
                   </div>
                   <div className="date-all-page"><DateIndex /></div>
                 </div>
-                {this.props.dataMeteo.description&&<div className="comment-all-page">{this.props.dataMeteo.description}</div>}
+                {dataMeteo.description&&<div className="comment-all-page">{description}</div>}
               </Grid>
             </Grid>
             </Grid>
@@ -56,7 +59,7 @@ class Home extends Component {
             </Grid>
         </Grid>
         <div>
-        {this.props.loadedMeteo && this.props.loadedPollution&&<Background imgBackground={this.props.dataMeteo.imgBackground} />}
+        {loadedMeteo && loadedPollution&&<Background imgBackground={imgBackground} />}
         </div>
       </div>
     );
