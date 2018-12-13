@@ -7,21 +7,18 @@ const formatDate = (date) => {
       ];
     let dayIndex = date.getDay();
     let day = date.getDate();
-  
+
     return `${dayName[dayIndex ]} ${day}`;
   }
-
-class DateForcastMeteo extends Component {
-
-    render() { 
-        let result = new Date();
-        result.setDate(result.getDate() + this.props.dateApp);
-        return ( 
-            <div className="date-forecast">
-                <div className='MeteoDate'>{formatDate(result)}</div> 
-            </div>
-         );
-    }
+const DateForcastMeteo = () => {
+  let result = new Date();
+  result.setDate(result.getDate() + this.props.dateApp);
+  return (
+    <div className="date-forecast">
+      <div className='MeteoDate'>{formatDate(result)}</div>
+    </div>
+    );
 }
- 
+
+
 export default DateForcastMeteo;

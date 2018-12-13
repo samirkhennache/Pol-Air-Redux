@@ -9,6 +9,4 @@ const Icon =({icon}) => {
       </div>
     )
   }
-
-
 export default Icon;

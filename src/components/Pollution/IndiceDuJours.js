@@ -5,54 +5,6 @@ import SmileyPollution from './SmileyPollution'
 import ButtonPollution from './ButtonPollution'
 import {connect} from 'react-redux';
 
-
-
-
-
-
-
-
-
-// //styleIndice permet de recuperer le style de l'indice à partir du fichiet IndiceDuJours.css
-
-// StyleIndice = (props) =>{
-//   if(props.indice<=25)
-//     return 'tres-faible'
-//   else if(props.indice<=50)
-//     return 'faible'
-//   else if( props.indice<=75)
-//     return 'moyen'
-//   else if(props.indice<=100)
-//     return 'eleve'
-//   else
-//     return'tres-eleve'
-// }
-// GetFrenchIndice = (props) =>{
-//   if(props.indice<=12)
-//     return 1
-//   else if(props.indice<=25)
-//     return 2
-//   else if( props.indice<=37)
-//     return 3
-//   else if(props.indice<=50)
-//     return 4
-//   else if(props.indice<=100)
-//     return 5
-//   else if( props.indice<=125)
-//     return 6
-//   else if(props.indice<=150)
-//     return 7
-//   else if(props.indice<=175)
-//     return 8
-//   else if( props.indice<=200)
-//     return 9
-//   else if(props.indice<=300)
-//     return 10
-//   else
-//     return 11
-// }
-
-
 const  IndiceDuJours = (props) =>(
   <div>
     <div className="indiceDuJour-index">
@@ -70,9 +22,9 @@ const  IndiceDuJours = (props) =>(
   </div>
   )
 const mapStateToProps = state =>({
-    dataPol:state.pollutionReducer.dataPol,
-    loadedPollution : state.pollutionReducer.loadedPollution,
-    dataCity : state.geolocReducer
+  dataPol:state.pollutionReducer.dataPol,
+  loadedPollution : state.pollutionReducer.loadedPollution,
+  dataCity : state.geolocReducer
 
 })
 export default connect(mapStateToProps)(IndiceDuJours);

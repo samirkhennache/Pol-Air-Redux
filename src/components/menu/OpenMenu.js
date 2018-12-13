@@ -32,6 +32,7 @@ class OpenMenu extends React.Component {
   Accueil = props => <Link to="/" {...props} />
   BlockForcastMeteo = props => <Link to="/BlockForcastMeteo" {...props} />
   Pollution = props => <Link to="/HistoriquePollution" {...props} />
+
 render() {
   const { classes } = this.props;
 
@@ -40,9 +41,7 @@ render() {
       <ListItem component={this.Accueil} button>Accueil</ListItem>
       <ListItem component={this.BlockForcastMeteo} button>Prévisions météo</ListItem>
       <ListItem component ={this.Pollution} button>Historique pollution</ListItem>
-    </div>
-  );
-
+    </div>)
   return (
     <div>
       <IconButton

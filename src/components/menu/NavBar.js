@@ -22,11 +22,9 @@ const styles = {
   },
 };
 
-
 const ButtonAppBar = (props) => {
   const { classes } = props;
   return (
-
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>

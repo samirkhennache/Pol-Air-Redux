@@ -49,38 +49,6 @@ componentDidMount() {
   }
 }
 
-
-// const BlockForcastMeteo = (props) =>{
-//  if(props.dataForcastMeteo !== undefined)
-//  {
-//    console.log("forcast meteo", props.dataForcastMeteo);
-
-//   return (
-
-//     <div className="bloc-page-meteo">
-//       <div>
-//       <Background imgBackground={props.dataMeteo.imgBackground} />
-//       </div>
-//       <Form />
-//       <BlockForecastMeteoNow className='blockMeteoNow' temperature={props.dataMeteo.temperature} description={props.dataMeteo.description} city={props.dataMeteo.city}/>
-//       {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
-//       <div className='back-blockMeteo'>
-//         {props.dataForcastMeteo.tempMin.map((x, index, t) => (
-//           <div key={index} >
-//             <div key={index} className='blockMeteo'>
-//               <BlockForcastMeteoDate dateApp={index+1} />
-//               <BlockIconForecast icon_forecast={props.dataForcastMeteo.icon_forecast[index]}/>
-//               <BlockForecastMeteoTemp temp_min={props.dataForcastMeteo.tempMin[index]} temp_max={props.dataForcastMeteo.tempMax[index]} />
-//             </div>
-//             {index !== t.length-1 ? <hr className="hr-meteo"/> : null }
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//    );
-//         }
-
-// }
 const mapStateToProps = state =>({
 
   dataForcastMeteo :state.forcastMeteoReducer.dataForcastMeteo,

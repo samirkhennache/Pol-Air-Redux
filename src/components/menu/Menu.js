@@ -18,7 +18,6 @@ class SimpleMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-
     return (
       <div>
         <Button

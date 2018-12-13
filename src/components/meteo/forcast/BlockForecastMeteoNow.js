@@ -2,8 +2,8 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 
 const BlockForecastMeteoNow = (props) => {
-    
-    return(
+
+  return(
     <div className='today-bloc-meteo'>
       <Grid container justify='space-between' alignItems='center' >
         <Grid item xs={5} md={3} >
@@ -22,7 +22,6 @@ const BlockForecastMeteoNow = (props) => {
         </Grid>
       </Grid>
     </div>
-    )
-
+  )
 }
 export default BlockForecastMeteoNow
