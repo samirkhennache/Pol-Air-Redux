@@ -11,25 +11,25 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    switch (action.type) {
-        case FETCH_FORCAST_STARTED:
-            return {
-                ...state,
-                loadingForcast: true
-            }
-        case FETCH_FORCAST_SUCCESS:
-            return {
-                ...state,
-                dataForcastMeteo: action.payload,
-                loadingForcast: false,
-                loadedForcast: true,
-            }
-        case FETCH_FORCAST_FAILURE:
-            return {
-                ...state,
-                error: action.payload.error
-            }
-        default:
-            return state
-    }
+	switch (action.type) {
+		case FETCH_FORCAST_STARTED:
+			return {
+				...state,
+				loadingForcast: true
+			}
+		case FETCH_FORCAST_SUCCESS:
+			return {
+				...state,
+				dataForcastMeteo: action.payload,
+				loadingForcast: false,
+				loadedForcast: true,
+			}
+		case FETCH_FORCAST_FAILURE:
+			return {
+					...state,
+					error: action.payload.error
+			}
+		default:
+			return state
+	}
 }

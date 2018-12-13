@@ -13,11 +13,10 @@ const styles = theme => ({
   },
 });
   
-
 const ButtonsPolluants = (props)  => {
   const { classes } = props;
   return (
-    <div>   
+    <div>
         <Button color="primary" variant="contained" className={classes.button}>
             NO2
         </Button>
@@ -35,7 +34,7 @@ const ButtonsPolluants = (props)  => {
         </Button>
         <Button color="primary" variant="contained" className={classes.button}>
             CO
-        </Button>    
+        </Button>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import ConseilsPollution from './ConseilsPollution'
 import HistoriquePollution from './HistoriquePollution'
@@ -6,28 +6,20 @@ import PagePollutionToday from './PagePollutionToday'
 import './pagePollution.css'
 import BlocPolluants from './BlocPolluants';
 import Form from '../form/Form'
-class PagePollution extends Component {
 
-    componentDidMount() {
-        window.scrollTo(0, 0)
-    }
 
-    state = {  }
-    render() {
+const PagePollution =(props) =>{
+	window.scrollTo(0, 0)
+	return(<div className="bloc-pollution">
+			<Form />
+		{props.loadedPollution &&	<PagePollutionToday city={props.dataMeteo.city} indice={props.dataPol} imgBackground={props.dataMeteo.imgBackground} />}
+			<div className="bloc-conseil-historique">
+				<ConseilsPollution className="test-border" indice={props.dataPol}/>
+				<BlocPolluants/>
+				<HistoriquePollution/>
 
-			return (
-				<div className="bloc-pollution">
-						<Form />
-					{this.props.loadedPollution &&	<PagePollutionToday city={this.props.dataMeteo.city} indice={this.props.dataPol} imgBackground={this.props.dataMeteo.imgBackground} />}
-						<div className="bloc-conseil-historique">
-							<ConseilsPollution className="test-border" indice={this.props.dataPol}/>
-							<BlocPolluants/>
-							<HistoriquePollution/>
-
-						</div>
-				</div>
-			);
-    }
+			</div>
+	</div>)
 }
 const mapStateToProps = state =>({
 
