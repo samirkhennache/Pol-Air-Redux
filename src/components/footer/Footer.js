@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import {Button, Avatar} from '@material-ui/core/';
 import './Footer.css';
 
-const Footer = (props) =>{
+const Footer = () =>{
   return (
     <div className="container-footer">
       <ul className="list-footer">

@@ -21,22 +21,25 @@ componentDidMount() {
 }
 
   render() {
-    if(this.props.loadedForcast)
+    const {dataMeteo,loadedForcast,dataForcastMeteo} = this.props
+    const {imgBackground,temperature,description,city} = dataMeteo
+    const {icon_forecast,tempMin,tempMax} =dataForcastMeteo
+    if(loadedForcast)
     return (
       <div className="bloc-page-meteo">
         <div>
-        <Background imgBackground={this.props.dataMeteo.imgBackground} />
+        <Background imgBackground={imgBackground} />
         </div>
         <Form />
-        <BlockForecastMeteoNow className='blockMeteoNow' temperature={this.props.dataMeteo.temperature} description={this.props.dataMeteo.description} city={this.props.dataMeteo.city}/>
-        {/* <Graphic  tempMin={this.props.tempMin}  tempMax={this.props.tempMax} /> */}
+        <BlockForecastMeteoNow className='blockMeteoNow' temperature={temperature} description={description} city={city}/>
+        {/* <Graphic  tempMin={tempMin}  tempMax={tempMax} /> */}
         <div className='back-blockMeteo'>
-          {this.props.dataForcastMeteo.tempMin.map((x, index, t) => (
+          {tempMin.map((x, index, t) => (
             <div key={index} >
               <div key={index} className='blockMeteo'>
                 <BlockForcastMeteoDate dateApp={index+1} />
-                <BlockIconForecast icon_forecast={this.props.dataForcastMeteo.icon_forecast[index]}/>
-                <BlockForecastMeteoTemp temp_min={this.props.dataForcastMeteo.tempMin[index]} temp_max={this.props.dataForcastMeteo.tempMax[index]} />
+                <BlockIconForecast icon_forecast={icon_forecast[index]}/>
+                <BlockForecastMeteoTemp temp_min={tempMin[index]} temp_max={tempMax[index]} />
               </div>
               {index !== t.length-1 ? <hr className="hr-meteo"/> : null }
             </div>
