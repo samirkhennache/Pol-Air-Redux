@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Grid } from '@material-ui/core';
 //import PrintSearch from './current/PrintSearch'
-import MeteoDuJours from './current/MeteoDuJours'
-import Background from './current/Background';
+import MeteoDuJours from '../meteo/current/MeteoDuJours'
+import Background from '../meteo/current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours';
 import Form from '../form/Form'
 //import Titles from '../Titles';
 // import DateIndex from '../date/DateIndex';
-import Mascotte from './Mascotte';
+import Mascotte from '../mascotte/Mascotte';
 import './home.css';
 
 

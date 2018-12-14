@@ -8,7 +8,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import BlockForcastMeteo from './components/meteo/forcast/BlockForcastMeteo'
 import './components/form/form.css'
 import NavBar from './components/menu/NavBar'
-import Home from './components/meteo/Home'
+import Home from './components/home/Home'
 import Footer from "./components/footer/Footer";
 import Page404 from './components/page404/Page404';
 
