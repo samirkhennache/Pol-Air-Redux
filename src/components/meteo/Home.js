@@ -7,7 +7,7 @@ import Background from './current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours';
 import Form from '../form/Form'
 //import Titles from '../Titles';
-import DateIndex from '../date/DateIndex';
+// import DateIndex from '../date/DateIndex';
 import Mascotte from './Mascotte';
 import './home.css';
 
@@ -27,8 +27,8 @@ class Home extends Component {
       return ""
   }
   render() {
-    const {dataMeteo,dataPol,loadedPollution,imgBackground} = this.props;
-    const {city,description,loadedMeteo} = dataMeteo
+    const {dataMeteo,dataPol,loadedPollution,loadedMeteo} = this.props;
+    const {city,description,imgBackground} = dataMeteo
     return (
       <div className="home-container">
         <Form />
@@ -36,14 +36,14 @@ class Home extends Component {
             <Grid item xs={12} md={7} className="test-border">
               <Grid item container className="home-opacity" justify-content ="space-beetween" direction="row" align-items="center"> {/*Container logo + city + date + description*/}
                 <Grid item xs={5} md={4} className="mascotte-bor"> {/*Container logo*/}
-                  { this.props.dataPol && <Mascotte /> }
+                  {dataPol && <Mascotte /> }
               </Grid>
               <Grid item container xs={7} md={8} direction="column" justify="space-around" align='right' alignItems="flex-end" className="main-main"> {/*Container city + date + description*/}
                 <div className="bloc-city-date">
                   <div className="bloc-city">
                     <div className={`city-all-pages${this.getClasseName()}`}>{city}</div>
                   </div>
-                  <div className="date-all-page"><DateIndex /></div>
+                  {/* <div className="date-all-page"><DateIndex /></div> */}
                 </div>
                 {dataMeteo.description&&<div className="comment-all-page">{description}</div>}
               </Grid>

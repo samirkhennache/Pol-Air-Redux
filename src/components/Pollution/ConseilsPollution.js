@@ -44,52 +44,58 @@ class ConseilsPagePollution extends Component {
   }
 
   getConseilsPieton = () => {
-    if(this.props.indice <=25)
-      return this.state.messagePieton[0]
-    else if(this.props.indice <=50)
-      return this.state.messagePieton[1]
-    else if(this.props.indice <=100)
-      return this.state.messagePieton[2]
-    else if(this.props.indice <=150)
-      return this.state.messagePieton[3]
-    else if(this.props.indice <=200)
-      return this.state.messagePieton[4]
-    else if(this.props.indice <=300)
-      return this.state.messagePieton[5]
-    else if (this.props.indice > 300)
-      return this.state.messagePieton[6]
+    const {indice} = this.props;
+    const {messagePieton} = this.state;
+    if(indice <=25)
+      return messagePieton[0]
+    else if(indice <=50)
+      return messagePieton[1]
+    else if(indice <=100)
+      return messagePieton[2]
+    else if(indice <=150)
+      return messagePieton[3]
+    else if(indice <=200)
+      return messagePieton[4]
+    else if(indice <=300)
+      return messagePieton[5]
+    else if (indice > 300)
+      return messagePieton[6]
   }
   getAdviseCyclo = () => {
-    if(this.props.indice <=25)
-      return this.state.messageCyclo[0]
-    else if(this.props.indice <=50)
-      return this.state.messageCyclo[1]
-    else if(this.props.indice <=100)
-      return this.state.messageCyclo[2]
-    else if(this.props.indice <=150)
-      return this.state.messageCyclo[3]
-    else if(this.props.indice <=200)
-      return this.state.messageCyclo[4]
-    else if(this.props.indice <=300)
-      return this.state.messageCyclo[5]
-    else if (this.props.indice > 300)
-      return this.state.messageCyclo[6]
+    const {indice} = this.props;
+    const {messageCyclo} = this.state;
+    if(indice <=25)
+      return messageCyclo[0]
+    else if(indice <=50)
+      return messageCyclo[1]
+    else if(indice <=100)
+      return messageCyclo[2]
+    else if(indice <=150)
+      return messageCyclo[3]
+    else if(indice <=200)
+      return messageCyclo[4]
+    else if(indice <=300)
+      return messageCyclo[5]
+    else if (indice > 300)
+      return messageCyclo[6]
   }
   getAdviseHouse = () => {
-    if(this.props.indice <=25)
-      return this.state.messageHouse[0]
-    else if(this.props.indice <=50)
-      return this.state.messageHouse[1]
-    else if(this.props.indice <=100)
-      return this.state.messageHouse[2]
-    else if(this.props.indice <=150)
-      return this.state.messageHouse[3]
-    else if(this.props.indice <=200)
-      return this.state.messageHouse[4]
-    else if(this.props.indice <=300)
-      return this.state.messageHouse[5]
-    else if (this.props.indice > 300)
-      return this.state.messageHouse[6]
+    const {indice} = this.props;
+    const {messageHouse} = this.state;
+    if(indice <=25)
+      return messageHouse[0]
+    else if(indice <=50)
+      return messageHouse[1]
+    else if(indice <=100)
+      return messageHouse[2]
+    else if(indice <=150)
+      return messageHouse[3]
+    else if(indice <=200)
+      return messageHouse[4]
+    else if(indice <=300)
+      return messageHouse[5]
+    else if (indice > 300)
+      return messageHouse[6]
   }
 
   handleClickPieton = () =>{
@@ -115,13 +121,16 @@ class ConseilsPagePollution extends Component {
   }
 
   getCssAdviseIconPieton = () => {
-    return(this.state.adviseDefault? "no-opacity" : "opacity")
+    const {adviseDefault} = this.state;
+    return(adviseDefault? "no-opacity" : "opacity")
   }
   getCssAdviseIconCyclo = () => {
-    return(this.state.adviseCyclo? "no-opacity" : "opacity")
+    const {adviseCyclo} = this.state;
+    return(adviseCyclo? "no-opacity" : "opacity")
   }
   getCssAdviseIconHouse = () => {
-    return(this.state.adviseHouse? "no-opacity" : "opacity")
+    const {adviseHouse} = this.state;
+    return(adviseHouse? "no-opacity" : "opacity")
   }
   render() {
     const adviseDefault = this.state.adviseDefault ? this.getConseilsPieton() : ""

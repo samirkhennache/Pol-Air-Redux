@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const formatDate = (date) => {
     let dayName = [
@@ -10,9 +10,9 @@ const formatDate = (date) => {
 
     return `${dayName[dayIndex ]} ${day}`;
   }
-const DateForcastMeteo = () => {
+const DateForcastMeteo = (props) => {
   let result = new Date();
-  result.setDate(result.getDate() + this.props.dateApp);
+  result.setDate(result.getDate() + props.dateApp);
   return (
     <div className="date-forecast">
       <div className='MeteoDate'>{formatDate(result)}</div>

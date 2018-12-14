@@ -5,7 +5,9 @@ import SmileyPollution from './SmileyPollution'
 import ButtonPollution from './ButtonPollution'
 import {connect} from 'react-redux';
 
-const  IndiceDuJours = (props) =>(
+const  IndiceDuJours = (props) =>{
+const {loadedPollution,dataPol} = props
+return(
   <div>
     <div className="indiceDuJour-index">
       <div><p className="indiceDuJour-part1">POLLUTION</p></div>
@@ -14,13 +16,14 @@ const  IndiceDuJours = (props) =>(
           <ButtonPollution className="button-indice-index"/>
         </div>
         <div className="indice-smiley">
-          <div className="indice-smiley-child">{props.loadedPollution && <IndicePollutionSolo indice={props.dataPol}/>}</div>
-          <div className="indice-smiley-child">{props.loadedPollution && <SmileyPollution indice={props.dataPol}/>}</div>
+          <div className="indice-smiley-child">{loadedPollution && <IndicePollutionSolo indice={dataPol}/>}</div>
+          <div className="indice-smiley-child">{loadedPollution && <SmileyPollution indice={dataPol}/>}</div>
         </div>
       </div>
     </div>
   </div>
   )
+}
 const mapStateToProps = state =>({
   dataPol:state.pollutionReducer.dataPol,
   loadedPollution : state.pollutionReducer.loadedPollution,

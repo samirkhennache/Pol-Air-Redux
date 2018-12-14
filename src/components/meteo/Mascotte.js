@@ -12,31 +12,37 @@ import nuit from '../../img/08_Mascotte_nuit.svg';
 
 
  const getBearc = (props) =>{
-  if(props.dataMeteo.imgBackground.endsWith('n'))
+     const {dataMeteo,dataPol} = props;
+     const {imgBackground,temperature,description} = dataMeteo
+  if(imgBackground.endsWith('n'))
       return nuit
-  else if(props.dataMeteo.dataPol>=150)
+  else if(dataPol>=150)
       return pollution
-  else if(props.dataMeteo.temperature<=0)
+  else if(temperature<=0)
       return glacial
-  else if(props.dataMeteo.temperature>=30)
+  else if(temperature>=30)
       return canicule
-  else if(props.dataMeteo.description.includes('pluie'))
+  else if(description.includes('pluie'))
       return pluie
-  else if(props.dataMeteo.temperature<=10)
+  else if(temperature<=10)
       return froid
-  else if(props.dataMeteo.temperature>=20)
+  else if(temperature>=20)
       return chaud
   else{
       return normal
   }
 }
-const Mascotte = (props) =>(
+const Mascotte = (props) =>{
+const {loadedMeteo} = props;
+return (
   <div className="mascotte-border">
-    {props.loadedMeteo&& <img src={getBearc(props)} alt="Mascotte du jour" style={{ height: "30vh" }}/>}
+    {loadedMeteo&& <img src={getBearc(props)} alt="Mascotte du jour" style={{ height: "30vh" }}/>}
   </div>
 )
+}
 const mapStateToProps = state =>({
   dataMeteo :state.meteoReducer.dataMeteo,
-  loadedMeteo: state.meteoReducer.loadedMeteo
+  loadedMeteo: state.meteoReducer.loadedMeteo,
+  dataPol:state.pollutionReducer.dataPol,
 })
 export default connect(mapStateToProps)(Mascotte);
