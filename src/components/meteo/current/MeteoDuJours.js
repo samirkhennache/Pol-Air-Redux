@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './IndiceDuJours.css';
+import '../../Pollution/IndiceDuJours.css'
 import IndiceMeteoSolo from './IndiceMeteoSolo'
 import IconMeteo from './IconMeteo'
-import ButtonMeteo from './ButtonMeteo'
+import ButtonMeteo from '../../Pollution/ButtonMeteo'
 
 
 const  MeteoDuJours =(props) =>{

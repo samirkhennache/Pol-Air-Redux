@@ -1,5 +1,5 @@
 import React from 'react';
-import './indice-pollution-solo.css'
+import '../../Pollution/indice-pollution-solo.css'
 
 const  IndicePollutionSolo =({temperature}) =>(
   <div className="indice-pollution-main color-meteoJour">

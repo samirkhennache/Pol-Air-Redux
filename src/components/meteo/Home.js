@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Grid } from '@material-ui/core';
 //import PrintSearch from './current/PrintSearch'
-import MeteoDuJours from '../Pollution/MeteoDuJours'
+import MeteoDuJours from './current/MeteoDuJours'
 import Background from './current/Background';
 import IndiceDuJours from '../Pollution/IndiceDuJours';
 import Form from '../form/Form'
