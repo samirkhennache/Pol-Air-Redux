@@ -42,7 +42,7 @@ class App extends Component {
 	render() {
 		return (
 			<BrowserRouter>
-        <div>
+				<div className = "App">
 					<NavBar />
             <Switch>
 							<Route  exact path="/" component ={Home}/>
@@ -51,7 +51,7 @@ class App extends Component {
 							<Route  component={Page404}/>
             </Switch>
 					<Footer />
-        </div>
+				</div>
     </BrowserRouter>
     );
   }

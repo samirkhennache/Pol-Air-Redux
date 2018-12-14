@@ -16,7 +16,7 @@ return(
           <ButtonPollution className="button-indice-index"/>
         </div>
         <div className="indice-smiley">
-          <div className="indice-smiley-child">{loadedPollution && <IndicePollutionSolo indice={dataPol}/>}</div>
+          <div className="indice-pollution-child">{loadedPollution && <IndicePollutionSolo indice={dataPol}/>}</div>
           <div className="indice-smiley-child">{loadedPollution && <SmileyPollution indice={dataPol}/>}</div>
         </div>
       </div>

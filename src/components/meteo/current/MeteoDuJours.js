@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../../Pollution/IndiceDuJours.css'
 import IndiceMeteoSolo from './IndiceMeteoSolo'
 import IconMeteo from './IconMeteo'
-import ButtonMeteo from '../../Pollution/ButtonMeteo'
+import ButtonMeteo from './ButtonMeteo'
 
 
 const  MeteoDuJours =(props) =>{

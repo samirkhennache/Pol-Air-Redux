@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import Button from '@material-ui/core/Button';
 
 
@@ -12,8 +10,5 @@ const ButtonPollution = () => (
   </div>
 );
 
-ButtonPollution.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default ButtonPollution;

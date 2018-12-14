@@ -17,6 +17,9 @@
 .indice-smiley-child{
     margin: 10px;
 }
+.indice-pollution-child{
+    margin: 10px;
+}
 @media all and (max-width: 424px)
 {
     .indiceDuJour-part2{
