@@ -1,13 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 
 const ButtonPollution = () => {
 
   return (
     <div>
-      <Button variant="fab" mini color="primary" aria-label="Add" >
+      <Fab mini ="true" color="primary" aria-label="Add" >
       <i className="material-icons">directions_walk</i>
-      </Button>
+      </Fab>
     </div>
   );
 }

@@ -1,23 +1,16 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from 'react-router-dom'
 
-const styles = {
-  root: {
-    variant:"fab"
-  },
+const ButtonPollution = () =>{
 
-};
-const ButtonPollution = (props) =>{
-  const { classes } = props;
 return(
   <div>
-    <Button component={Link} to="/HistoriquePollution" variant={classes.root.variant} mini color="primary" aria-label="Add">
+    <Fab component={Link} to="/HistoriquePollution" mini ="true" color="primary" aria-label="Add">
       <AddIcon />
-    </Button>
+    </Fab>
   </div>
 );
 }
-export default withStyles(styles)(ButtonPollution);
+export default (ButtonPollution);
