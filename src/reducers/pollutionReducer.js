@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
 				loadingPollution:true
 			}
 		case FETCH_POLLUTION_SUCCESS:
+		localStorage.setItem('dataPol', JSON.stringify(action.payload));
 			return {
 				...state,
 				loadingPollution:false,

@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
 				loadingForcast: true
 			}
 		case FETCH_FORCAST_SUCCESS:
+		localStorage.setItem('dataForcastMeteo', JSON.stringify(action.payload));
 			return {
 				...state,
 				dataForcastMeteo: action.payload,
